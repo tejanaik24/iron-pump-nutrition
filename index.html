@@ -313,13 +313,13 @@
     /* ── INGREDIENT CARDS MOBILE ───────────────────── */
     @media (max-width: 900px) {
       .ingredient-cards { grid-template-columns: repeat(2, 1fr); }
-      .hellfire-content { padding: 60px 24px; }
+      .hellfire-content { padding: 60px 20px; }
     }
 
     @media (max-width: 500px) {
-      .ingredient-cards { grid-template-columns: 1fr; }
-      .ingredient-card { padding: 28px 20px; }
-      .hellfire-content { padding: 48px 16px; }
+      .ingredient-cards { grid-template-columns: repeat(2, 1fr); }
+      .ingredient-card { padding: 28px 16px; }
+      .hellfire-content { padding: 40px 16px; }
     }
 
     /* ── FEATURE CAROUSEL MOBILE ────────────────────── */
@@ -779,12 +779,15 @@
       .ingredient-cards { grid-template-columns: repeat(2, 1fr); }
       .ingredient-card { border-right: 1px solid rgba(255,255,255,0.05); }
       .ingredient-card:nth-child(2n) { border-right: none; }
-      .hellfire-content { padding: 60px 24px; }
+      .hellfire-content { padding: 60px 20px; }
     }
 
     @media (max-width: 500px) {
-      .ingredient-cards { grid-template-columns: 1fr; }
-      .ingredient-card { border-right: none; }
+      .ingredient-cards { grid-template-columns: repeat(2, 1fr); }
+      .ingredient-card { padding: 28px 16px; border-right: 1px solid rgba(255,255,255,0.05); }
+      .ingredient-card:nth-child(2n) { border-right: none; }
+      .ingredient-dose { font-size: 44px; }
+      .ingredient-name { font-size: 12px; }
     }
 
     /* ── PRODUCTS SECTION ─────────────────────── */
@@ -918,9 +921,22 @@
 
     /* ── PRODUCTS GRID: 2x2 on mobile, 4-col on desktop ─────── */
     @media (max-width: 600px) {
-      .products-grid { grid-template-columns: repeat(2, 1fr); }
-      #products { padding: 70px 20px; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+      #products { padding: 48px 16px; }
       .tab-btn { padding: 12px 16px; font-size: 10px; letter-spacing: 0.2em; }
+      .products-tabs { margin: 32px auto 40px; }
+      /* compact card sizing */
+      .product-card { padding: 16px 10px 14px; }
+      .card-img { height: 150px; margin-bottom: 12px; }
+      .card-type { font-size: 8px; letter-spacing: 0.08em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+      .card-name { font-size: 15px; margin-bottom: 2px; }
+      .card-flavour { font-size: 8px; letter-spacing: 0.08em; margin-bottom: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .card-pricing { padding-top: 10px; gap: 4px; }
+      .card-price { font-size: 20px; }
+      .card-offer { padding: 2px 4px; gap: 4px; flex-wrap: nowrap; }
+      .card-original { font-size: 10px; }
+      .card-discount { font-size: 10px; white-space: nowrap; }
+      .card-btn { font-size: 11px; letter-spacing: 0.15em; padding: 10px 0; margin-top: 8px; }
     }
 
     /* ── IMAGE: zero border radius, edge-to-edge, scale on hover */
