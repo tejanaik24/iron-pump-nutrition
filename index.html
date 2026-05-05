@@ -16,10 +16,7 @@
 
     html, body {
       width: 100%;
-      background: #FFFFFF;
-    }
-
-     body {
+      background: #111111;
       overflow-x: hidden;
     }
 
@@ -281,21 +278,7 @@
       .mobile-link:hover { color: #FFFFFF; }
     }
 
-    /* ── MANIFESTO MOBILE ─────────────────────────── */
-    @media (max-width: 900px) {
-      .manifesto-inner { flex-direction: column; gap: 48px; }
-      .manifesto-stats { flex: none; width: 100%; }
-      .manifesto-content { padding: 60px 24px; }
-      .manifesto-quote { font-size: 32px; }
-    }
-
-    @media (max-width: 600px) {
-      .manifesto-stats { grid-template-columns: 1fr 1fr; gap: 16px; }
-      .manifesto-stat { padding: 24px 16px; }
-      .manifesto-stat-num { font-size: 40px; }
-      .manifesto-content { padding: 48px 16px; }
-      .manifesto-quote { font-size: 28px; }
-    }
+    /* manifesto responsive — consolidated below after base CSS */
 
     /* ── PARALLAX MOBILE (disable heavy effects) ─────── */
     @media (max-width: 768px) {
@@ -715,9 +698,19 @@
     }
 
     @media (max-width: 900px) {
-      .manifesto-inner { flex-direction: column; gap: 48px; }
+      .manifesto-inner { flex-direction: column; gap: 48px; padding: 0; }
       .manifesto-stats { flex: none; width: 100%; }
-      .manifesto-content { padding: 60px 24px; }
+      .manifesto-content { padding: 60px 20px; }
+      .manifesto-quote { font-size: 32px; }
+    }
+
+    @media (max-width: 600px) {
+      .manifesto-content { padding: 48px 20px; }
+      .manifesto-inner { padding: 0; }
+      .manifesto-stats { grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; box-sizing: border-box; }
+      .manifesto-stat { padding: 24px 16px; }
+      .manifesto-stat-num { font-size: 38px; }
+      .manifesto-quote { font-size: 26px; }
     }
 
     /* ── HELLFIRE INGREDIENT CARDS ─────────────────── */
