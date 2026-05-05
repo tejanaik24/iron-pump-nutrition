@@ -324,17 +324,8 @@
 
     /* ── FEATURE CAROUSEL MOBILE ────────────────────── */
     @media (max-width: 768px) {
-      .feature-card { width: 260px; height: 360px; }
-      .cards-stack { height: 380px; }
-      .feature-chip { padding: 6px 14px; font-size: 11px; }
-      .chips-drum { gap: 10px; }
       .why-header { margin-bottom: 40px; }
       .why-title { font-size: clamp(28px, 6vw, 48px); }
-    }
-
-    @media (max-width: 414px) {
-      .feature-card { width: 220px; height: 320px; }
-      .cards-stack { height: 340px; }
     }
 
     /* ── ATHLETE STRIP MOBILE ─────────────────────── */
@@ -1480,14 +1471,21 @@
     }
 
     @media (max-width: 900px) {
-      .why-inner { flex-direction: column; }
-      .why-left { width: 100%; min-height: 320px; padding: 40px; justify-content: center; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
-      .why-right { padding: 40px 20px; }
-      .cards-stack { width: 260px; }
+      .why-inner { flex-direction: column; padding: 0; }
+      .why-left { width: 100%; min-height: 300px; padding: 32px 20px; justify-content: center; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+      .why-right { padding: 32px 20px; }
+      .cards-stack { width: min(90%, 280px); }
     }
 
     @media (max-width: 600px) {
-      #why-ipn { padding: 70px 20px; }
+      #why-ipn { padding: 56px 16px; }
+      .why-inner { padding: 0; }
+      .why-left { padding: 28px 16px; min-height: 260px; }
+      .why-right { padding: 24px 16px; }
+      .cards-stack { width: 100%; max-width: 300px; }
+      .feature-chip { padding: 10px 16px; gap: 10px; }
+      .chip-label { font-size: 11px; letter-spacing: 0.12em; }
+      .chip-icon { width: 15px; height: 15px; }
     }
 
     /* ── THE IRON STANDARD SECTION ─────────────────── */
