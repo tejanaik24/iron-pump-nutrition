@@ -1,0 +1,2304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iron Pump Nutrition — Unleash The Beast</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      background: #FFFFFF;
+    }
+
+     body {
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ─────────────────────────────────────── */
+    #hero {
+      position: relative;
+      width: 100vw; height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    /* ── HERO VIDEO ───────────────────────────────── */
+    #hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+      z-index: 0;
+    }
+
+    /* Overlay — stronger scrim at bottom for headline legibility */
+    #overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.50) 0%,
+        rgba(0,0,0,0.08) 28%,
+        rgba(0,0,0,0.35) 65%,
+        rgba(0,0,0,0.92) 100%
+      );
+    }
+
+    /* ── HERO CONTENT ─────────────────────────────── */
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 80px 100px;
+    }
+
+    .hero-text {
+      max-width: 780px;
+      will-change: transform, opacity;
+    }
+
+    .hero-eyebrow {
+      display: block;
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: #FFB800;
+      margin-bottom: 16px;
+    }
+
+    /* MASSIVE headline — Nike-level display type */
+    .hero-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(96px, 14vw, 160px);
+      line-height: 0.88;
+      letter-spacing: 0.02em;
+      color: #FFFFFF;
+      margin-bottom: 28px;
+    }
+
+    .hero-sub {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 0.07em;
+      color: rgba(255,255,255,0.60);
+      line-height: 1.6;
+      max-width: 440px;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    /* Pill buttons — Nike 30px radius rule */
+    .btn-primary {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif !important;
+      font-weight: 500 !important;
+      font-size: 16px !important;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #111111 !important;
+      background: #FFB800 !important;
+      padding: 12px 24px;
+      border-radius: 30px !important;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 200ms ease;
+      will-change: transform;
+      border: none !important;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: #ffc933;
+    }
+
+    .btn-ghost {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      text-decoration: none;
+       color: #111111;
+       background: transparent;
+       border: 1.5px solid #CACACB;
+       border-radius: 30px;
+       padding: 14px 44px;
+      display: inline-flex;
+      align-items: center;
+      transition: border-color 220ms ease, color 220ms ease;
+      will-change: transform;
+    }
+
+    .btn-ghost:hover {
+       border-color: #707072;
+       color: #111111;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content { padding: 0 24px 120px; }
+      .hero-sub { font-size: 13px; }
+    }
+
+    /* ── MARQUEE STRIP ────────────────────────────── */
+     #marquee-strip {
+       background: #111111;
+      overflow: hidden;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .marquee-track {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      animation: marquee-scroll 28s linear infinite;
+      will-change: transform;
+    }
+
+    .marquee-track:hover { animation-play-state: paused; }
+
+    @keyframes marquee-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .marquee-item {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      color: #111111;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-shrink: 0;
+    }
+
+    .marquee-sep {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.35);
+      flex-shrink: 0;
+    }
+
+    /* ── NAV ──────────────────────────────────────── */
+     #navbar {
+       position: sticky;
+       top:0; left:0; right:0;
+       z-index: 20;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       padding:0 36px;
+       height: 64px;
+       background: #111111;
+       box-shadow: 0 1px 0 rgba(255,184,0,0.2);
+     }
+
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      width: 100%;
+      max-width: 1280px;
+      justify-content: center;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+      align-items: center;
+      flex: 1;
+    }
+
+    .nav-links:last-of-type {
+      justify-content: flex-end;
+    }
+
+     .nav-link {
+       font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+       font-weight: 500;
+       font-size: 13px;
+       letter-spacing: 0.22em;
+       color: #FFB800;
+       text-decoration: none;
+       text-transform: uppercase;
+       cursor: pointer;
+       transition: color 160ms ease;
+     }
+
+     .nav-link:hover { color: #FFFFFF; }
+
+    #nav-logo {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      padding: 0 48px;
+    }
+
+     #nav-logo img {
+       height: 48px;
+       width: auto;
+      object-fit: contain;
+    }
+
+    /* nav scrolled state */
+    #navbar.scrolled {
+      background: rgba(10,10,10,0.96);
+      backdrop-filter: blur(12px);
+    }
+
+    /* ── PARALLAX SECTIONS ─────────────────────────── */
+    .parallax-section {
+      position: relative;
+      height: 150vh;
+      padding: 12px;
+    }
+
+    .parallax-sticky-img {
+      position: sticky;
+      top: 12px;
+      height: calc(100vh - 24px);
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+      transform-origin: center center;
+      will-change: transform;
+    }
+
+    .parallax-dark-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      pointer-events: none;
+    }
+
+    .parallax-overlay-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      padding: 0 40px;
+    }
+
+    .parallax-subheading {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: #FFB800;
+      margin-bottom: 16px;
+    }
+
+    .parallax-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 9vw, 120px);
+      line-height: 0.88;
+      letter-spacing: 0.03em;
+      text-shadow: none;
+    }
+
+    .parallax-content {
+      position: relative;
+      z-index: 10;
+      background: #111111;
+    }
+
+    /* ── MANIFESTO CONTENT ─────────────────────────── */
+    .manifesto-content {
+      padding: 80px 40px;
+      background: #111111;
+    }
+
+    .manifesto-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 80px;
+      align-items: flex-start;
+    }
+
+    .manifesto-quote {
+      flex: 1;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px;
+      line-height: 1.1;
+      letter-spacing: 0.03em;
+      color: #FFFFFF;
+    }
+
+    .manifesto-stats {
+      flex: 0 0 340px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px 24px;
+    }
+
+    .manifesto-stat {
+      flex: 1;
+      background: #1F1F21;
+      padding: 36px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border-right: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .manifesto-stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 56px;
+      line-height: 1;
+      color: #FFFFFF;
+      letter-spacing: 0.02em;
+    }
+
+    .manifesto-stat-label {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #FFB800;
+    }
+
+    @media (max-width: 900px) {
+      .manifesto-inner { flex-direction: column; gap: 48px; }
+      .manifesto-stats { flex: none; width: 100%; }
+      .manifesto-content { padding: 60px 24px; }
+    }
+
+    /* ── HELLFIRE INGREDIENT CARDS ─────────────────── */
+    .hellfire-content {
+      padding: 80px 40px;
+    }
+
+    .ingredient-cards {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .ingredient-card {
+      background: #1F1F21;
+      border-top: 2px solid #CACACB;
+      padding: 36px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-right: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .ingredient-card:last-child {
+      border-right: none;
+    }
+
+    .ingredient-dose {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 52px;
+      line-height: 1;
+      color: #FFB800;
+      letter-spacing: 0.02em;
+    }
+
+    .ingredient-name {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+    }
+
+    .ingredient-desc {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #707072;
+    }
+
+    @media (max-width: 900px) {
+      .ingredient-cards { grid-template-columns: repeat(2, 1fr); }
+      .ingredient-card { border-right: 1px solid rgba(255,255,255,0.05); }
+      .ingredient-card:nth-child(2n) { border-right: none; }
+      .hellfire-content { padding: 60px 24px; }
+    }
+
+    @media (max-width: 500px) {
+      .ingredient-cards { grid-template-columns: 1fr; }
+      .ingredient-card { border-right: none; }
+    }
+
+    /* ── PRODUCTS SECTION ─────────────────────── */
+    #products {
+      background: #111111;
+      padding: 100px 40px;
+      position: relative;
+    }
+
+    /* Subtle 1px inset divider — Nike elevation model */
+    #products::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .products-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .products-label {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.45em;
+      color: #FFB800;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+
+    .products-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 5.6vw, 64px);
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 0;
+      letter-spacing: 0.04em;
+    }
+    .products-title span { color: #FFB800; }
+
+    /* ── PRODUCT TABS ───────────────────────────────── */
+    .products-tabs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin: 52px auto 56px;
+      max-width: 480px;
+      border: 1px solid rgba(255,184,0,0.3);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 14px 32px;
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: background 220ms ease, color 220ms ease;
+    }
+
+    .tab-btn:first-child {
+      border-right: 1px solid rgba(255,184,0,0.3);
+    }
+
+    .tab-btn.tab-active {
+      background: #FFB800;
+      color: #111111;
+    }
+
+    .tab-btn:hover:not(.tab-active) {
+      color: #FFFFFF;
+    }
+
+    /* Tab panel */
+    .tab-panel { display: none; }
+    .tab-panel.tab-panel-active { display: grid; }
+
+    /* Grid — 8px gap, tight and abundant like Nike */
+    .products-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 1100px) {
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .products-grid { grid-template-columns: 1fr; }
+      #products { padding: 70px 20px; }
+      .tab-btn { padding: 12px 16px; font-size: 10px; letter-spacing: 0.2em; }
+    }
+
+    /* ── PRODUCT CARD ──────────────────────────────── */
+    /* Flat, no shadow, no bottom gold bar — Nike model */
+    .product-card {
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 28px 20px 24px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      will-change: transform;
+      /* No box-shadow — Nike flat elevation */
+      transition: background 250ms ease;
+      opacity: 0;
+      transform: translateY(32px);
+    }
+
+    /* No ::after gold bar — removed per design rules */
+
+    .product-card:hover {
+      background: #111;
+    }
+
+    /* ── IMAGE: zero border radius, edge-to-edge, scale on hover */
+    .card-img {
+      width: 100%;
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .card-img img {
+      height: 100%;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      transition: transform 360ms ease;
+      will-change: transform;
+      border-radius: 0; /* ZERO — Nike rule */
+    }
+
+    .product-card:hover .card-img img {
+      transform: scale(1.05); /* No translateY — just clean scale */
+    }
+
+    /* Type badge */
+    .card-type {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      color: #707072;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    /* Name */
+    .card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      color: #111111;
+      letter-spacing: 0.06em;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    /* Flavour */
+    .card-flavour {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.20em;
+      color: #707072;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    /* Pricing */
+    .card-pricing {
+      margin-top: auto;
+      width: 100%;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-price {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 28px;
+      font-weight: 500;
+      color: #111111;
+      letter-spacing: 0.02em;
+    }
+
+    .card-offer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 14px;
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+    }
+
+    .card-original {
+      color: #9E9EA0;
+      text-decoration: line-through;
+    }
+
+    .card-discount {
+      color: #FFB800; /* Yellow for discount — brand accent */
+      font-weight: 700;
+    }
+
+    /* Shop button — pill shape, 30px radius */
+    .card-btn {
+      margin-top: 14px;
+      width: 100%;
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      color: #111111;
+      background: #FFB800;
+      border: 1.5px solid #FFB800;
+      border-radius: 30px; /* Pill — Nike rule */
+      padding: 12px 0;
+      cursor: pointer;
+      transition: background 200ms ease, border-color 200ms ease, color 200ms ease;
+    }
+
+    .card-btn:hover {
+      background: #ffc933;
+      border-color: #ffc933;
+      color: #111111;
+    }
+
+    /* ── ATHLETE LIFESTYLE SECTION ─────────────────── */
+    #athlete-lifestyle {
+      background: #111111;
+      padding: 100px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #athlete-lifestyle::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .athlete-header {
+      text-align: center;
+      padding: 0 40px;
+      margin-bottom: 56px;
+    }
+
+    .athlete-label {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: #FFB800;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .athlete-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 9vw, 88px);
+      color: #FFFFFF;
+      line-height: 0.90;
+      letter-spacing: 0.03em;
+    }
+
+    /* Full-width athlete banner — editorial treatment */
+    .athlete-strip {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .athlete-strip img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    .athlete-strip-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.6) 100%);
+      pointer-events: none;
+    }
+
+    .athlete-strip-tagline {
+      position: absolute;
+      bottom: 48px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(32px, 5vw, 64px);
+      color: rgba(255,255,255,0.92);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    .athlete-strip-tagline span {
+      color: #FFFFFF;
+    }
+
+    @media (max-width: 600px) {
+      .athlete-title { font-size: 52px; }
+      .athlete-strip-tagline { bottom: 24px; }
+    }
+
+    /* Athlete marquee — white on black */
+    .athlete-marquee {
+      background: #111111;
+      overflow: hidden;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .athlete-marquee-track {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      animation: marquee-scroll 32s linear infinite;
+      will-change: transform;
+    }
+
+    .athlete-marquee-item {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-shrink: 0;
+    }
+
+    .athlete-marquee-sep {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      flex-shrink: 0;
+    }
+
+    /* ── WHY IPN SECTION ─────────────────────── */
+    #why-ipn {
+      background: #111111;
+      padding: 100px 40px;
+      position: relative;
+    }
+
+    #why-ipn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: #FFB800;
+    }
+
+    .why-header {
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+    }
+
+    .why-header::before {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 3px;
+      background: #FFB800;
+      margin: 0 auto 20px;
+    }
+
+    .why-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      overflow: hidden;
+      min-height: 680px;
+      /* No border-radius on the container — sharp, Nike-level */
+    }
+
+    /* Left panel */
+    .why-left {
+      width: 40%;
+      position: relative;
+      background: #0d0d0d;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
+      padding: 0 40px 0 52px;
+      border-right: 1px solid rgba(255,255,255,0.05);
+      border-left: 4px solid #FFB800;
+    }
+
+    .why-left::before,
+    .why-left::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 130px;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .why-left::before {
+      top: 0;
+      background: linear-gradient(to bottom, #0d0d0d 0%, transparent 100%);
+    }
+    .why-left::after {
+      bottom: 0;
+      background: linear-gradient(to top, #0d0d0d 0%, transparent 100%);
+    }
+
+    .chips-drum {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .feature-chip {
+      position: absolute;
+      left: 0;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 24px;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      will-change: transform, opacity;
+      transition: border-color 250ms ease, background 250ms ease;
+    }
+
+    .chip-icon {
+      width: 18px; height: 18px;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.4);
+      transition: color 250ms ease;
+    }
+
+    .chip-label {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      transition: color 250ms ease;
+    }
+
+    .feature-chip.chip-active {
+      background: #FFB800;
+      border-color: #FFB800;
+    }
+    .feature-chip.chip-active .chip-label { color: #111111; font-weight: 700; }
+    .feature-chip.chip-active .chip-icon  { color: #111111; }
+
+    .feature-chip:not(.chip-active):hover {
+      border-color: rgba(255,184,0,0.5);
+      background: rgba(255,184,0,0.08);
+    }
+    .feature-chip:not(.chip-active):hover .chip-label { color: #FFB800; }
+    .feature-chip:not(.chip-active):hover .chip-icon  { color: #FFB800; }
+
+    /* Right panel */
+    .why-right {
+      flex: 1;
+      background: #161616;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 40px;
+    }
+
+    .cards-stack {
+      position: relative;
+      width: 360px;
+      aspect-ratio: 4/5;
+    }
+
+    .feature-card {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #1F1F21;
+      will-change: transform, opacity;
+      transform-origin: center center;
+      /* No border-radius on feature cards — Nike sharp rule */
+    }
+
+    .feature-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+      transition: filter 500ms ease;
+      border-radius: 0; /* No border radius on images */
+    }
+
+    .feature-card:not(.card-inactive) {
+      box-shadow: 0 0 0 2px #FFB800, 0 20px 60px rgba(255,184,0,0.18);
+    }
+
+    .feature-card.card-inactive img {
+      filter: grayscale(1) blur(2px) brightness(0.65);
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset-x: 0; bottom: 0;
+      padding: 40px 20px 22px;
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+      pointer-events: none;
+      will-change: transform, opacity;
+    }
+
+    .card-badge {
+      display: inline-block;
+      background: #FFB800;
+      color: #111111;
+      border: 1px solid #FFB800;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: #FFFFFF;
+      line-height: 1.75;
+      letter-spacing: 0.02em;
+    }
+
+    .card-live {
+      position: absolute;
+      top: 18px; left: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+      will-change: transform, opacity;
+    }
+
+    /* Yellow live dot — brand accent */
+    .card-live-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #FFB800;
+    }
+
+    .card-live-text {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      color: #FFB800;
+    }
+
+    /* ── TRUST BADGES ────────────────────────── */
+    /* Inset divider only, no outer border-radius — Nike flat model */
+    .trust-badges {
+      max-width: 1280px;
+      margin: 56px auto 0;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: 0;
+      background: #FFB800;
+    }
+
+    .trust-badge {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 30px 20px;
+      background: transparent;
+      transition: background 250ms ease;
+      position: relative;
+      cursor: default;
+    }
+
+    .trust-badge + .trust-badge::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 20%; bottom: 20%;
+      width: 1px;
+      background: rgba(0,0,0,0.15);
+    }
+
+    .trust-badge:hover { background: rgba(0,0,0,0.06); }
+
+    .trust-icon {
+      flex-shrink: 0;
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .trust-badge span {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #111111;
+    }
+
+    @media (max-width: 768px) {
+      .trust-badges { flex-wrap: wrap; }
+      .trust-badge { flex: 0 0 50%; }
+      .trust-badge + .trust-badge::before { display: none; }
+    }
+
+    @media (max-width: 900px) {
+      .why-inner { flex-direction: column; }
+      .why-left { width: 100%; min-height: 320px; padding: 40px; justify-content: center; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+      .why-right { padding: 40px 20px; }
+      .cards-stack { width: 260px; }
+    }
+
+    @media (max-width: 600px) {
+      #why-ipn { padding: 70px 20px; }
+    }
+
+    /* ── THE IRON STANDARD SECTION ─────────────────── */
+    #iron-standard {
+      background: #111111;
+      padding: 120px 40px;
+      position: relative;
+      text-align: center;
+    }
+
+    #iron-standard::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: #FFB800;
+    }
+
+    #iron-standard::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 4px; left: 0; right: 0;
+      height: 1px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .iron-standard-header-rule {
+      display: block;
+      width: 48px;
+      height: 3px;
+      background: #FFB800;
+      margin: 0 auto 20px;
+    }
+
+    .iron-standard-label {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: #FFB800;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .iron-standard-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 9vw, 88px);
+      color: #FFFFFF;
+      line-height: 0.88;
+      letter-spacing: 0.03em;
+      margin-bottom: 20px;
+    }
+
+    .iron-standard-sub {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #707072;
+      margin-bottom: 64px;
+      line-height: 1.75;
+    }
+
+    .iron-standard-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      max-width: 700px;
+      margin: 0 auto;
+      background: rgba(255,184,0,0.2);
+    }
+
+    .iron-standard-card {
+      background: #161616;
+      padding: 36px 32px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      border: none;
+      border-left: 3px solid #FFB800;
+      transition: background 250ms ease, border-color 250ms ease;
+    }
+
+    .iron-standard-card:hover {
+      background: #1e1e1e;
+      border-left-color: #ffd040;
+    }
+
+    .iron-standard-icon {
+      width: 28px; height: 28px;
+      color: #FFB800;
+      flex-shrink: 0;
+    }
+
+    .iron-standard-card-title {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+    }
+
+    .iron-standard-card-text {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #888888;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .iron-standard-grid { grid-template-columns: 1fr; }
+      #iron-standard { padding: 80px 20px; }
+    }
+
+    /* ── FOOTER ──────────────────────────────── */
+    footer {
+      background: #0d0d0d;
+      border-top: 4px solid #FFB800;
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px 40px 0;
+      box-shadow: 0px 1px 0px 0px rgba(255,184,0,0.12) inset;
+    }
+
+    .footer-top {
+      display: flex;
+      gap: 80px;
+      padding-bottom: 60px;
+    }
+
+    .footer-brand {
+      flex: 0 0 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .footer-logo img {
+      height: 52px;
+      width: auto;
+    }
+
+    .footer-logo span {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #FFB800;
+    }
+
+    .footer-desc {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: #707072;
+      line-height: 1.75;
+      max-width: 260px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 10px;
+      list-style: none;
+    }
+
+    .footer-socials a {
+      width: 38px; height: 38px;
+      border: 1px solid rgba(255,184,0,0.4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #FFB800;
+      transition: border-color 200ms ease, color 200ms ease, background 200ms ease;
+    }
+
+    .footer-socials a:hover {
+      border-color: #FFB800;
+      background: #FFB800;
+      color: #111111;
+    }
+
+    .footer-socials svg { width: 15px; height: 15px; }
+
+    .footer-links-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #FFB800;
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+    .footer-col a {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: #888888;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 180ms ease;
+    }
+
+    .footer-col a:hover { color: #FFB800; }
+
+    /* Bottom bar */
+    .footer-bottom {
+      border-top: 1px solid rgba(255,184,0,0.15);
+      padding: 24px 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-copy {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      color: #9E9EA0;
+      text-transform: uppercase;
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-legal a {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #9E9EA0;
+      text-decoration: none;
+      transition: color 180ms ease;
+    }
+
+    .footer-legal a:hover { color: #FFB800; }
+
+    @media (max-width: 900px) {
+      .footer-top { flex-direction: column; gap: 40px; }
+      .footer-brand { flex: none; }
+      .footer-desc { max-width: 100%; }
+    }
+
+    @media (max-width: 600px) {
+      .footer-inner { padding: 60px 20px 0; }
+      .footer-links-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    }
+
+  </style>
+</head>
+<body>
+
+<section id="hero">
+
+  <!-- Video background -->
+  <video id="hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="assets/video/hero-hd.mp4?v=2" type="video/mp4" />
+    <source src="assets/video/hero.mp4?v=2" type="video/mp4" />
+  </video>
+
+  <!-- Gradient overlay -->
+  <div id="overlay" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-center">
+      <ul class="nav-links">
+        <li><a href="#about"    class="nav-link">About Us</a></li>
+        <li><a href="#products" class="nav-link">Products</a></li>
+      </ul>
+      <div id="nav-logo" aria-label="Iron Pump Nutrition">
+        <img src="assets/logo/ipn-logo-new.png" alt="IPN — Iron Pump Nutrition" />
+      </div>
+      <ul class="nav-links">
+        <li><a href="#why-ipn"  class="nav-link">Why IPN</a></li>
+        <li><a href="#contact"  class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero text + CTAs -->
+  <div class="hero-content">
+    <div class="hero-text">
+      <span class="hero-eyebrow">Iron Pump Nutrition</span>
+      <h1 class="hero-headline">Unleash<br>The Beast</h1>
+      <p class="hero-sub">Premium sports nutrition engineered for athletes who refuse to settle for average.</p>
+       <div class="hero-ctas">
+         <a href="#products" class="btn-primary">Shop Now</a>
+         <a href="#products" class="btn-primary">Explore Products</a>
+       </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── MARQUEE STRIP ──────────────────────────────── -->
+<section id="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <!-- Set 1 -->
+    <span class="marquee-item">FSSAI Certified<span class="marquee-sep"></span></span>
+    <span class="marquee-item">Lab Tested<span class="marquee-sep"></span></span>
+    <span class="marquee-item">24g Protein<span class="marquee-sep"></span></span>
+    <span class="marquee-item">Zero Fillers<span class="marquee-sep"></span></span>
+    <span class="marquee-item">Made in India<span class="marquee-sep"></span></span>
+    <span class="marquee-item">200mg Caffeine<span class="marquee-sep"></span></span>
+    <span class="marquee-item">4g L-Citrulline<span class="marquee-sep"></span></span>
+    <span class="marquee-item">0 Side Effects<span class="marquee-sep"></span></span>
+    <span class="marquee-item">Clinically Tested<span class="marquee-sep"></span></span>
+    <span class="marquee-item">Guaranteed Results<span class="marquee-sep"></span></span>
+    <!-- Set 2 — duplicate for seamless loop -->
+    <span class="marquee-item">FSSAI Certified<span class="marquee-sep"></span></span>
+    <span class="marquee-item">Lab Tested<span class="marquee-sep"></span></span>
+    <span class="marquee-item">24g Protein<span class="marquee-sep"></span></span>
+    <span class="marquee-item">Zero Fillers<span class="marquee-sep"></span></span>
+    <span class="marquee-item">Made in India<span class="marquee-sep"></span></span>
+    <span class="marquee-item">200mg Caffeine<span class="marquee-sep"></span></span>
+    <span class="marquee-item">4g L-Citrulline<span class="marquee-sep"></span></span>
+    <span class="marquee-item">0 Side Effects<span class="marquee-sep"></span></span>
+    <span class="marquee-item">Clinically Tested<span class="marquee-sep"></span></span>
+    <span class="marquee-item">Guaranteed Results<span class="marquee-sep"></span></span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PARALLAX SECTION 1 — MANIFESTO                        -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section id="parallax-manifesto" style="background:#111111; width:100%; overflow:hidden;">
+  <img src="assets/images/male-model.png?v=3" alt="Built For The Ones Who Refuse To Stop — IPN" style="width:100%; height:auto; display:block;" />
+</section>
+
+<!-- Manifesto content — reveals after sticky ends -->
+<div class="parallax-content manifesto-content">
+  <div class="manifesto-inner">
+    <p class="manifesto-quote">We don't make supplements for people who show up 3 days a week. Iron Pump is built for the grind — every rep, every set, no excuses.</p>
+    <div class="manifesto-stats">
+      <div class="manifesto-stat">
+        <span class="manifesto-stat-num">10,000+</span>
+        <span class="manifesto-stat-label">Athletes Fueled</span>
+      </div>
+      <div class="manifesto-stat">
+        <span class="manifesto-stat-num">0</span>
+        <span class="manifesto-stat-label">Side Effects</span>
+      </div>
+      <div class="manifesto-stat">
+        <span class="manifesto-stat-num">100%</span>
+        <span class="manifesto-stat-label">Lab Tested</span>
+      </div>
+      <div class="manifesto-stat">
+        <span class="manifesto-stat-num">FSSAI</span>
+        <span class="manifesto-stat-label">Certified</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PARALLAX SECTION 2 — IRON HELLFIRE                    -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section id="parallax-hellfire" style="position:relative; width:100%; overflow:hidden; background:#000;">
+  <img src="assets/images/preworkout-splash.png" alt="Iron Pump Pre-Workout — Big Flavor Bigger Performance" style="width:100%; height:auto; display:block;" />
+</section>
+
+<!-- Hellfire ingredient cards — reveals after sticky ends -->
+<div class="parallax-content hellfire-content">
+  <div class="ingredient-cards">
+    <div class="ingredient-card">
+      <div class="ingredient-dose">4G</div>
+      <div class="ingredient-name">L-Citrulline</div>
+      <div class="ingredient-desc">Pumps + Performance</div>
+    </div>
+    <div class="ingredient-card">
+      <div class="ingredient-dose">3G</div>
+      <div class="ingredient-name">Beta Alanine</div>
+      <div class="ingredient-desc">Endurance + Output</div>
+    </div>
+    <div class="ingredient-card">
+      <div class="ingredient-dose">200MG</div>
+      <div class="ingredient-name">Caffeine</div>
+      <div class="ingredient-desc">Explosive Energy</div>
+    </div>
+    <div class="ingredient-card">
+      <div class="ingredient-dose">1G</div>
+      <div class="ingredient-name">L-Arginine</div>
+      <div class="ingredient-desc">Nitric Oxide Support</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PRODUCTS SECTION ─────────────────────────── -->
+<section id="products">
+
+  <div class="products-header">
+    <span class="products-label">Iron Pump Nutrition</span>
+    <h2 class="products-title">Our <span>Products</span></h2>
+  </div>
+
+  <!-- Tab switcher -->
+  <div class="products-tabs" id="products-tabs">
+    <button class="tab-btn tab-active" data-tab="preworkout">Pre-Workout</button>
+    <button class="tab-btn" data-tab="whey">Whey Protein</button>
+  </div>
+
+  <!-- Pre-Workout grid -->
+  <div class="products-grid tab-panel tab-panel-active" id="preworkout-grid">
+
+    <div class="product-card">
+      <div class="card-img">
+        <img src="assets/images/product1.png" alt="Iron Hellfire Hellfire Punch" />
+      </div>
+      <div class="card-type">Pre-Workout</div>
+      <div class="card-name">Iron Hellfire</div>
+      <div class="card-flavour">Hellfire Punch</div>
+      <div class="card-pricing">
+        <div class="card-price">₹1,499</div>
+        <div class="card-offer">
+          <span class="card-original">₹1,999</span>
+          <span class="card-discount">25% OFF</span>
+        </div>
+        <button class="card-btn">Shop Now</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">
+        <img src="assets/images/product2.png" alt="Iron Hellfire Blue Rage" />
+      </div>
+      <div class="card-type">Pre-Workout</div>
+      <div class="card-name">Iron Hellfire</div>
+      <div class="card-flavour">Blue Rage</div>
+      <div class="card-pricing">
+        <div class="card-price">₹1,499</div>
+        <div class="card-offer">
+          <span class="card-original">₹1,999</span>
+          <span class="card-discount">25% OFF</span>
+        </div>
+        <button class="card-btn">Shop Now</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">
+        <img src="assets/images/product3.png" alt="Iron Pump Ultra Stim Inferno Punch" />
+      </div>
+      <div class="card-type">Ultra Stim Pre-Workout</div>
+      <div class="card-name">Iron Pump</div>
+      <div class="card-flavour">Inferno Punch</div>
+      <div class="card-pricing">
+        <div class="card-price">₹1,899</div>
+        <div class="card-offer">
+          <span class="card-original">₹2,499</span>
+          <span class="card-discount">24% OFF</span>
+        </div>
+        <button class="card-btn">Shop Now</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">
+        <img src="assets/images/product4.png" alt="Iron Pump Ultra Stim Blue Raspberry Blast" />
+      </div>
+      <div class="card-type">Ultra Stim Pre-Workout</div>
+      <div class="card-name">Iron Pump</div>
+      <div class="card-flavour">Blue Raspberry Blast</div>
+      <div class="card-pricing">
+        <div class="card-price">₹1,899</div>
+        <div class="card-offer">
+          <span class="card-original">₹2,499</span>
+          <span class="card-discount">24% OFF</span>
+        </div>
+        <button class="card-btn">Shop Now</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Whey grid -->
+  <div class="products-grid tab-panel" id="whey-grid">
+
+    <div class="product-card">
+      <div class="card-img">
+        <img src="assets/images/whey-strawberry.png" alt="Premium Whey Strawberry" />
+      </div>
+      <div class="card-type">Premium Whey Protein</div>
+      <div class="card-name">Premium Whey</div>
+      <div class="card-flavour">Strawberry</div>
+      <div class="card-pricing">
+        <div class="card-price">₹2,999</div>
+        <div class="card-offer">
+          <span class="card-original">₹3,799</span>
+          <span class="card-discount">21% OFF</span>
+        </div>
+        <button class="card-btn">Shop Now</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">
+        <img src="assets/images/whey-chocolate.png" alt="Premium Whey Chocolate Fudge" />
+      </div>
+      <div class="card-type">Premium Whey Protein</div>
+      <div class="card-name">Premium Whey</div>
+      <div class="card-flavour">Chocolate Fudge</div>
+      <div class="card-pricing">
+        <div class="card-price">₹2,999</div>
+        <div class="card-offer">
+          <span class="card-original">₹3,799</span>
+          <span class="card-discount">21% OFF</span>
+        </div>
+        <button class="card-btn">Shop Now</button>
+      </div>
+    </div>
+
+    <!-- Whey Card 3 -->
+    <div class="product-card">
+      <div class="card-img">
+        <img src="assets/images/whey-kulfi.png" alt="Premium Whey Kulfi" />
+      </div>
+      <div class="card-type">Premium Whey Protein</div>
+      <div class="card-name">Premium Whey</div>
+      <div class="card-flavour">Kulfi</div>
+      <div class="card-pricing">
+        <div class="card-price">₹2,999</div>
+        <div class="card-offer">
+          <span class="card-original">₹3,799</span>
+          <span class="card-discount">21% OFF</span>
+        </div>
+        <button class="card-btn">Shop Now</button>
+      </div>
+    </div>
+
+    <!-- Whey Card 4 -->
+    <div class="product-card">
+      <div class="card-img">
+        <img src="assets/images/whey-mango.png" alt="Premium Whey Mango" />
+      </div>
+      <div class="card-type">Premium Whey Protein</div>
+      <div class="card-name">Premium Whey</div>
+      <div class="card-flavour">Mango</div>
+      <div class="card-pricing">
+        <div class="card-price">₹2,999</div>
+        <div class="card-offer">
+          <span class="card-original">₹3,799</span>
+          <span class="card-discount">21% OFF</span>
+        </div>
+        <button class="card-btn">Shop Now</button>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- ATHLETE LIFESTYLE SECTION                             -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section id="athlete-lifestyle">
+
+  <div class="athlete-header">
+    <span class="athlete-label">The IPN Athlete</span>
+    <h2 class="athlete-title">TRAIN WITHOUT COMPROMISE</h2>
+  </div>
+
+  <!-- Full-width athlete banner with editorial overlay -->
+  <div class="athlete-strip">
+    <img src="assets/images/athletes-banner.png?v=3" alt="IPN Athletes — Train Without Compromise" />
+    <div class="athlete-strip-overlay"></div>
+    <div class="athlete-strip-tagline">FUELED BY <span>IPN</span> · BUILT TO DOMINATE</div>
+  </div>
+
+  <!-- Athlete marquee — white on black -->
+  <div class="athlete-marquee" aria-hidden="true">
+    <div class="athlete-marquee-track">
+      <!-- Set 1 -->
+      <span class="athlete-marquee-item">STRENGTH<span class="athlete-marquee-sep"></span></span>
+      <span class="athlete-marquee-item">POWER<span class="athlete-marquee-sep"></span></span>
+      <span class="athlete-marquee-item">ENDURANCE<span class="athlete-marquee-sep"></span></span>
+      <span class="athlete-marquee-item">DISCIPLINE<span class="athlete-marquee-sep"></span></span>
+      <span class="athlete-marquee-item">RESULTS<span class="athlete-marquee-sep"></span></span>
+      <span class="athlete-marquee-item">NO EXCUSES<span class="athlete-marquee-sep"></span></span>
+      <span class="athlete-marquee-item">ZERO FILLERS<span class="athlete-marquee-sep"></span></span>
+      <span class="athlete-marquee-item">MADE IN INDIA<span class="athlete-marquee-sep"></span></span>
+      <!-- Set 2 — duplicate for seamless loop -->
+      <span class="athlete-marquee-item">STRENGTH<span class="athlete-marquee-sep"></span></span>
+      <span class="athlete-marquee-item">POWER<span class="athlete-marquee-sep"></span></span>
+      <span class="athlete-marquee-item">ENDURANCE<span class="athlete-marquee-sep"></span></span>
+      <span class="athlete-marquee-item">DISCIPLINE<span class="athlete-marquee-sep"></span></span>
+      <span class="athlete-marquee-item">RESULTS<span class="athlete-marquee-sep"></span></span>
+      <span class="athlete-marquee-item">NO EXCUSES<span class="athlete-marquee-sep"></span></span>
+      <span class="athlete-marquee-item">ZERO FILLERS<span class="athlete-marquee-sep"></span></span>
+      <span class="athlete-marquee-item">MADE IN INDIA<span class="athlete-marquee-sep"></span></span>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── WHY IPN SECTION ───────────────────────── -->
+<section id="why-ipn">
+  <div class="why-header">
+    <span class="products-label">The Iron Pump Difference</span>
+    <h2 class="products-title">Why <span>Iron Pump</span></h2>
+  </div>
+  <div class="why-inner">
+    <div class="why-left">
+      <div class="chips-drum" id="chips-drum"></div>
+    </div>
+    <div class="why-right">
+      <div class="cards-stack" id="cards-stack"></div>
+    </div>
+  </div>
+
+  <!-- Trust badges -->
+  <div class="trust-badges">
+    <div class="trust-badge">
+      <div class="trust-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <span>Research Backed</span>
+    </div>
+    <div class="trust-badge">
+      <div class="trust-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <span>Clinically Tested</span>
+    </div>
+    <div class="trust-badge">
+      <div class="trust-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <span>0 Side Effects</span>
+    </div>
+    <div class="trust-badge">
+      <div class="trust-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      </div>
+      <span>Guaranteed Results</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- THE IRON STANDARD SECTION                            -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section id="iron-standard">
+  <span class="iron-standard-header-rule"></span>
+  <span class="iron-standard-label">The Iron Standard</span>
+  <h2 class="iron-standard-title">NOTHING TO HIDE.</h2>
+  <p class="iron-standard-sub">Every batch tested. Every claim verified. Every ingredient disclosed.</p>
+
+  <div class="iron-standard-grid">
+
+    <!-- Card 1: FSSAI -->
+    <div class="iron-standard-card">
+      <svg class="iron-standard-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        <polyline points="9 12 11 14 15 10"/>
+      </svg>
+      <div class="iron-standard-card-title">FSSAI Certified</div>
+      <p class="iron-standard-card-text">License No. 10021022000258 — India's highest food safety standard</p>
+    </div>
+
+    <!-- Card 2: Lab Tested -->
+    <div class="iron-standard-card">
+      <svg class="iron-standard-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11m0 0a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 14H5a2 2 0 0 1-2-2V9m0 0h18m-3 5v3a2 2 0 0 1-2 2h-2"/>
+        <circle cx="12" cy="9" r="1" fill="currentColor" stroke="none"/>
+      </svg>
+      <div class="iron-standard-card-title">Lab Tested</div>
+      <p class="iron-standard-card-text">Third-party tested at NABL-accredited labs — every batch, every time</p>
+    </div>
+
+    <!-- Card 3: Zero Fillers -->
+    <div class="iron-standard-card">
+      <svg class="iron-standard-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/>
+        <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+      </svg>
+      <div class="iron-standard-card-title">Zero Fillers</div>
+      <p class="iron-standard-card-text">No maltodextrin, no proprietary blends. You see exactly what you're getting</p>
+    </div>
+
+    <!-- Card 4: Made in India -->
+    <div class="iron-standard-card">
+      <svg class="iron-standard-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      <div class="iron-standard-card-title">Made in India</div>
+      <p class="iron-standard-card-text">Proudly manufactured in India for Indian athletes</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────── -->
+<footer id="contact">
+  <div class="footer-inner">
+
+    <div class="footer-top">
+      <!-- Brand col -->
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          <img src="assets/logo/ipn-logo-new.png" alt="Iron Pump Nutrition" />
+          <span>Iron Pump Nutrition</span>
+        </a>
+        <p class="footer-desc">India's premium sports nutrition brand — engineered for athletes who refuse to settle for average.</p>
+        <ul class="footer-socials">
+          <li>
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="#" aria-label="Twitter / X">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="#" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Links grid -->
+      <div class="footer-links-grid">
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="#products">Pre-Workout</a></li>
+            <li><a href="#products">Whey Protein</a></li>
+            <li><a href="#products">All Products</a></li>
+            <li><a href="#products">New Arrivals</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#about">Our Story</a></li>
+            <li><a href="#blogs">Blog</a></li>
+            <li><a href="#contact">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#contact">FAQs</a></li>
+            <li><a href="#contact">Shipping Policy</a></li>
+            <li><a href="#contact">Return Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Iron Pump Nutrition. All rights reserved.</p>
+      <ul class="footer-legal">
+        <li><a href="#">Terms &amp; Conditions</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+
+  </div>
+</footer>
+
+
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Nav scroll state
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Hero entrance animation
+  gsap.fromTo('.hero-text',
+    { opacity: 0, y: 40 },
+    { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', delay: 0.3 }
+  );
+
+  // Products header reveal
+  gsap.from('.products-header', {
+    opacity: 0,
+    y: 30,
+    duration: 0.8,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '#products',
+      start: 'top 85%',
+      once: true,
+    }
+  });
+
+  // Products tabs reveal
+  gsap.from('.products-tabs', {
+    opacity: 0,
+    y: 20,
+    duration: 0.6,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '#products-tabs',
+      start: 'top 90%',
+      once: true,
+    }
+  });
+
+  // Animate visible grid cards on scroll
+  function animateGridCards(grid) {
+    gsap.fromTo(grid.querySelectorAll('.product-card'),
+      { opacity: 0, y: 32 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.1 }
+    );
+  }
+
+  // Initial pre-workout grid animation
+  gsap.to('#preworkout-grid .product-card', {
+    opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.1,
+    scrollTrigger: { trigger: '#preworkout-grid', start: 'top 80%', once: true }
+  });
+
+  // ── PRODUCT TAB SWITCHER ─────────────────────────
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      tabBtns.forEach(b => b.classList.remove('tab-active'));
+      btn.classList.add('tab-active');
+
+      tabPanels.forEach(panel => {
+        panel.classList.remove('tab-panel-active');
+      });
+
+      const activePanel = document.getElementById(target + '-grid');
+      activePanel.classList.add('tab-panel-active');
+      // Reset cards to invisible then animate
+      gsap.set(activePanel.querySelectorAll('.product-card'), { opacity: 0, y: 32 });
+      animateGridCards(activePanel);
+    });
+  });
+
+  // ── FEATURE CAROUSEL ─────────────────────────
+  const FC_FEATURES = [
+    { id:'quality',       label:'Premium Quality Health Supplements', image:'assets/images/premium-quality.png',        desc:'Perfect ratio of every ingredient in all our products to ensure maximum benefits.' },
+    { id:'macro',         label:'Macronutrients & Micronutrients',    image:'assets/images/macro-micronutrients.png',   desc:'We not only focus on fulfilling macronutrient requirements but micronutrients as well.' },
+    { id:'constituents',  label:"Our Supplements' Constituents",      image:'assets/images/ingredients-formulation.png', desc:'Iron Pump Nutrition is crafted from carefully chosen, premium ingredients and expert guidance.' },
+    { id:'transparent',   label:'Transparent & Trustworthy',          image:'assets/images/transparency-trust.png',     desc:'Test Certificates from FSSAI-Approved labs to evidence our claims on Nutritional Profiling.' },
+  ];
+
+  const FC_ICONS = {
+    quality:      '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+    macro:        '<path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>',
+    constituents: '<circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>',
+    transparent:  '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+  };
+
+  const FC_ITEM_H = 65;
+  let fc_cur = 0;
+  let fc_paused = false;
+  let fc_timer;
+
+  function fc_wrapDiff(diff, total) {
+    const half = total / 2;
+    while (diff > half)  diff -= total;
+    while (diff < -half) diff += total;
+    return diff;
+  }
+
+  // Build chips
+  const drumEl = document.getElementById('chips-drum');
+  FC_FEATURES.forEach((f, i) => {
+    const chip = document.createElement('button');
+    chip.className = 'feature-chip';
+    chip.dataset.index = i;
+    chip.innerHTML = `
+      <span class="chip-icon">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${FC_ICONS[f.id]}</svg>
+      </span>
+      <span class="chip-label">${f.label}</span>`;
+    chip.addEventListener('click', () => { fc_goTo(i); fc_startAuto(); });
+    chip.addEventListener('mouseenter', () => { fc_paused = true; });
+    chip.addEventListener('mouseleave', () => { fc_paused = false; });
+    drumEl.appendChild(chip);
+  });
+
+  // Build cards
+  const stackEl = document.getElementById('cards-stack');
+  FC_FEATURES.forEach((f, i) => {
+    const card = document.createElement('div');
+    card.className = 'feature-card card-inactive';
+    card.innerHTML = `
+      <img src="${f.image}" alt="${f.label}" />
+      <div class="card-live" style="opacity:0">
+        <div class="card-live-dot"></div>
+        <span class="card-live-text">Active</span>
+      </div>
+      <div class="card-overlay" style="opacity:0;transform:translateY(15px)">
+        <div class="card-badge">${String(i+1).padStart(2,'0')} · ${f.label}</div>
+        <p class="card-desc">${f.desc}</p>
+      </div>`;
+    stackEl.appendChild(card);
+  });
+
+  function fc_updateChips() {
+    document.querySelectorAll('.feature-chip').forEach((chip, i) => {
+      const diff = fc_wrapDiff(i - fc_cur, FC_FEATURES.length);
+      const isActive = diff === 0;
+      gsap.to(chip, {
+        y: diff * FC_ITEM_H,
+        opacity: Math.max(0, 1 - Math.abs(diff) * 0.25),
+        duration: 0.55,
+        ease: 'power3.out'
+      });
+      chip.classList.toggle('chip-active', isActive);
+    });
+  }
+
+  function fc_updateCards() {
+    document.querySelectorAll('.feature-card').forEach((card, i) => {
+      const total = FC_FEATURES.length;
+      let diff = i - fc_cur;
+      if (diff > total/2)  diff -= total;
+      if (diff < -total/2) diff += total;
+      const isActive = diff === 0;
+      const isPrev   = diff === -1;
+      const isNext   = diff === 1;
+
+      gsap.to(card, {
+        x:        isActive ? 0 : isPrev ? -110 : isNext ? 110 : 0,
+        scale:    isActive ? 1 : (isPrev || isNext) ? 0.85 : 0.7,
+        opacity:  isActive ? 1 : (isPrev || isNext) ? 0.4 : 0,
+        rotation: isPrev ? -4 : isNext ? 4 : 0,
+        zIndex:   isActive ? 20 : (isPrev || isNext) ? 10 : 0,
+        duration: 0.55,
+        ease: 'power3.out'
+      });
+
+      card.classList.toggle('card-inactive', !isActive);
+
+      const overlay = card.querySelector('.card-overlay');
+      const live    = card.querySelector('.card-live');
+      gsap.to(overlay, { opacity: isActive ? 1 : 0, y: isActive ? 0 : 15, duration: 0.35, ease: 'power2.out', delay: isActive ? 0.12 : 0 });
+      gsap.to(live,    { opacity: isActive ? 1 : 0, y: isActive ? 0 : 8,  duration: 0.3,  ease: 'power2.out', delay: isActive ? 0.15 : 0 });
+    });
+  }
+
+  function fc_goTo(index) {
+    fc_cur = ((index % FC_FEATURES.length) + FC_FEATURES.length) % FC_FEATURES.length;
+    fc_updateChips();
+    fc_updateCards();
+  }
+
+  function fc_startAuto() {
+    clearInterval(fc_timer);
+    fc_timer = setInterval(() => { if (!fc_paused) fc_goTo(fc_cur + 1); }, 3000);
+  }
+
+  // Scroll-triggered init
+  ScrollTrigger.create({
+    trigger: '#why-ipn',
+    start: 'top 75%',
+    once: true,
+    onEnter: () => {
+      fc_updateChips();
+      fc_updateCards();
+      fc_startAuto();
+      gsap.from('.why-inner', { opacity: 0, y: 40, duration: 0.8, ease: 'power3.out' });
+    }
+  });
+
+  gsap.from('.why-header', {
+    opacity: 0, y: 28, duration: 0.8, ease: 'power3.out',
+    scrollTrigger: { trigger: '#why-ipn', start: 'top 85%', once: true }
+  });
+
+  // ── PARALLAX SECTIONS ──────────────────────────────────────
+  document.querySelectorAll('.parallax-section').forEach(section => {
+    const stickyImg  = section.querySelector('.parallax-sticky-img');
+    const overlay    = section.querySelector('.parallax-dark-overlay');
+    const overlayText = section.querySelector('.parallax-overlay-text');
+
+    // Image scale as section scrolls past
+    gsap.to(stickyImg, {
+      scale: 0.85,
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+      }
+    });
+
+    // Dark overlay fades IN as image scales down (dramatic exit)
+    gsap.to(overlay, {
+      background: 'rgba(0,0,0,0.75)',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+      }
+    });
+
+    // Text parallaxes upward as section scrolls — enter bottom, exit top
+    gsap.fromTo(overlayText,
+      { y: 80, opacity: 0 },
+      {
+        y: -80,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 80%',
+          end: 'center center',
+          scrub: true,
+        }
+      }
+    );
+  });
+
+  // ── MANIFESTO CONTENT REVEAL ───────────────────────────────
+  gsap.from('.manifesto-quote', {
+    opacity: 0,
+    y: 40,
+    duration: 0.9,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '.manifesto-content',
+      start: 'top 80%',
+      once: true,
+    }
+  });
+
+  gsap.from('.manifesto-stat', {
+    opacity: 0,
+    y: 28,
+    duration: 0.7,
+    ease: 'power3.out',
+    stagger: 0.10,
+    scrollTrigger: {
+      trigger: '.manifesto-stats',
+      start: 'top 85%',
+      once: true,
+    }
+  });
+
+  // ── HELLFIRE INGREDIENT CARDS REVEAL ──────────────────────
+  gsap.from('.ingredient-card', {
+    opacity: 0,
+    y: 36,
+    duration: 0.65,
+    ease: 'power3.out',
+    stagger: 0.10,
+    scrollTrigger: {
+      trigger: '.ingredient-cards',
+      start: 'top 85%',
+      once: true,
+    }
+  });
+
+  // ── ATHLETE LIFESTYLE SECTION ──────────────────────────────
+  gsap.from('.athlete-header', {
+    opacity: 0,
+    y: 30,
+    duration: 0.8,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '#athlete-lifestyle',
+      start: 'top 85%',
+      once: true,
+    }
+  });
+
+  gsap.from('.athlete-strip img', {
+    opacity: 0,
+    scale: 1.04,
+    duration: 1.2,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '.athlete-strip',
+      start: 'top 85%',
+      once: true,
+    }
+  });
+
+  // ── IRON STANDARD SECTION ──────────────────────────────────
+  gsap.from('#iron-standard .iron-standard-label, #iron-standard .iron-standard-title, #iron-standard .iron-standard-sub', {
+    opacity: 0,
+    y: 30,
+    duration: 0.8,
+    ease: 'power3.out',
+    stagger: 0.10,
+    scrollTrigger: {
+      trigger: '#iron-standard',
+      start: 'top 85%',
+      once: true,
+    }
+  });
+
+  gsap.from('.iron-standard-card', {
+    opacity: 0,
+    y: 32,
+    duration: 0.65,
+    ease: 'power3.out',
+    stagger: 0.10,
+    scrollTrigger: {
+      trigger: '.iron-standard-grid',
+      start: 'top 85%',
+      once: true,
+    }
+  });
+</script>
+
+
+</body>
+</html>
