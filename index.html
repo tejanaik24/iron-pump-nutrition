@@ -26,12 +26,16 @@
     /* ── HERO ─────────────────────────────────────── */
     #hero {
       position: relative;
-      width: 100%; height: 100vh;
+      width: 100%; height: 100vh; height: 100dvh; min-height: 600px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-end;
+    }
+
+    @supports not (height: 100dvh) {
+      #hero { height: 100vh; }
     }
 
     /* ── HERO VIDEO ───────────────────────────────── */
@@ -40,9 +44,22 @@
       inset: 0;
       width: 100%; height: 100%;
       object-fit: cover;
-      object-position: center center;
+      object-position: center 25%;   /* show more top on portrait */
       display: block;
       z-index: 0;
+    }
+
+    /* Mobile: adjust video position so subject is visible */
+    @media (max-width: 768px) {
+      #hero-video {
+        object-position: center 20%;
+        /* If video is landscape on portrait phone, this keeps top visible */
+      }
+    }
+    @media (max-width: 414px) {
+      #hero-video {
+        object-position: center 15%;
+      }
     }
 
     /* Overlay — stronger scrim at bottom for headline legibility */
@@ -53,21 +70,22 @@
       pointer-events: none;
       background: linear-gradient(
         to bottom,
-        rgba(0,0,0,0.50) 0%,
-        rgba(0,0,0,0.08) 28%,
-        rgba(0,0,0,0.35) 65%,
+        rgba(0,0,0,0.25) 0%,
+        rgba(0,0,0,0.05) 28%,
+        rgba(0,0,0,0.20) 65%,
         rgba(0,0,0,0.92) 100%
       );
     }
 
     /* ── HERO CONTENT ─────────────────────────────── */
     .hero-content {
-      position: absolute;
-      inset: 0;
+      position: relative;
       z-index: 10;
+      width: 100%;
+      max-width: 100%;
+      padding: 0 80px 80px;
       display: flex;
       align-items: flex-end;
-      padding: 0 80px 100px;
     }
 
     .hero-text {
@@ -166,6 +184,200 @@
     @media (max-width: 768px) {
       .hero-content { padding: 0 24px 120px; }
       .hero-sub { font-size: 13px; }
+    }
+
+    /* ── MOBILE SMALL (375px–414px) ────────────────── */
+    @media (max-width: 414px) {
+      .hero-headline { font-size: clamp(48px, 11vw, 72px); }
+      .hero-sub { font-size: 11px; max-width: 100%; }
+      .hero-content { padding: 0 16px 100px; }
+      .btn-primary { padding: 10px 20px; font-size: 13px; }
+      .btn-ghost { padding: 10px 20px; font-size: 11px; }
+    }
+
+    @media (max-width: 375px) {
+      .hero-headline { font-size: 44px; }
+      .hero-eyebrow { font-size: 10px; }
+      .hero-content { padding: 0 12px 80px; }
+      .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+      .hero-ctas { flex-direction: column; width: 100%; }
+    }
+
+    /* ── NAV MOBILE FIXES ─────────────────────────── */
+    @media (max-width: 900px) {
+      #navbar { padding: 0 20px; height: 56px; }
+      .nav-center { padding: 0 16px; }
+      #nav-logo img { height: 40px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: flex; }
+      .nav-center { justify-content: space-between; padding: 0 20px; }
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 56px;
+        left: 0; right: 0;
+        background: #111111;
+        padding: 16px 24px 24px;
+        z-index: 19;
+        flex-direction: column;
+        gap: 0;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      }
+      .mobile-menu.active { display: flex; }
+      .mobile-link {
+        font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+        font-weight: 500;
+        font-size: 15px;
+        letter-spacing: 0.22em;
+        color: #FFB800;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(255,184,0,0.15);
+        display: block;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+      .mobile-link:last-child { border-bottom: none; }
+      .mobile-link:hover { color: #FFFFFF; }
+    }
+
+    /* ── MANIFESTO MOBILE ─────────────────────────── */
+    @media (max-width: 900px) {
+      .manifesto-inner { flex-direction: column; gap: 48px; }
+      .manifesto-stats { flex: none; width: 100%; }
+      .manifesto-content { padding: 60px 24px; }
+      .manifesto-quote { font-size: 32px; }
+    }
+
+    @media (max-width: 600px) {
+      .manifesto-stats { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .manifesto-stat { padding: 24px 16px; }
+      .manifesto-stat-num { font-size: 40px; }
+      .manifesto-content { padding: 48px 16px; }
+      .manifesto-quote { font-size: 28px; }
+    }
+
+    /* ── PARALLAX MOBILE (disable heavy effects) ─────── */
+    @media (max-width: 768px) {
+      .parallax-section { height: auto; min-height: 100vh; padding: 0; }
+      .parallax-sticky-img {
+        position: relative;
+        top: auto;
+        height: 60vh;
+        min-height: 300px;
+      }
+      .parallax-content { padding: 60px 20px; }
+      .parallax-heading { font-size: clamp(40px, 9vw, 72px); }
+    }
+
+    /* ── PRODUCT GRID MOBILE ──────────────────────── */
+    @media (max-width: 600px) {
+      .products-grid { grid-template-columns: repeat(2, 1fr); padding: 0 16px; gap: 6px; }
+      #products { padding: 56px 16px; }
+      .product-card { padding: 20px 12px 16px; }
+      .product-card-title { font-size: 13px; }
+      .product-card-sub { font-size: 9px; }
+      .tab-btn { padding: 10px 12px; font-size: 10px; letter-spacing: 0.15em; }
+      .products-header { margin-bottom: 40px; }
+      .products-title { font-size: clamp(28px, 6vw, 48px); }
+    }
+
+    @media (max-width: 375px) {
+      .products-grid { grid-template-columns: 1fr; }
+      .tab-btn { padding: 10px 8px; font-size: 9px; }
+    }
+
+    /* ── INGREDIENT CARDS MOBILE ───────────────────── */
+    @media (max-width: 900px) {
+      .ingredient-cards { grid-template-columns: repeat(2, 1fr); }
+      .hellfire-content { padding: 60px 24px; }
+    }
+
+    @media (max-width: 500px) {
+      .ingredient-cards { grid-template-columns: 1fr; }
+      .ingredient-card { padding: 28px 20px; }
+      .hellfire-content { padding: 48px 16px; }
+    }
+
+    /* ── FEATURE CAROUSEL MOBILE ────────────────────── */
+    @media (max-width: 768px) {
+      .feature-card { width: 260px; height: 360px; }
+      .cards-stack { height: 380px; }
+      .feature-chip { padding: 6px 14px; font-size: 11px; }
+      .chips-drum { gap: 10px; }
+      .why-header { margin-bottom: 40px; }
+      .why-title { font-size: clamp(28px, 6vw, 48px); }
+    }
+
+    @media (max-width: 414px) {
+      .feature-card { width: 220px; height: 320px; }
+      .cards-stack { height: 340px; }
+    }
+
+    /* ── ATHLETE STRIP MOBILE ─────────────────────── */
+    @media (max-width: 768px) {
+      .athlete-strip { flex-direction: column; height: auto; }
+      .athlete-strip img { width: 50%; height: auto; }
+      .athlete-strip img:first-child { width: 100%; }
+    }
+
+    /* ── IRON STANDARD MOBILE ─────────────────────── */
+    @media (max-width: 900px) {
+      .iron-standard-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 0 24px; }
+      #iron-standard { padding: 60px 24px; }
+    }
+
+    @media (max-width: 500px) {
+      .iron-standard-grid { grid-template-columns: 1fr; }
+      .iron-standard-card { padding: 28px 20px; }
+      #iron-standard { padding: 48px 16px; }
+    }
+
+    /* ── FOOTER MOBILE ───────────────────────────── */
+    @media (max-width: 768px) {
+      .footer-inner { padding: 40px 20px 24px; }
+      .footer-top { flex-direction: column; gap: 32px; }
+      .footer-links-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .footer-brand { max-width: 100%; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .footer-legal { justify-content: center; }
+    }
+
+    @media (max-width: 414px) {
+      .footer-links-grid { grid-template-columns: 1fr; }
+      .footer-socials { justify-content: center; }
+    }
+
+    /* ── TOUCH TARGET FIXES (min 44x44px) ─────────── */
+    .nav-link, .mobile-link, .tab-btn, .btn-primary, .btn-ghost, .feature-chip, .mobile-menu-btn {
+      min-height: 44px;
+      min-width: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── SCROLLBAR MOBILE ────────────────────────── */
+    @media (max-width: 768px) {
+      ::-webkit-scrollbar { width: 0; }
+      body { scrollbar-width: none; }
+    }
+
+    /* ── PREFERS REDUCED MOTION ───────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .marquee-track { animation: none; }
+      .parallax-sticky-img { transform: none !important; }
     }
 
     /* ── MARQUEE STRIP ────────────────────────────── */
@@ -1526,7 +1738,7 @@
 <section id="hero">
 
   <!-- Video background -->
-  <video id="hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+  <video id="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/images/hero-poster.jpg" aria-hidden="true" style="background:#111;">
     <source src="assets/video/hero-hd.mp4?v=2" type="video/mp4" />
     <source src="assets/video/hero.mp4?v=2" type="video/mp4" />
   </video>
@@ -2118,53 +2330,260 @@
     navbar.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 
-  // Hero entrance animation
-  gsap.fromTo('.hero-text',
-    { opacity: 0, y: 40 },
-    { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', delay: 0.3 }
-  );
+  // ── GSAP matchMedia: desktop + mobile responsive ────────────────────────
+  const mm = gsap.matchMedia();
 
-  // Products header reveal
-  gsap.from('.products-header', {
-    opacity: 0,
-    y: 30,
-    duration: 0.8,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '#products',
-      start: 'top 85%',
-      once: true,
+  // ── DESKTOP (min-width 769px) ────────────────────────
+  mm.add("(min-width: 769px)", () => {
+    // Hero entrance animation (desktop only — mobile handled by CSS)
+    const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+      .fromTo('.hero-text',
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 1.1, delay: 0.3 }
+      );
+
+    // Products header reveal
+    gsap.from('.products-header', {
+      opacity: 0, y: 30, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: '#products', start: 'top 85%', once: true }
+    });
+
+    // Products tabs reveal
+    gsap.from('.products-tabs', {
+      opacity: 0, y: 20, duration: 0.6, ease: 'power3.out',
+      scrollTrigger: { trigger: '#products-tabs', start: 'top 90%', once: true }
+    });
+
+    // Animate visible grid cards on scroll
+    function animateGridCards(grid) {
+      gsap.fromTo(grid.querySelectorAll('.product-card'),
+        { opacity: 0, y: 32 },
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.1 }
+      );
     }
+
+    // Initial pre-workout grid animation
+    gsap.to('#preworkout-grid .product-card', {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.1,
+      scrollTrigger: { trigger: '#preworkout-grid', start: 'top 80%', once: true }
+    });
+
+    // Whey / all grid animation
+    ['#whey-grid', '#all-grid'].forEach(sel => {
+      if (document.querySelector(sel)) {
+        gsap.to(sel + ' .product-card', {
+          opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.1,
+          scrollTrigger: { trigger: sel, start: 'top 80%', once: true }
+        });
+      }
+    });
+
+    // PARALLAX — desktop only (heavy)
+    document.querySelectorAll('.parallax-section').forEach(section => {
+      const stickyImg  = section.querySelector('.parallax-sticky-img');
+      const overlay    = section.querySelector('.parallax-dark-overlay');
+      const overlayText = section.querySelector('.parallax-overlay-text');
+
+      gsap.to(stickyImg, {
+        scale: 0.85,
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        }
+      });
+
+      gsap.to(overlay, {
+        background: 'rgba(0,0,0,0.75)',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        }
+      });
+
+      gsap.fromTo(overlayText,
+        { y: 80, opacity: 0 },
+        {
+          y: -80, opacity: 1,
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 80%',
+            end: 'center center',
+            scrub: true,
+          }
+        }
+      );
+    });
+
+    // MANIFESTO CONTENT REVEAL
+    gsap.from('.manifesto-quote', {
+      opacity: 0, y: 40, duration: 0.9, ease: 'power3.out',
+      scrollTrigger: { trigger: '.manifesto-content', start: 'top 80%', once: true }
+    });
+
+    gsap.from('.manifesto-stat', {
+      opacity: 0, y: 28, duration: 0.7, ease: 'power3.out', stagger: 0.10,
+      scrollTrigger: { trigger: '.manifesto-stats', start: 'top 85%', once: true }
+    });
+
+    // HELLFIRE INGREDIENT CARDS REVEAL
+    gsap.from('.ingredient-card', {
+      opacity: 0, y: 36, duration: 0.65, ease: 'power3.out', stagger: 0.10,
+      scrollTrigger: { trigger: '.ingredient-cards', start: 'top 85%', once: true }
+    });
+
+    // ATHLETE LIFESTYLE SECTION
+    gsap.from('.athlete-header', {
+      opacity: 0, y: 30, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: '#athlete-lifestyle', start: 'top 85%', once: true }
+    });
+
+    gsap.from('.athlete-strip img', {
+      opacity: 0, scale: 1.04, duration: 1.2, ease: 'power3.out',
+      scrollTrigger: { trigger: '.athlete-strip', start: 'top 85%', once: true }
+    });
+
+    // IRON STANDARD SECTION
+    gsap.from('#iron-standard .iron-standard-label, #iron-standard .iron-standard-title, #iron-standard .iron-standard-sub', {
+      opacity: 0, y: 30, duration: 0.8, ease: 'power3.out', stagger: 0.10,
+      scrollTrigger: { trigger: '#iron-standard', start: 'top 85%', once: true }
+    });
+
+    gsap.from('.iron-standard-card', {
+      opacity: 0, y: 32, duration: 0.65, ease: 'power3.out', stagger: 0.10,
+      scrollTrigger: { trigger: '.iron-standard-grid', start: 'top 85%', once: true }
+    });
+
+    // WHY IPN — feature carousel init
+    ScrollTrigger.create({
+      trigger: '#why-ipn',
+      start: 'top 75%',
+      once: true,
+      onEnter: () => {
+        fc_updateChips();
+        fc_updateCards();
+        fc_startAuto();
+        gsap.from('.why-inner', { opacity: 0, y: 40, duration: 0.8, ease: 'power3.out' });
+      }
+    });
+
+    gsap.from('.why-header', {
+      opacity: 0, y: 28, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: '#why-ipn', start: 'top 85%', once: true }
+    });
+
+    return () => {
+      // cleanup handled by matchMedia.revert()
+    };
   });
 
-  // Products tabs reveal
-  gsap.from('.products-tabs', {
-    opacity: 0,
-    y: 20,
-    duration: 0.6,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '#products-tabs',
-      start: 'top 90%',
-      once: true,
-    }
-  });
-
-  // Animate visible grid cards on scroll
-  function animateGridCards(grid) {
-    gsap.fromTo(grid.querySelectorAll('.product-card'),
-      { opacity: 0, y: 32 },
-      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.1 }
+  // ── MOBILE (max-width 768px) — lighter animations ────────────────────────
+  mm.add("(max-width: 768px)", () => {
+    // Simple hero fade (no big y movement on mobile)
+    gsap.fromTo('.hero-text',
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.2 }
     );
-  }
 
-  // Initial pre-workout grid animation
-  gsap.to('#preworkout-grid .product-card', {
-    opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.1,
-    scrollTrigger: { trigger: '#preworkout-grid', start: 'top 80%', once: true }
+    // Products — simpler reveals
+    gsap.from('.products-header', {
+      opacity: 0, y: 20, duration: 0.6, ease: 'power2.out',
+      scrollTrigger: { trigger: '#products', start: 'top 90%', once: true }
+    });
+
+    gsap.from('.products-tabs', {
+      opacity: 0, y: 16, duration: 0.5, ease: 'power2.out',
+      scrollTrigger: { trigger: '#products-tabs', start: 'top 92%', once: true }
+    });
+
+    function animateGridCardsMobile(grid) {
+      gsap.fromTo(grid.querySelectorAll('.product-card'),
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.08 }
+      );
+    }
+
+    ['#preworkout-grid', '#whey-grid', '#all-grid'].forEach(sel => {
+      if (document.querySelector(sel)) {
+        gsap.to(sel + ' .product-card', {
+          opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.08,
+          scrollTrigger: { trigger: sel, start: 'top 85%', once: true }
+        });
+      }
+    });
+
+    // MANIFESTO mobile
+    gsap.from('.manifesto-quote', {
+      opacity: 0, y: 24, duration: 0.7, ease: 'power2.out',
+      scrollTrigger: { trigger: '.manifesto-content', start: 'top 85%', once: true }
+    });
+
+    gsap.from('.manifesto-stat', {
+      opacity: 0, y: 20, duration: 0.6, ease: 'power2.out', stagger: 0.08,
+      scrollTrigger: { trigger: '.manifesto-stats', start: 'top 88%', once: true }
+    });
+
+    // INGREDIENTS mobile
+    gsap.from('.ingredient-card', {
+      opacity: 0, y: 24, duration: 0.5, ease: 'power2.out', stagger: 0.08,
+      scrollTrigger: { trigger: '.ingredient-cards', start: 'top 88%', once: true }
+    });
+
+    // ATHLETE mobile
+    gsap.from('.athlete-header', {
+      opacity: 0, y: 20, duration: 0.6, ease: 'power2.out',
+      scrollTrigger: { trigger: '#athlete-lifestyle', start: 'top 88%', once: true }
+    });
+
+    // IRON STANDARD mobile
+    gsap.from('#iron-standard .iron-standard-label, #iron-standard .iron-standard-title, #iron-standard .iron-standard-sub', {
+      opacity: 0, y: 20, duration: 0.6, ease: 'power2.out', stagger: 0.08,
+      scrollTrigger: { trigger: '#iron-standard', start: 'top 88%', once: true }
+    });
+
+    gsap.from('.iron-standard-card', {
+      opacity: 0, y: 24, duration: 0.5, ease: 'power2.out', stagger: 0.08,
+      scrollTrigger: { trigger: '.iron-standard-grid', start: 'top 88%', once: true }
+    });
+
+    // WHY IPN mobile — feature carousel
+    ScrollTrigger.create({
+      trigger: '#why-ipn',
+      start: 'top 80%',
+      once: true,
+      onEnter: () => {
+        fc_updateChips();
+        fc_updateCards();
+        fc_startAuto();
+        gsap.from('.why-inner', { opacity: 0, y: 24, duration: 0.6, ease: 'power2.out' });
+      }
+    });
+
+    gsap.from('.why-header', {
+      opacity: 0, y: 20, duration: 0.6, ease: 'power2.out',
+      scrollTrigger: { trigger: '#why-ipn', start: 'top 88%', once: true }
+    });
+
+    return () => {
+      // cleanup handled by matchMedia.revert()
+    };
   });
 
-  // ── PRODUCT TAB SWITCHER ─────────────────────────
+  // ── PREFERS REDUCED MOTION ────────────────────────
+  mm.add("(prefers-reduced-motion: reduce)", () => {
+    // Disable all animations — instant reveal
+    gsap.set('.hero-text, .products-header, .products-tabs, .product-card, .manifesto-quote, .manifesto-stat, .ingredient-card, .athlete-header, .athlete-strip img, .iron-standard-label, .iron-standard-title, .iron-standard-sub, .iron-standard-card, .why-header, .why-inner', {
+      opacity: 1, y: 0, scale: 1
+    });
+    // Kill all ScrollTriggers
+    ScrollTrigger.getAll().forEach(t => t.kill());
+    return () => {};
+  });
+
+  // ── PRODUCT TAB SWITCHER ────────────────────────
   const tabBtns = document.querySelectorAll('.tab-btn');
   const tabPanels = document.querySelectorAll('.tab-panel');
 
@@ -2173,20 +2592,27 @@
       const target = btn.dataset.tab;
       tabBtns.forEach(b => b.classList.remove('tab-active'));
       btn.classList.add('tab-active');
-
-      tabPanels.forEach(panel => {
-        panel.classList.remove('tab-panel-active');
-      });
-
+      tabPanels.forEach(panel => panel.classList.remove('tab-panel-active'));
       const activePanel = document.getElementById(target + '-grid');
-      activePanel.classList.add('tab-panel-active');
-      // Reset cards to invisible then animate
-      gsap.set(activePanel.querySelectorAll('.product-card'), { opacity: 0, y: 32 });
-      animateGridCards(activePanel);
+      if (activePanel) {
+        activePanel.classList.add('tab-panel-active');
+        gsap.set(activePanel.querySelectorAll('.product-card'), { opacity: 0, y: 32 });
+        if (window.innerWidth >= 769) {
+          gsap.fromTo(activePanel.querySelectorAll('.product-card'),
+            { opacity: 0, y: 32 },
+            { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.1 }
+          );
+        } else {
+          gsap.fromTo(activePanel.querySelectorAll('.product-card'),
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.08 }
+          );
+        }
+      }
     });
   });
 
-  // ── FEATURE CAROUSEL ─────────────────────────
+  // ── FEATURE CAROUSEL ────────────────────────
   const FC_FEATURES = [
     { id:'quality',       label:'Premium Quality Health Supplements', image:'assets/images/premium-quality.png',        desc:'Perfect ratio of every ingredient in all our products to ensure maximum benefits.' },
     { id:'macro',         label:'Macronutrients & Micronutrients',    image:'assets/images/macro-micronutrients.png',   desc:'We not only focus on fulfilling macronutrient requirements but micronutrients as well.' },
@@ -2213,7 +2639,6 @@
     return diff;
   }
 
-  // Build chips
   const drumEl = document.getElementById('chips-drum');
   FC_FEATURES.forEach((f, i) => {
     const chip = document.createElement('button');
@@ -2230,7 +2655,6 @@
     drumEl.appendChild(chip);
   });
 
-  // Build cards
   const stackEl = document.getElementById('cards-stack');
   FC_FEATURES.forEach((f, i) => {
     const card = document.createElement('div');
@@ -2255,7 +2679,7 @@
       gsap.to(chip, {
         y: diff * FC_ITEM_H,
         opacity: Math.max(0, 1 - Math.abs(diff) * 0.25),
-        duration: 0.55,
+        duration: window.innerWidth >= 769 ? 0.55 : 0.4,
         ease: 'power3.out'
       });
       chip.classList.toggle('chip-active', isActive);
@@ -2273,12 +2697,12 @@
       const isNext   = diff === 1;
 
       gsap.to(card, {
-        x:        isActive ? 0 : isPrev ? -110 : isNext ? 110 : 0,
+        x:        isActive ? 0 : isPrev ? -90 : isNext ? 90 : 0,
         scale:    isActive ? 1 : (isPrev || isNext) ? 0.85 : 0.7,
-        opacity:  isActive ? 1 : (isPrev || isNext) ? 0.4 : 0,
-        rotation: isPrev ? -4 : isNext ? 4 : 0,
+        opacity: isActive ? 1 : (isPrev || isNext) ? 0.4 : 0,
+        rotation: isPrev ? -3 : isNext ? 3 : 0,
         zIndex:   isActive ? 20 : (isPrev || isNext) ? 10 : 0,
-        duration: 0.55,
+        duration: window.innerWidth >= 769 ? 0.55 : 0.4,
         ease: 'power3.out'
       });
 
@@ -2302,178 +2726,25 @@
     fc_timer = setInterval(() => { if (!fc_paused) fc_goTo(fc_cur + 1); }, 3000);
   }
 
-  // Scroll-triggered init
-  ScrollTrigger.create({
-    trigger: '#why-ipn',
-    start: 'top 75%',
-    once: true,
-    onEnter: () => {
-      fc_updateChips();
-      fc_updateCards();
-      fc_startAuto();
-      gsap.from('.why-inner', { opacity: 0, y: 40, duration: 0.8, ease: 'power3.out' });
-    }
-  });
-
-  gsap.from('.why-header', {
-    opacity: 0, y: 28, duration: 0.8, ease: 'power3.out',
-    scrollTrigger: { trigger: '#why-ipn', start: 'top 85%', once: true }
-  });
-
-  // ── PARALLAX SECTIONS ──────────────────────────────────────
-  document.querySelectorAll('.parallax-section').forEach(section => {
-    const stickyImg  = section.querySelector('.parallax-sticky-img');
-    const overlay    = section.querySelector('.parallax-dark-overlay');
-    const overlayText = section.querySelector('.parallax-overlay-text');
-
-    // Image scale as section scrolls past
-    gsap.to(stickyImg, {
-      scale: 0.85,
-      scrollTrigger: {
-        trigger: section,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
-      }
+  // ── MOBILE MENU ────────────────────────
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (mobileBtn && mobileMenu) {
+    mobileBtn.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('active');
+      mobileBtn.classList.toggle('active');
+      mobileBtn.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     });
-
-    // Dark overlay fades IN as image scales down (dramatic exit)
-    gsap.to(overlay, {
-      background: 'rgba(0,0,0,0.75)',
-      scrollTrigger: {
-        trigger: section,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
-      }
-    });
-
-    // Text parallaxes upward as section scrolls — enter bottom, exit top
-    gsap.fromTo(overlayText,
-      { y: 80, opacity: 0 },
-      {
-        y: -80,
-        opacity: 1,
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          end: 'center center',
-          scrub: true,
-        }
-      }
-    );
-  });
-
-  // ── MANIFESTO CONTENT REVEAL ───────────────────────────────
-  gsap.from('.manifesto-quote', {
-    opacity: 0,
-    y: 40,
-    duration: 0.9,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.manifesto-content',
-      start: 'top 80%',
-      once: true,
-    }
-  });
-
-  gsap.from('.manifesto-stat', {
-    opacity: 0,
-    y: 28,
-    duration: 0.7,
-    ease: 'power3.out',
-    stagger: 0.10,
-    scrollTrigger: {
-      trigger: '.manifesto-stats',
-      start: 'top 85%',
-      once: true,
-    }
-  });
-
-  // ── HELLFIRE INGREDIENT CARDS REVEAL ──────────────────────
-  gsap.from('.ingredient-card', {
-    opacity: 0,
-    y: 36,
-    duration: 0.65,
-    ease: 'power3.out',
-    stagger: 0.10,
-    scrollTrigger: {
-      trigger: '.ingredient-cards',
-      start: 'top 85%',
-      once: true,
-    }
-  });
-
-  // ── ATHLETE LIFESTYLE SECTION ──────────────────────────────
-  gsap.from('.athlete-header', {
-    opacity: 0,
-    y: 30,
-    duration: 0.8,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '#athlete-lifestyle',
-      start: 'top 85%',
-      once: true,
-    }
-  });
-
-  gsap.from('.athlete-strip img', {
-    opacity: 0,
-    scale: 1.04,
-    duration: 1.2,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.athlete-strip',
-      start: 'top 85%',
-      once: true,
-    }
-  });
-
-  // ── IRON STANDARD SECTION ──────────────────────────────────
-  gsap.from('#iron-standard .iron-standard-label, #iron-standard .iron-standard-title, #iron-standard .iron-standard-sub', {
-    opacity: 0,
-    y: 30,
-    duration: 0.8,
-    ease: 'power3.out',
-    stagger: 0.10,
-    scrollTrigger: {
-      trigger: '#iron-standard',
-      start: 'top 85%',
-      once: true,
-    }
-  });
-
-    gsap.from('.iron-standard-card', {
-      opacity: 0,
-      y: 32,
-      duration: 0.65,
-      ease: 'power3.out',
-      stagger: 0.10,
-      scrollTrigger: {
-        trigger: '.iron-standard-grid',
-        start: 'top 85%',
-        once: true,
-      }
-    });
-
-    // ── MOBILE MENU ────────────────────────────────
-    const mobileBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    if (mobileBtn && mobileMenu) {
-      mobileBtn.addEventListener('click', () => {
-        const isOpen = mobileMenu.classList.toggle('active');
-        mobileBtn.classList.toggle('active');
-        mobileBtn.setAttribute('aria-expanded', isOpen);
+    mobileMenu.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        mobileBtn.classList.remove('active');
+        mobileBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
       });
-      // Close on link click
-      mobileMenu.querySelectorAll('.mobile-link').forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.remove('active');
-          mobileBtn.classList.remove('active');
-          mobileBtn.setAttribute('aria-expanded', 'false');
-        });
-      });
-    }
+    });
+  }
   </script>
 
 
