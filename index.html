@@ -26,7 +26,7 @@
     /* ── HERO ─────────────────────────────────────── */
     #hero {
       position: relative;
-      width: 100vw; height: 100vh;
+      width: 100%; height: 100vh;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -234,7 +234,8 @@
       align-items: center;
       gap: 0;
       width: 100%;
-      max-width: 1280px;
+      max-width: 100%;
+      padding: 0 36px;
       justify-content: center;
     }
 
@@ -282,6 +283,71 @@
     #navbar.scrolled {
       background: rgba(10,10,10,0.96);
       backdrop-filter: blur(12px);
+    }
+
+    /* ── MOBILE MENU BUTTON ──────────────────────── */
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .mobile-menu-btn span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #FFB800;
+      transition: transform 200ms ease, opacity 200ms ease;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) {
+      transform: rotate(45deg) translateY(7px);
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+      transform: rotate(-45deg) translateY(-7px);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0; right: 0;
+      background: #111111;
+      padding: 24px;
+      z-index: 19;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-link {
+      font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      color: #FFB800;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,184,0,0.15);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: flex; }
+      .nav-center { justify-content: space-between; padding: 0 20px; }
     }
 
     /* ── PARALLAX SECTIONS ─────────────────────────── */
@@ -351,7 +417,8 @@
     }
 
     .manifesto-inner {
-      max-width: 1100px;
+      max-width: 100%;
+      padding: 0 36px;
       margin: 0 auto;
       display: flex;
       gap: 80px;
@@ -599,6 +666,75 @@
     .product-card:hover {
       background: #111;
     }
+
+    /* ── CAROUSEL: GSAP-powered, mobile-fit ─────────────── */
+    .products-carousel {
+      position: relative;
+      overflow: hidden;
+      padding: 0 40px;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 8px;
+      will-change: transform;
+    }
+
+    .carousel-slide {
+      flex: 0 0 calc(25% - 6px);
+      min-width: 0;
+    }
+
+    @media (max-width: 1100px) {
+      .carousel-slide { flex: 0 0 calc(50% - 4px); }
+    }
+
+    @media (max-width: 600px) {
+      .carousel-slide { flex: 0 0 85%; }
+      .products-carousel { padding: 0 20px; }
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 20;
+      background: #FFB800;
+      color: #111111;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 200ms ease;
+    }
+
+    .carousel-btn:hover { background: #ffc933; }
+    .carousel-prev { left: 0; }
+    .carousel-next { right: 0; }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #CACACB;
+      border: none;
+      cursor: pointer;
+      transition: background 200ms ease;
+    }
+
+    .carousel-dot.active { background: #FFB800; }
 
     /* ── IMAGE: zero border radius, edge-to-edge, scale on hover */
     .card-img {
@@ -1443,17 +1579,28 @@
   <!-- Navigation -->
   <nav id="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-center">
-      <ul class="nav-links">
+      <ul class="nav-links nav-links-left">
         <li><a href="#about"    class="nav-link">About Us</a></li>
         <li><a href="#products" class="nav-link">Products</a></li>
       </ul>
       <div id="nav-logo" aria-label="Iron Pump Nutrition">
         <img src="assets/logo/ipn-logo-new.png" alt="IPN — Iron Pump Nutrition" />
       </div>
-      <ul class="nav-links">
+      <ul class="nav-links nav-links-right">
         <li><a href="#why-ipn"  class="nav-link">Why IPN</a></li>
         <li><a href="#contact"  class="nav-link">Contact</a></li>
       </ul>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#about"    class="mobile-link">About Us</a>
+      <a href="#products" class="mobile-link">Products</a>
+      <a href="#why-ipn"  class="mobile-link">Why IPN</a>
+      <a href="#contact"  class="mobile-link">Contact</a>
     </div>
   </nav>
 
@@ -1579,13 +1726,81 @@
     <button class="tab-btn" data-tab="whey">Whey Protein</button>
   </div>
 
-  <!-- Pre-Workout grid -->
-  <div class="products-grid tab-panel tab-panel-active" id="preworkout-grid">
-
-    <div class="product-card">
+  <!-- Pre-Workout carousel -->
+  <div class="products-carousel tab-panel tab-panel-active" id="preworkout-grid">
+    <div class="carousel-track" id="preworkout-track">
+    <div class="product-card carousel-slide">
       <div class="card-img">
         <img src="assets/images/product1.png" alt="Iron Hellfire Hellfire Punch" />
       </div>
+      <div class="card-type">Pre-Workout</div>
+      <div class="card-name">Iron Hellfire</div>
+      <div class="card-flavour">Hellfire Punch</div>
+      <div class="card-pricing">
+        <div class="card-price">₹1,499</div>
+        <div class="card-offer">
+          <span class="card-original">₹1,999</span>
+          <span class="card-discount">25% OFF</span>
+        </div>
+        <button class="card-btn">Shop Now</button>
+      </div>
+    </div>
+  
+    <div class="product-card carousel-slide">
+      <div class="card-img">
+        <img src="assets/images/product2.png" alt="Iron Hellfire Blue Rage" />
+      </div>
+      <div class="card-type">Pre-Workout</div>
+      <div class="card-name">Iron Hellfire</div>
+      <div class="card-flavour">Blue Rage</div>
+      <div class="card-pricing">
+        <div class="card-price">₹1,499</div>
+        <div class="card-offer">
+          <span class="card-original">₹1,999</span>
+          <span class="card-discount">25% OFF</span>
+        </div>
+        <button class="card-btn">Shop Now</button>
+      </div>
+    </div>
+  
+    <div class="product-card carousel-slide">
+      <div class="card-img">
+        <img src="assets/images/product3.png" alt="Iron Pump Ultra Stim Inferno Punch" />
+      </div>
+      <div class="card-type">Ultra Stim Pre-Workout</div>
+      <div class="card-name">Iron Pump</div>
+      <div class="card-flavour">Inferno Punch</div>
+      <div class="card-pricing">
+        <div class="card-price">₹1,899</div>
+        <div class="card-offer">
+          <span class="card-original">₹2,499</span>
+          <span class="card-discount">24% OFF</span>
+        </div>
+        <button class="card-btn">Shop Now</button>
+      </div>
+    </div>
+  
+    <div class="product-card carousel-slide">
+      <div class="card-img">
+        <img src="assets/images/product4.png" alt="Iron Pump Ultra Stim Blue Raspberry Blast" />
+      </div>
+      <div class="card-type">Ultra Stim Pre-Workout</div>
+      <div class="card-name">Iron Pump</div>
+      <div class="card-flavour">Blue Raspberry Blast</div>
+      <div class="card-pricing">
+        <div class="card-price">₹1,899</div>
+        <div class="card-offer">
+          <span class="card-original">₹2,499</span>
+          <span class="card-discount">24% OFF</span>
+        </div>
+        <button class="card-btn">Shop Now</button>
+      </div>
+    </div>
+    </div>
+    <button class="carousel-btn carousel-prev" aria-label="Previous">‹</button>
+    <button class="carousel-btn carousel-next" aria-label="Next">›</button>
+    <div class="carousel-dots" id="preworkout-dots"></div>
+  </div>
       <div class="card-type">Pre-Workout</div>
       <div class="card-name">Iron Hellfire</div>
       <div class="card-flavour">Hellfire Punch</div>
@@ -1652,10 +1867,10 @@
 
   </div>
 
-  <!-- Whey grid -->
-  <div class="products-grid tab-panel" id="whey-grid">
-
-    <div class="product-card">
+  <!-- Whey carousel -->
+  <div class="products-carousel tab-panel" id="whey-grid">
+    <div class="carousel-track" id="whey-track">
+    <div class="product-card carousel-slide">
       <div class="card-img">
         <img src="assets/images/whey-strawberry.png" alt="Premium Whey Strawberry" />
       </div>
@@ -1671,8 +1886,8 @@
         <button class="card-btn">Shop Now</button>
       </div>
     </div>
-
-    <div class="product-card">
+  
+    <div class="product-card carousel-slide">
       <div class="card-img">
         <img src="assets/images/whey-chocolate.png" alt="Premium Whey Chocolate Fudge" />
       </div>
@@ -1688,9 +1903,8 @@
         <button class="card-btn">Shop Now</button>
       </div>
     </div>
-
-    <!-- Whey Card 3 -->
-    <div class="product-card">
+  
+    <div class="product-card carousel-slide">
       <div class="card-img">
         <img src="assets/images/whey-kulfi.png" alt="Premium Whey Kulfi" />
       </div>
@@ -1706,9 +1920,8 @@
         <button class="card-btn">Shop Now</button>
       </div>
     </div>
-
-    <!-- Whey Card 4 -->
-    <div class="product-card">
+  
+    <div class="product-card carousel-slide">
       <div class="card-img">
         <img src="assets/images/whey-mango.png" alt="Premium Whey Mango" />
       </div>
@@ -1724,7 +1937,10 @@
         <button class="card-btn">Shop Now</button>
       </div>
     </div>
-
+    </div>
+    <button class="carousel-btn carousel-prev" aria-label="Previous">‹</button>
+    <button class="carousel-btn carousel-next" aria-label="Next">›</button>
+    <div class="carousel-dots" id="whey-dots"></div>
   </div>
 
 </section>
@@ -2285,19 +2501,110 @@
     }
   });
 
-  gsap.from('.iron-standard-card', {
-    opacity: 0,
-    y: 32,
-    duration: 0.65,
-    ease: 'power3.out',
-    stagger: 0.10,
-    scrollTrigger: {
-      trigger: '.iron-standard-grid',
-      start: 'top 85%',
-      once: true,
+    gsap.from('.iron-standard-card', {
+      opacity: 0,
+      y: 32,
+      duration: 0.65,
+      ease: 'power3.out',
+      stagger: 0.10,
+      scrollTrigger: {
+        trigger: '.iron-standard-grid',
+        start: 'top 85%',
+        once: true,
+      }
+    });
+
+    // ── PRODUCTS CAROUSELS (GSAP-powered) ────────────────────────
+    function initCarousel(trackId, dotsId) {
+      const track = document.getElementById(trackId);
+      if (!track) return;
+      const slides = track.querySelectorAll('.carousel-slide');
+      const dotsContainer = document.getElementById(dotsId);
+      let current = 0;
+      const total = slides.length;
+
+      // Create dots
+      if (dotsContainer) {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < total; i++) {
+          const dot = document.createElement('button');
+          dot.classList.add('carousel-dot');
+          if (i === 0) dot.classList.add('active');
+          dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+          dot.addEventListener('click', () => goTo(i));
+          dotsContainer.appendChild(dot);
+        }
+      }
+
+      function updateDots() {
+        if (!dotsContainer) return;
+        dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
+          d.classList.toggle('active', i === current);
+        });
+      }
+
+      function goTo(index) {
+        if (index < 0) index = total - 1;
+        if (index >= total) index = 0;
+        const slideWidth = slides[0].offsetWidth + 8; // gap
+        gsap.to(track, {
+          x: -current * slideWidth,
+          duration: 0.5,
+          ease: 'power3.out'
+        });
+        current = index;
+        updateDots();
+      }
+
+      // Next/Prev buttons
+      const container = track.closest('.products-carousel');
+      if (container) {
+        const prevBtn = container.querySelector('.carousel-prev');
+        const nextBtn = container.querySelector('.carousel-next');
+        if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
+        if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
+      }
+
+      // Swipe support (touch)
+      let startX = 0;
+      track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
+      track.addEventListener('touchend', (e) => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+          diff > 0 ? goTo(current + 1) : goTo(current - 1);
+        }
+      });
+
+      // Auto-play (optional, pauses on hover)
+      let autoplay = setInterval(() => goTo(current + 1), 4000);
+      track.addEventListener('mouseenter', () => clearInterval(autoplay));
+      track.addEventListener('mouseleave', () => {
+        autoplay = setInterval(() => goTo(current + 1), 4000);
+      });
     }
-  });
-</script>
+
+    initCarousel('preworkout-track', 'preworkout-dots');
+    initCarousel('whey-track', 'whey-dots');
+
+    // ── MOBILE MENU ────────────────────────────────
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileBtn && mobileMenu) {
+      mobileBtn.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('active');
+        mobileBtn.classList.toggle('active');
+        mobileBtn.setAttribute('aria-expanded', isOpen);
+      });
+      // Close on link click
+      mobileMenu.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('active');
+          mobileBtn.classList.remove('active');
+          mobileBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  </script>
 
 
 </body>
