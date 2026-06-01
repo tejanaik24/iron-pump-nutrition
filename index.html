@@ -34,16 +34,14 @@
   <style>
     :root {
       --bg: #0D0D0D;
-      --bg-alt: #1A1A1A;
-      --surface: #1A1A1A;
+      --surface: #171717;
       --text-primary: #FFFFFF;
       --text-secondary: #A1A1A1;
       --text-muted: #6B6B6B;
       --accent: #C46B36;
       --accent-hover: #D67D4A;
-      --highlight: #E6B17A;
+      --accent-secondary: #E6B17A;
       --border: #2A2A2A;
-      --border-light: #222222;
       --font-display: 'Bebas Neue', sans-serif;
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --container: 1200px;
@@ -295,7 +293,7 @@
       letter-spacing: 0.06em;
       color: var(--text-primary);
       padding: 14px 0;
-      border-bottom: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border);
       min-height: 44px;
       display: flex;
       align-items: center;
@@ -427,12 +425,14 @@
 
     /* -- MARQUEE ------------------------------------ */
     #marquee {
-      background: var(--accent);
+      background: var(--surface);
       overflow: hidden;
       height: 44px;
       display: flex;
       align-items: center;
       position: relative;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
     .marquee-track {
@@ -451,10 +451,10 @@
     .marquee-item {
       font-family: var(--font-body);
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #0D0D0D;
+      color: var(--text-muted);
       padding: 0 28px;
       display: flex;
       align-items: center;
@@ -465,7 +465,7 @@
     .marquee-sep {
       width: 3px; height: 3px;
       border-radius: 50%;
-      background: rgba(0,0,0,0.3);
+      background: var(--accent);
       flex-shrink: 0;
     }
 
@@ -517,8 +517,9 @@
     .tab-btn:first-child { border-right: 1px solid var(--border); }
 
     .tab-btn.tab-active {
-      background: var(--accent);
-      color: var(--text-primary);
+      background: transparent;
+      color: var(--accent);
+      box-shadow: inset 0 -2px 0 var(--accent);
     }
 
     .tab-btn:hover:not(.tab-active) { color: var(--text-primary); }
@@ -611,7 +612,7 @@
     .card-pricing {
       margin-top: auto;
       width: 100%;
-      border-top: 1px solid var(--border-light);
+      border-top: 1px solid var(--border);
       padding-top: 14px;
       display: flex;
       flex-direction: column;
@@ -652,16 +653,19 @@
       font-size: 12px;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--text-primary);
-      background: var(--accent);
-      border: none;
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 12px 0;
       cursor: pointer;
-      transition: background 200ms ease;
+      transition: all 220ms ease;
     }
 
-    .card-btn:hover { background: var(--accent-hover); }
+    .card-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
 
     @media (max-width: 600px) {
       .product-card { padding: 20px 14px 18px; }
