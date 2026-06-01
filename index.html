@@ -469,6 +469,122 @@
       flex-shrink: 0;
     }
 
+    #marquee:hover .marquee-track { animation-play-state: paused; }
+
+    /* -- STATS GRID ----------------------------------- */
+    #stats-grid {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stats-grid-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stat-item {
+      padding: 32px 24px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 4vw, 52px);
+      line-height: 1;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    .stat-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 700px) {
+      .stats-grid-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item { padding: 24px 16px; }
+    }
+
+    @media (max-width: 400px) {
+      .stats-grid-inner { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-item:last-child { border-bottom: none; }
+    }
+
+    /* -- MANIFESTO ------------------------------------- */
+    #manifesto {
+      background: var(--bg);
+      padding: 96px 0;
+      position: relative;
+    }
+
+    #manifesto::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .manifesto-inner {
+      display: flex;
+      gap: 80px;
+      align-items: flex-start;
+    }
+
+    .manifesto-img {
+      flex: 0 0 45%;
+      max-width: 45%;
+    }
+
+    .manifesto-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .manifesto-text {
+      flex: 1;
+      padding-top: 24px;
+    }
+
+    .manifesto-quote {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3.5vw, 42px);
+      line-height: 1.1;
+      letter-spacing: 0.03em;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+
+    .manifesto-quote span { color: var(--accent); }
+
+    .manifesto-byline {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 900px) {
+      .manifesto-inner { flex-direction: column; gap: 32px; }
+      .manifesto-img { flex: none; max-width: 100%; }
+      #manifesto { padding: 56px 0; }
+    }
+
     /* -- PRODUCTS ----------------------------------- */
     #products {
       background: var(--bg);
@@ -675,7 +791,70 @@
       .card-btn { font-size: 11px; padding: 10px 0; }
     }
 
-    /* -- WHY IPN ------------------------------------ */
+    /* -- ATHLETE LIFESTYLE ---------------------------- */
+    #athlete-lifestyle {
+      background: var(--bg);
+      padding: 96px 0 0;
+      position: relative;
+    }
+
+    #athlete-lifestyle::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .athlete-strip {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      margin-top: 48px;
+    }
+
+    .athlete-strip img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    .athlete-strip-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.6) 100%);
+      pointer-events: none;
+    }
+
+    .athlete-strip-tagline {
+      position: absolute;
+      bottom: 48px;
+      left: 0; right: 0;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 56px);
+      color: rgba(255,255,255,0.92);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    .athlete-strip-tagline span { color: var(--accent); }
+
+    .athlete-marquee {
+      border-top: 1px solid var(--border);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .athlete-strip-tagline { bottom: 24px; font-size: 20px; }
+      #athlete-lifestyle { padding: 56px 0 0; }
+    }
+
+    /* -- WHY IPN / CAROUSEL --------------------------- */
     #why-ipn {
       background: var(--bg);
       padding: 96px 0;
@@ -695,52 +874,187 @@
       margin-bottom: 56px;
     }
 
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--border);
-    }
-
-    .why-card {
-      background: var(--surface);
-      padding: 48px 28px;
+    .why-inner {
       display: flex;
-      flex-direction: column;
+      overflow: hidden;
+      min-height: 560px;
+      border: 1px solid var(--border);
+    }
+
+    .why-left {
+      width: 40%;
+      background: var(--surface);
+      display: flex;
       align-items: center;
-      text-align: center;
+      justify-content: flex-start;
+      overflow: hidden;
+      padding: 0 40px 0 48px;
+      border-right: 1px solid var(--border);
+    }
+
+    .chips-drum {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .feature-chip {
+      position: absolute;
+      left: 0;
+      display: flex;
+      align-items: center;
       gap: 12px;
-    }
-
-    .why-card svg {
-      width: 32px;
-      height: 32px;
-      stroke: var(--accent);
-      stroke-width: 1.5;
-      fill: none;
-    }
-
-    .why-card h3 {
+      padding: 12px 20px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      will-change: transform, opacity;
+      transition: border-color 250ms ease, background 250ms ease;
       font-family: var(--font-body);
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-primary);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      min-height: 44px;
+      min-width: 44px;
     }
 
-    .why-card p {
-      font-size: 13px;
-      line-height: 1.6;
-      color: var(--text-secondary);
+    .feature-chip.chip-active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--text-primary);
+      font-weight: 700;
     }
+
+    .feature-chip:not(.chip-active):hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .why-right {
+      flex: 1;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 32px;
+    }
+
+    .cards-stack {
+      position: relative;
+      width: 340px;
+      aspect-ratio: 4/5;
+    }
+
+    .feature-card {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #222;
+      will-change: transform, opacity;
+      transform-origin: center center;
+    }
+
+    .feature-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .feature-card.card-inactive img {
+      filter: grayscale(1) brightness(0.5);
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset-x: 0; bottom: 0;
+      padding: 32px 20px 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+      pointer-events: none;
+      will-change: transform, opacity;
+    }
+
+    .card-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--text-primary);
+      padding: 4px 10px;
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .card-desc {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    /* -- TRUST BADGES -------------------------------- */
+    .trust-badges {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      margin: 48px auto 0;
+      max-width: 900px;
+      border: 1px solid var(--border);
+    }
+
+    .trust-badge {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px 16px;
+      background: var(--surface);
+      color: var(--accent);
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .trust-badge + .trust-badge {
+      border-left: 1px solid var(--border);
+    }
+
+    .trust-badge span { color: var(--text-muted); }
 
     @media (max-width: 900px) {
-      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-inner { flex-direction: column; min-height: auto; }
+      .why-left { width: 100%; min-height: 280px; padding: 24px 20px; justify-content: center; border-right: none; border-bottom: 1px solid var(--border); }
+      .why-right { padding: 32px 20px; }
+      .cards-stack { width: min(90%, 260px); }
+      .trust-badges { flex-wrap: wrap; }
+      .trust-badge { flex: 0 0 50%; }
+      .trust-badge:nth-child(2) { border-left: none; }
+      .trust-badge:nth-child(3),
+      .trust-badge:nth-child(4) { border-top: 1px solid var(--border); }
+    }
+
+    @media (max-width: 600px) {
+      .trust-badge { flex: 0 0 100%; }
+      .trust-badge + .trust-badge { border-left: none; border-top: 1px solid var(--border); }
     }
 
     @media (max-width: 500px) {
-      .why-grid { grid-template-columns: 1fr; }
-      .why-card { padding: 36px 24px; }
       #why-ipn { padding: 56px 0; }
+      .why-left { min-height: 240px; padding: 20px 16px; }
+      .why-right { padding: 24px 16px; }
+      .cards-stack { width: 100%; max-width: 280px; }
+      .feature-chip { padding: 10px 14px; font-size: 10px; }
     }
 
     /* -- IRON STANDARD ------------------------------ */
@@ -983,6 +1297,7 @@
       <span class="marquee-item">Made in India<span class="marquee-sep"></span></span>
       <span class="marquee-item">200mg Caffeine<span class="marquee-sep"></span></span>
       <span class="marquee-item">4g L-Citrulline<span class="marquee-sep"></span></span>
+      <span class="marquee-item">0 Side Effects<span class="marquee-sep"></span></span>
       <span class="marquee-item">Clinically Tested<span class="marquee-sep"></span></span>
       <span class="marquee-item">Guaranteed Results<span class="marquee-sep"></span></span>
       <span class="marquee-item">FSSAI Certified<span class="marquee-sep"></span></span>
@@ -992,8 +1307,47 @@
       <span class="marquee-item">Made in India<span class="marquee-sep"></span></span>
       <span class="marquee-item">200mg Caffeine<span class="marquee-sep"></span></span>
       <span class="marquee-item">4g L-Citrulline<span class="marquee-sep"></span></span>
+      <span class="marquee-item">0 Side Effects<span class="marquee-sep"></span></span>
       <span class="marquee-item">Clinically Tested<span class="marquee-sep"></span></span>
       <span class="marquee-item">Guaranteed Results<span class="marquee-sep"></span></span>
+    </div>
+  </section>
+
+  <section id="stats-grid">
+    <div class="container">
+      <div class="stats-grid-inner">
+        <div class="stat-item">
+          <span class="stat-num">10,000+</span>
+          <span class="stat-label">Athletes Fueled</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">0</span>
+          <span class="stat-label">Side Effects</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Lab Tested</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">FSSAI</span>
+          <span class="stat-label">Certified</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="manifesto">
+    <div class="container">
+      <div class="manifesto-inner">
+        <div class="manifesto-img">
+          <img src="assets/images/male-model.png" alt="Built For The Ones Who Refuse To Stop" loading="lazy" />
+        </div>
+        <div class="manifesto-text">
+          <span class="label">The Iron Spirit</span>
+          <p class="manifesto-quote">We don't make supplements for people who show up 3 days a week. <span>Iron Pump</span> is built for the grind — every rep, every set, no excuses.</p>
+          <span class="manifesto-byline">— Unleash The Beast</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1021,33 +1375,72 @@
     </div>
   </section>
 
+  <section id="athlete-lifestyle">
+    <div class="container">
+      <div class="why-header">
+        <span class="label">The IPN Athlete</span>
+        <h2 class="heading-lg">Train without compromise.</h2>
+      </div>
+      <div class="athlete-strip">
+        <img src="assets/images/athletes-banner.png" alt="IPN Athletes — Train Without Compromise" loading="lazy" />
+        <div class="athlete-strip-overlay"></div>
+        <div class="athlete-strip-tagline">Fueled by <span>IPN</span> — Built to Dominate</div>
+      </div>
+    </div>
+    <div class="athlete-marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="marquee-item">Strength<span class="marquee-sep"></span></span>
+        <span class="marquee-item">Power<span class="marquee-sep"></span></span>
+        <span class="marquee-item">Endurance<span class="marquee-sep"></span></span>
+        <span class="marquee-item">Discipline<span class="marquee-sep"></span></span>
+        <span class="marquee-item">Results<span class="marquee-sep"></span></span>
+        <span class="marquee-item">No Excuses<span class="marquee-sep"></span></span>
+        <span class="marquee-item">Zero Fillers<span class="marquee-sep"></span></span>
+        <span class="marquee-item">Made in India<span class="marquee-sep"></span></span>
+        <span class="marquee-item">Strength<span class="marquee-sep"></span></span>
+        <span class="marquee-item">Power<span class="marquee-sep"></span></span>
+        <span class="marquee-item">Endurance<span class="marquee-sep"></span></span>
+        <span class="marquee-item">Discipline<span class="marquee-sep"></span></span>
+        <span class="marquee-item">Results<span class="marquee-sep"></span></span>
+        <span class="marquee-item">No Excuses<span class="marquee-sep"></span></span>
+        <span class="marquee-item">Zero Fillers<span class="marquee-sep"></span></span>
+        <span class="marquee-item">Made in India<span class="marquee-sep"></span></span>
+      </div>
+    </div>
+  </section>
+
   <section id="why-ipn">
     <div class="container">
       <div class="why-header">
         <span class="label">Why Iron Pump</span>
         <h2 class="heading-lg">No shortcuts. No compromises.</h2>
       </div>
-      <div class="why-grid">
-        <div class="why-card">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-          <h3>Lab Tested</h3>
-          <p>Every batch tested at NABL-accredited labs for purity and potency.</p>
+      <div class="why-inner">
+        <div class="why-left">
+          <div class="chips-drum" id="chips-drum"></div>
         </div>
-        <div class="why-card">
-          <svg viewBox="0 0 24 24"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/><polyline points="4 11 4 20 20 20 20 11"/></svg>
-          <h3>FSSAI Certified</h3>
-          <p>India's highest food safety and quality manufacturing standard.</p>
+        <div class="why-right">
+          <div class="cards-stack" id="cards-stack"></div>
         </div>
-        <div class="why-card">
-          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          <h3>Full Transparency</h3>
-          <p>No proprietary blends. Every ingredient and dose disclosed on label.</p>
-        </div>
-        <div class="why-card">
-          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          <h3>Made in India</h3>
-          <p>Manufactured in state-of-the-art facilities with global quality standards.</p>
-        </div>
+      </div>
+    </div>
+
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <span>Research Backed</span>
+      </div>
+      <div class="trust-badge">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span>Clinically Tested</span>
+      </div>
+      <div class="trust-badge">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>0 Side Effects</span>
+      </div>
+      <div class="trust-badge">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        <span>Guaranteed Results</span>
       </div>
     </div>
   </section>
@@ -1100,6 +1493,9 @@
             <a href="#" aria-label="YouTube">
               <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
             </a>
+            <a href="#" aria-label="Twitter / X">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+            </a>
           </div>
         </div>
         <div class="footer-col">
@@ -1114,6 +1510,7 @@
           <h4>Company</h4>
           <ul>
             <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Story</a></li>
             <li><a href="#">Blog</a></li>
             <li><a href="#">Careers</a></li>
           </ul>
@@ -1122,6 +1519,7 @@
           <h4>Support</h4>
           <ul>
             <li><a href="#">Contact Us</a></li>
+            <li><a href="#">FAQs</a></li>
             <li><a href="#">Shipping Policy</a></li>
             <li><a href="#">Return Policy</a></li>
           </ul>
@@ -1209,6 +1607,141 @@
         });
       });
     }
+
+    gsap.from('.stat-item', {
+      opacity: 0, y: 20, duration: 0.5, ease: 'power3.out', stagger: 0.08,
+      scrollTrigger: { trigger: '#stats-grid', start: 'top 85%', once: true }
+    });
+
+    gsap.from('.manifesto-img', {
+      opacity: 0, x: -30, duration: 0.7, ease: 'power3.out',
+      scrollTrigger: { trigger: '#manifesto', start: 'top 85%', once: true }
+    });
+
+    gsap.from('.manifesto-text', {
+      opacity: 0, x: 30, duration: 0.7, ease: 'power3.out',
+      scrollTrigger: { trigger: '#manifesto', start: 'top 85%', once: true }
+    });
+
+    gsap.from('.athlete-strip', {
+      opacity: 0, y: 30, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: '#athlete-lifestyle', start: 'top 85%', once: true }
+    });
+
+    // -- FEATURE CAROUSEL -----------------------------
+    var FC_FEATURES = [
+      { id:'quality',       label:'Premium Quality',      image:'assets/images/premium-quality.png',        desc:'Perfect ratio of every ingredient to ensure maximum benefits.' },
+      { id:'macro',         label:'Macro & Micro',         image:'assets/images/macro-micronutrients.png',   desc:'We focus on fulfilling both macronutrient and micronutrient requirements.' },
+      { id:'constituents',  label:'Clean Formulation',     image:'assets/images/ingredients-formulation.png', desc:'Crafted from carefully chosen, premium ingredients with expert guidance.' },
+      { id:'transparent',   label:'100% Transparent',      image:'assets/images/transparency-trust.png',     desc:'Test certificates from FSSAI-approved labs backing every nutritional claim.' },
+    ];
+
+    var FC_ICONS = {
+      quality:      '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+      macro:        '<path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>',
+      constituents: '<circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>',
+      transparent:  '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+    };
+
+    var FC_ITEM_H = 65;
+    var fc_cur = 0;
+    var fc_paused = false;
+    var fc_timer;
+
+    function fc_wrapDiff(diff, total) {
+      var half = total / 2;
+      while (diff > half)  diff -= total;
+      while (diff < -half) diff += total;
+      return diff;
+    }
+
+    var drumEl = document.getElementById('chips-drum');
+    if (drumEl) {
+      FC_FEATURES.forEach(function(f, i) {
+        var chip = document.createElement('button');
+        chip.className = 'feature-chip';
+        chip.dataset.index = i;
+        chip.innerHTML =
+          '<span class="chip-icon" style="display:inline-flex;align-items:center;width:16px;height:16px;flex-shrink:0;color:inherit;">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + FC_ICONS[f.id] + '</svg>' +
+          '</span><span class="chip-label">' + f.label + '</span>';
+        chip.addEventListener('click', function() { fc_goTo(i); fc_startAuto(); });
+        chip.addEventListener('mouseenter', function() { fc_paused = true; });
+        chip.addEventListener('mouseleave', function() { fc_paused = false; });
+        drumEl.appendChild(chip);
+      });
+    }
+
+    var stackEl = document.getElementById('cards-stack');
+    if (stackEl) {
+      FC_FEATURES.forEach(function(f, i) {
+        var card = document.createElement('div');
+        card.className = 'feature-card card-inactive';
+        card.innerHTML =
+          '<img src="' + f.image + '" alt="' + f.label + '" />' +
+          '<div class="card-overlay" style="opacity:0;transform:translateY(15px)">' +
+          '<div class="card-badge">' + f.label + '</div>' +
+          '<p class="card-desc">' + f.desc + '</p></div>';
+        stackEl.appendChild(card);
+      });
+    }
+
+    function fc_updateChips() {
+      document.querySelectorAll('.feature-chip').forEach(function(chip, i) {
+        var diff = fc_wrapDiff(i - fc_cur, FC_FEATURES.length);
+        var isActive = diff === 0;
+        gsap.to(chip, { y: diff * FC_ITEM_H, opacity: Math.max(0, 1 - Math.abs(diff) * 0.25), duration: 0.5, ease: 'power3.out' });
+        chip.classList.toggle('chip-active', isActive);
+      });
+    }
+
+    function fc_updateCards() {
+      document.querySelectorAll('.feature-card').forEach(function(card, i) {
+        var total = FC_FEATURES.length;
+        var diff = i - fc_cur;
+        if (diff > total/2)  diff -= total;
+        if (diff < -total/2) diff += total;
+        var isActive = diff === 0;
+        var isPrev   = diff === -1;
+        var isNext   = diff === 1;
+
+        gsap.to(card, {
+          x:        isActive ? 0 : isPrev ? -80 : isNext ? 80 : 0,
+          scale:    isActive ? 1 : (isPrev || isNext) ? 0.85 : 0.7,
+          opacity:  isActive ? 1 : (isPrev || isNext) ? 0.4 : 0,
+          rotation: isPrev ? -3 : isNext ? 3 : 0,
+          zIndex:   isActive ? 20 : (isPrev || isNext) ? 10 : 0,
+          duration: 0.5, ease: 'power3.out'
+        });
+
+        card.classList.toggle('card-inactive', !isActive);
+
+        var overlay = card.querySelector('.card-overlay');
+        gsap.to(overlay, { opacity: isActive ? 1 : 0, y: isActive ? 0 : 15, duration: 0.35, ease: 'power2.out', delay: isActive ? 0.12 : 0 });
+      });
+    }
+
+    function fc_goTo(index) {
+      fc_cur = ((index % FC_FEATURES.length) + FC_FEATURES.length) % FC_FEATURES.length;
+      fc_updateChips();
+      fc_updateCards();
+    }
+
+    function fc_startAuto() {
+      clearInterval(fc_timer);
+      fc_timer = setInterval(function() { if (!fc_paused) fc_goTo(fc_cur + 1); }, 3500);
+    }
+
+    ScrollTrigger.create({
+      trigger: '#why-ipn',
+      start: 'top 80%',
+      once: true,
+      onEnter: function() {
+        fc_updateChips();
+        fc_updateCards();
+        fc_startAuto();
+      }
+    });
 
     var navbar = document.getElementById('navbar');
     window.addEventListener('scroll', function() {
