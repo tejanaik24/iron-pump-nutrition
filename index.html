@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Iron Pump Nutrition — Unleash The Beast</title>
+  <title>Iron Pump Nutrition â€” Unleash The Beast</title>
   <meta name="description" content="Premium sports nutrition engineered for athletes who refuse to settle for average. Lab-tested, FSSAI-certified, made in India." />
-  <meta property="og:title" content="Iron Pump Nutrition — Unleash The Beast" />
+  <meta property="og:title" content="Iron Pump Nutrition â€” Unleash The Beast" />
   <meta property="og:description" content="Premium sports nutrition engineered for athletes who refuse to settle for average." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ironpumpnutrition.com" />
@@ -49,26 +49,19 @@
       --radius: 4px;
     }
 
-    @media (max-width: 768px) { :root { --nav-h: 56px; } }
-
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html {
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text-primary);
-      font-family: var(--font-body);
-      font-size: 15px;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
+    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+    body { background: var(--bg); color: var(--text-primary); font-family: var(--font-body); font-size: 15px; line-height: 1.6; overflow-x: hidden; }
     img { max-width: 100%; height: auto; display: block; }
+
+    @media (max-width: 768px) {
+      :root { --nav-h: 56px; }
+      .section { padding: 48px 0; }
+      .section-sm { padding: 32px 0; }
+      #hero { min-height: 85vh; min-height: 85dvh; align-items: flex-end; }
+      #hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+    }
+
     a { color: inherit; text-decoration: none; }
     button { cursor: pointer; font-family: var(--font-body); }
 
@@ -86,8 +79,7 @@
       padding: 0 24px;
     }
 
-    .section { padding: 96px 0; }
-    .section-sm { padding: 64px 0; }
+    .section { padding: 96px 0; } .section-sm { padding: 64px 0; } @media (max-width: 768px) { .section { padding: 48px 0; } .section-sm { padding: 32px 0; } }
 
     @media (max-width: 768px) {
       .section { padding: 56px 0; }
@@ -333,85 +325,61 @@
       #hero { height: 100vh; }
     }
 
-    #hero-video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 30%;
-      display: block;
-      z-index: 0;
-    }
+    #hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+      #hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
 
     #hero-overlay {
       position: absolute;
       inset: 0;
       z-index: 1;
       pointer-events: none;
-      background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.25) 0%,
-        rgba(0,0,0,0.06) 30%,
-        rgba(0,0,0,0.10) 60%,
-        rgba(244,241,234,0.92) 100%
-      );
+      background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.82) 100%);
     }
 
     .hero-content {
       position: relative;
       z-index: 10;
       width: 100%;
-      max-width: var(--container-wide);
-      padding: 0 80px 80px;
-      margin: 0 auto;
+      padding: 0 64px 64px;
+      display: flex;
+      align-items: flex-end;
     }
 
-    .hero-text { max-width: 720px; }
+    .hero-text { max-width: 780px; }
 
     .hero-eyebrow {
+      display: block;
       font-family: var(--font-body);
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.45em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 12px;
-      display: block;
+      margin-bottom: 16px;
     }
 
     .hero-headline {
       font-family: var(--font-display);
-      font-size: clamp(88px, 14vw, 160px);
-      font-weight: 400;
-      line-height: 0.86;
+      font-size: clamp(72px, 12vw, 140px);
+      line-height: 0.88;
       letter-spacing: 0.02em;
-      color: var(--text-primary);
+      color: #FFFFFF;
       margin-bottom: 24px;
     }
 
     .hero-sub {
       font-family: var(--font-body);
-      font-size: 15px;
-      font-weight: 400;
-      color: var(--text-secondary);
+      font-size: 16px;
       line-height: 1.6;
-      max-width: 440px;
-      margin-bottom: 36px;
+      color: rgba(255,255,255,0.8);
+      max-width: 480px;
+      margin-bottom: 40px;
     }
 
-    .hero-ctas {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
+    .hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
 
     @media (max-width: 768px) {
-      #hero { height: auto; min-height: unset; justify-content: flex-start; }
-      #hero-video { position: relative; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; }
-      #hero-overlay { position: absolute; }
-      .hero-content { padding: 32px 24px 48px; }
+      .hero-content { padding: 0 24px 48px; }
       .hero-sub { font-size: 14px; max-width: 100%; }
     }
 
@@ -470,6 +438,60 @@
 
     #marquee:hover .marquee-track { animation-play-state: paused; }
 
+    /* -- MANIFESTO ---------------------------------- */
+    #manifesto {
+      background: var(--surface);
+      padding: 96px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .manifesto-inner {
+      display: flex;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .manifesto-img {
+      flex: 0 0 42%;
+      overflow: hidden;
+    }
+
+    .manifesto-img img { width: 100%; height: auto; object-fit: cover; }
+
+    .manifesto-text { flex: 1; }
+
+    .manifesto-quote {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3.5vw, 48px);
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+
+    .manifesto-quote span { color: var(--accent); }
+
+    .manifesto-byline {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 24px;
+    }
+
+    @media (max-width: 900px) {
+      #manifesto { padding: 64px 0; }
+      .manifesto-inner { flex-direction: column; gap: 40px; }
+      .manifesto-img { flex: none; width: 100%; max-width: 480px; }
+    }
+
+    @media (max-width: 600px) {
+      #manifesto { padding: 48px 0; }
+      .manifesto-quote { font-size: clamp(24px, 6vw, 32px); }
+    }
+
     /* -- STATS GRID ----------------------------------- */
     #stats-grid {
       background: var(--surface);
@@ -515,152 +537,64 @@
       .stat-item { padding: 24px 16px; }
     }
 
-    @media (max-width: 400px) {
-      .stats-grid-inner { grid-template-columns: 1fr; }
-      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
-      .stat-item:last-child { border-bottom: none; }
+    @media (max-width: 400px) { .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } .product-card { padding: 12px 10px; } .card-name { font-size: 16px; } .card-price { font-size: 18px; } .card-img { height: 120px; }
     }
 
-    /* -- MANIFESTO ------------------------------------- */
-    #manifesto {
-      background: var(--bg);
-      padding: 96px 0;
-      position: relative;
-    }
-
-    #manifesto::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .manifesto-inner {
-      display: flex;
-      gap: 80px;
-      align-items: flex-start;
-    }
-
-    .manifesto-img {
-      flex: 0 0 45%;
-      max-width: 45%;
-    }
-
-    .manifesto-img img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .manifesto-text {
-      flex: 1;
-      padding-top: 24px;
-    }
-
-    .manifesto-quote {
-      font-family: var(--font-display);
-      font-size: clamp(28px, 3.5vw, 42px);
-      line-height: 1.1;
-      letter-spacing: 0.03em;
-      color: var(--text-primary);
-      margin-bottom: 24px;
-    }
-
-    .manifesto-quote span { color: var(--accent); }
-
-    .manifesto-byline {
-      font-family: var(--font-body);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    @media (max-width: 900px) {
-      .manifesto-inner { flex-direction: column; gap: 32px; }
-      .manifesto-img { flex: none; max-width: 100%; }
-      #manifesto { padding: 56px 0; }
-    }
-
-    /* -- PRODUCTS ----------------------------------- */
     #products {
       background: var(--bg);
       padding: 96px 0;
-      position: relative;
+      border-top: 1px solid var(--border);
     }
 
-    #products::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .products-header {
-      text-align: center;
-      margin-bottom: 56px;
-    }
+    .products-header { margin-bottom: 40px; }
 
     .products-tabs {
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 0;
-      margin: 40px auto 48px;
-      max-width: 360px;
+      margin-top: 40px;
+      margin-bottom: 48px;
       border: 1px solid var(--border);
+      max-width: 400px;
     }
 
     .tab-btn {
       flex: 1;
       padding: 12px 24px;
       font-family: var(--font-body);
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--text-muted);
       background: transparent;
       border: none;
       cursor: pointer;
-      transition: all 220ms ease;
+      transition: background 200ms ease, color 200ms ease;
+      min-height: 44px;
     }
 
+    .tab-btn.tab-active { background: #111111; color: #FFFFFF; }
+    .tab-btn:hover:not(.tab-active) { color: var(--accent); }
     .tab-btn:first-child { border-right: 1px solid var(--border); }
 
-    .tab-btn.tab-active {
-      background: transparent;
-      color: var(--accent);
-      box-shadow: inset 0 -2px 0 var(--accent);
-    }
-
-    .tab-btn:hover:not(.tab-active) { color: var(--text-primary); }
-
     .tab-panel { display: none; }
-    .tab-panel.tab-panel-active { display: grid; }
+    .tab-panel.tab-panel-active { display: block; }
 
     .products-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 1px;
       background: var(--border);
+      margin-top: 8px;
     }
 
-    @media (max-width: 1100px) {
-      .products-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 600px) {
-      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1px; }
+    @media (max-width: 1100px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) {
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; background: transparent; }
       #products { padding: 56px 0; }
-      .tab-btn { padding: 10px 16px; font-size: 10px; }
-    }
-
-    @media (max-width: 400px) {
-      .products-grid { grid-template-columns: 1fr; }
+      .products-tabs { max-width: 100%; }
+      .tab-btn { padding: 10px 12px; font-size: 11px; }
     }
 
     .product-card {
@@ -1032,8 +966,8 @@
     .trust-badge span { color: var(--text-muted); }
 
     @media (max-width: 900px) {
-      .why-inner { flex-direction: column; min-height: auto; }
-      .why-left { width: 100%; min-height: 280px; padding: 24px 20px; justify-content: center; border-right: none; border-bottom: 1px solid var(--border); }
+      .why-inner { flex-direction: column; min-height: auto; border: none; }
+      .why-left { width: 100%; min-height: 200px; padding: 24px 20px; justify-content: center; border-right: none; border-bottom: 1px solid var(--border); }
       .why-right { padding: 32px 20px; }
       .cards-stack { width: min(90%, 260px); }
       .trust-badges { flex-wrap: wrap; }
@@ -1343,8 +1277,8 @@
         </div>
         <div class="manifesto-text">
           <span class="label">The Iron Spirit</span>
-          <p class="manifesto-quote">We don't make supplements for people who show up 3 days a week. <span>Iron Pump</span> is built for the grind — every rep, every set, no excuses.</p>
-          <span class="manifesto-byline">— Unleash The Beast</span>
+          <p class="manifesto-quote">We don't make supplements for people who show up 3 days a week. <span>Iron Pump</span> is built for the grind â€” every rep, every set, no excuses.</p>
+          <span class="manifesto-byline">â€” Unleash The Beast</span>
         </div>
       </div>
     </div>
@@ -1381,9 +1315,9 @@
         <h2 class="heading-lg">Train without compromise.</h2>
       </div>
       <div class="athlete-strip">
-        <img src="assets/images/athletes-banner.png" alt="IPN Athletes — Train Without Compromise" loading="lazy" />
+        <img src="assets/images/athletes-banner.png" alt="IPN Athletes â€” Train Without Compromise" loading="lazy" />
         <div class="athlete-strip-overlay"></div>
-        <div class="athlete-strip-tagline">Fueled by <span>IPN</span> — Built to Dominate</div>
+        <div class="athlete-strip-tagline">Fueled by <span>IPN</span> â€” Built to Dominate</div>
       </div>
     </div>
     <div class="athlete-marquee" aria-hidden="true">
@@ -1572,10 +1506,11 @@
 
     renderGrid('preworkout');
     renderGrid('whey');
+    setTimeout(() => { ScrollTrigger.refresh(); }, 100);
 
     gsap.from('.product-card', {
       opacity: 0, y: 24, duration: 0.5, ease: 'power3.out', stagger: 0.06,
-      scrollTrigger: { trigger: '#products', start: 'top 85%', once: true }
+      scrollTrigger: { trigger: '#products', start: 'top 95%', once: true }
     });
 
     var tabs = document.querySelectorAll('.tab-btn');
@@ -1609,22 +1544,22 @@
 
     gsap.from('.stat-item', {
       opacity: 0, y: 20, duration: 0.5, ease: 'power3.out', stagger: 0.08,
-      scrollTrigger: { trigger: '#stats-grid', start: 'top 85%', once: true }
+      scrollTrigger: { trigger: '#stats-grid', start: 'top 95%', once: true }
     });
 
     gsap.from('.manifesto-img', {
       opacity: 0, x: -30, duration: 0.7, ease: 'power3.out',
-      scrollTrigger: { trigger: '#manifesto', start: 'top 85%', once: true }
+      scrollTrigger: { trigger: '#manifesto', start: 'top 95%', once: true }
     });
 
     gsap.from('.manifesto-text', {
       opacity: 0, x: 30, duration: 0.7, ease: 'power3.out',
-      scrollTrigger: { trigger: '#manifesto', start: 'top 85%', once: true }
+      scrollTrigger: { trigger: '#manifesto', start: 'top 95%', once: true }
     });
 
     gsap.from('.athlete-strip', {
       opacity: 0, y: 30, duration: 0.8, ease: 'power3.out',
-      scrollTrigger: { trigger: '#athlete-lifestyle', start: 'top 85%', once: true }
+      scrollTrigger: { trigger: '#athlete-lifestyle', start: 'top 95%', once: true }
     });
 
     // -- FEATURE CAROUSEL -----------------------------
@@ -1705,12 +1640,12 @@
         var isNext   = diff === 1;
 
         gsap.to(card, {
-          x:        isActive ? 0 : isPrev ? -80 : isNext ? 80 : 0,
-          scale:    isActive ? 1 : (isPrev || isNext) ? 0.85 : 0.7,
+          x:        isActive ? 0 : isPrev ? -60 : isNext ? 60 : 0,
+          scale:    isActive ? 1 : (isPrev || isNext) ? 0.9 : 0.8,
           opacity:  isActive ? 1 : (isPrev || isNext) ? 0.4 : 0,
-          rotation: isPrev ? -3 : isNext ? 3 : 0,
+          rotation: isPrev ? -2 : isNext ? 2 : 0,
           zIndex:   isActive ? 20 : (isPrev || isNext) ? 10 : 0,
-          duration: 0.5, ease: 'power3.out'
+          duration: 0.5, ease: 'power2.out'
         });
 
         card.classList.toggle('card-inactive', !isActive);
@@ -1749,3 +1684,8 @@
   </script>
 </body>
 </html>
+
+
+
+
+
