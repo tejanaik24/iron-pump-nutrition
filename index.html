@@ -740,13 +740,12 @@
       width: 100%;
       overflow: hidden;
       margin-top: 48px;
-      background: #111111 center center / cover no-repeat;
-      aspect-ratio: 1797 / 875;
-      min-height: 280px;
     }
 
-    @media (max-width: 768px) {
-      .athlete-strip { aspect-ratio: auto; min-height: 220px; }
+    .athlete-strip img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     .athlete-strip-overlay {
@@ -1585,7 +1584,8 @@
         <span class="label">The IPN Athlete</span>
         <h2 class="heading-lg">Train without compromise.</h2>
       </div>
-      <div class=”athlete-strip” style=”background-image:url('assets/images/athletes-banner.png')” role=”img” aria-label=”IPN Athletes — Train Without Compromise”>
+      <div class=”athlete-strip”>
+        <img src=”assets/images/athletes-banner.png” alt=”IPN Athletes — Train Without Compromise” />
         <div class=”athlete-strip-overlay”></div>
         <div class=”athlete-strip-tagline”>Fueled by <span>IPN</span> — Built to Dominate</div>
       </div>
