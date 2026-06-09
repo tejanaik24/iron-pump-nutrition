@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Iron Pump Nutrition â€” Unleash The Beast</title>
-  <meta name="description" content="Premium sports nutrition engineered for athletes who refuse to settle for average. Lab-tested, FSSAI-certified, made in India." />
-  <meta property="og:title" content="Iron Pump Nutrition â€” Unleash The Beast" />
+  <title>Iron Pump Nutrition — Unleash The Beast</title>
+  <meta name=”description” content=”Premium sports nutrition engineered for athletes who refuse to settle for average. Lab-tested, FSSAI-certified, made in India.” />
+  <meta property=”og:title” content=”Iron Pump Nutrition — Unleash The Beast” />
   <meta property="og:description" content="Premium sports nutrition engineered for athletes who refuse to settle for average." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ironpumpnutrition.com" />
@@ -193,23 +193,20 @@
       justify-content: space-between;
     }
 
-    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo { display: flex; align-items: center; flex-shrink: 0; }
 
-    .nav-logo img { height: 32px; width: auto; }
-
-    .nav-logo span {
-      font-family: var(--font-display);
-      font-size: 22px;
-      letter-spacing: 0.06em;
-      color: var(--text-primary);
-    }
+    .nav-logo img { height: 40px; width: auto; }
 
     .nav-links {
       display: flex;
       align-items: center;
       gap: 28px;
       list-style: none;
+      flex: 1;
     }
+
+    .nav-left { justify-content: flex-end; padding-right: 32px; }
+    .nav-right { justify-content: flex-start; padding-left: 32px; }
 
     .nav-link {
       font-family: var(--font-body);
@@ -1049,12 +1046,12 @@
     }
 
     @media (max-width: 700px) {
-      .standard-grid { grid-template-columns: 1fr; }
+      .standard-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 500px) {
       #iron-standard { padding: 56px 0; }
-      .standard-card { padding: 32px 24px; }
+      .standard-card { padding: 24px 16px; }
     }
 
     /* -- FOOTER ------------------------------------- */
@@ -1152,9 +1149,237 @@
     }
 
     @media (max-width: 600px) {
-      .footer-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .footer-brand { grid-column: 1 / -1; }
       .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
       .footer-legal { justify-content: center; }
+    }
+
+    @media (max-width: 400px) {
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    /* -- STICKY BUY BAR ----------------------------- */
+    .sticky-bar {
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0;
+      z-index: 90;
+      background: #111111;
+      border-bottom: 1px solid rgba(184,162,122,0.3);
+      transform: translateY(-110%);
+      transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+
+    .sticky-bar.visible { transform: translateY(0); }
+
+    .sticky-bar-inner {
+      max-width: var(--container-wide);
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .sticky-bar-name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      color: #FFFFFF;
+      letter-spacing: 0.04em;
+    }
+
+    .sticky-bar-price {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sticky-bar-off {
+      font-size: 10px;
+      font-weight: 700;
+      background: var(--accent);
+      color: #FFFFFF;
+      padding: 2px 6px;
+      border-radius: 2px;
+      letter-spacing: 0.06em;
+    }
+
+    .sticky-bar-btn {
+      padding: 8px 18px !important;
+      min-height: 36px !important;
+      font-size: 11px !important;
+    }
+
+    @media (max-width: 600px) {
+      .sticky-bar-name { font-size: 15px; }
+      .sticky-bar-inner { gap: 10px; padding: 10px 16px; flex-wrap: wrap; justify-content: center; }
+    }
+
+    /* -- INGREDIENTS DEEP-DIVE ---------------------- */
+    #ingredients {
+      background: #111111;
+      padding: 96px 0;
+      position: relative;
+    }
+
+    #ingredients::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--accent);
+    }
+
+    .ingredients-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .ingredients-header .heading-lg { color: #FFFFFF; }
+    .ingredients-header .label { color: var(--accent); }
+    .ingredients-header .body-lg { color: rgba(255,255,255,0.55); margin-top: 12px; }
+
+    .ingredients-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.07);
+    }
+
+    .ingr-card {
+      background: #161616;
+      padding: 40px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border-left: 3px solid var(--accent);
+      transition: background 250ms ease;
+    }
+
+    .ingr-card:hover { background: #1e1e1e; }
+
+    .ingr-dose {
+      font-family: var(--font-display);
+      font-size: 52px;
+      line-height: 1;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    .ingr-name {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+    }
+
+    .ingr-benefit {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+    }
+
+    .ingr-tag {
+      margin-top: 10px;
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(184,162,122,0.12);
+      padding: 3px 8px;
+      width: fit-content;
+    }
+
+    @media (max-width: 900px) {
+      .ingredients-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 500px) {
+      #ingredients { padding: 56px 0; }
+      .ingr-dose { font-size: 42px; }
+      .ingr-card { padding: 28px 20px; }
+    }
+
+    /* -- FOOTER DISTRIBUTION ROW -------------------- */
+    .footer-distribution {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0;
+      flex-wrap: wrap;
+    }
+
+    .footer-distribution span {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .footer-distribution a {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      transition: color 200ms ease;
+    }
+
+    .footer-distribution a:hover { color: var(--accent-hover); }
+
+    .footer-dist-sep {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) {
+      .footer-distribution { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .footer-dist-sep { display: none; }
+    }
+
+    /* -- FLOATING WHATSAPP BUTTON ------------------- */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999;
+      width: 56px;
+      height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      transition: transform 200ms ease, box-shadow 200ms ease;
+      text-decoration: none;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.6);
+    }
+
+    .whatsapp-float svg { width: 30px; height: 30px; fill: #FFFFFF; }
+
+    @media (max-width: 768px) {
+      .whatsapp-float { bottom: 20px; right: 16px; width: 52px; height: 52px; }
+      .whatsapp-float svg { width: 26px; height: 26px; }
     }
 
     @media (max-width: 768px) {
@@ -1174,17 +1399,26 @@
 </head>
 <body>
 
+  <div id="sticky-bar" class="sticky-bar" aria-hidden="true">
+    <div class="sticky-bar-inner">
+      <span class="sticky-bar-name">Iron Hellfire Pre-Workout</span>
+      <span class="sticky-bar-price">&#x20B9;2,499 <span class="sticky-bar-off">50% OFF</span></span>
+      <a href="https://wa.me/918317564213?text=Hi%20Iron%20Pump%20Nutrition!%20I%20want%20to%20order%20Iron%20Hellfire%20Pre-Workout.%20Please%20share%20details." class="btn btn-primary sticky-bar-btn" target="_blank" rel="noopener noreferrer">Order on WhatsApp</a>
+    </div>
+  </div>
+
   <nav id="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo" aria-label="Iron Pump Nutrition home">
-        <img src="assets/logo/ipn-logo-new.png" alt="Iron Pump Nutrition" />
-        <span>Iron Pump</span>
-      </a>
-      <ul class="nav-links">
+      <ul class="nav-links nav-left">
         <li><a href="#products" class="nav-link">Products</a></li>
         <li><a href="#why-ipn" class="nav-link">Why IPN</a></li>
+      </ul>
+      <a href="index.html" class="nav-logo" aria-label="Iron Pump Nutrition home">
+        <img src="assets/logo/ipn-logo-new.png" alt="Iron Pump Nutrition" />
+      </a>
+      <ul class="nav-links nav-right">
         <li><a href="#iron-standard" class="nav-link">Quality</a></li>
-        <li><a href="#products" class="nav-link nav-cta">Shop Now</a></li>
+        <li><a href="https://wa.me/918317564213?text=Hi%20Iron%20Pump%20Nutrition!%20I%20want%20to%20place%20an%20order." class="nav-link nav-cta" target="_blank" rel="noopener noreferrer">Shop Now</a></li>
       </ul>
       <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
         <span></span>
@@ -1196,7 +1430,7 @@
       <a href="#products" class="mobile-link">Products</a>
       <a href="#why-ipn" class="mobile-link">Why IPN</a>
       <a href="#iron-standard" class="mobile-link">Quality</a>
-      <a href="#products" class="mobile-link mobile-link-cta">Shop Now</a>
+      <a href="https://wa.me/918317564213?text=Hi%20Iron%20Pump%20Nutrition!%20I%20want%20to%20place%20an%20order." class="mobile-link mobile-link-cta" target="_blank" rel="noopener noreferrer">Shop Now</a>
     </div>
   </nav>
 
@@ -1276,8 +1510,8 @@
         </div>
         <div class="manifesto-text">
           <span class="label">The Iron Spirit</span>
-          <p class="manifesto-quote">We don't make supplements for people who show up 3 days a week. <span>Iron Pump</span> is built for the grind â€” every rep, every set, no excuses.</p>
-          <span class="manifesto-byline">â€” Unleash The Beast</span>
+          <p class=”manifesto-quote”>We don't make supplements for people who show up 3 days a week. <span>Iron Pump</span> is built for the grind — every rep, every set, no excuses.</p>
+          <span class=”manifesto-byline”>— Unleash The Beast</span>
         </div>
       </div>
     </div>
@@ -1307,6 +1541,42 @@
     </div>
   </section>
 
+  <section id="ingredients">
+    <div class="container">
+      <div class="ingredients-header">
+        <span class="label">What's Inside</span>
+        <h2 class="heading-lg">Clinically dosed. Nothing hidden.</h2>
+        <p class="body-lg">Every scoop delivers ingredients at doses that actually work — verified by third-party labs, zero proprietary blends.</p>
+      </div>
+      <div class="ingredients-grid">
+        <div class="ingr-card">
+          <div class="ingr-dose">200mg</div>
+          <div class="ingr-name">Caffeine Anhydrous</div>
+          <div class="ingr-benefit">Peak energy, laser focus, zero crash</div>
+          <div class="ingr-tag">Energy</div>
+        </div>
+        <div class="ingr-card">
+          <div class="ingr-dose">4g</div>
+          <div class="ingr-name">L-Citrulline</div>
+          <div class="ingr-benefit">Skin-tearing pumps and endurance</div>
+          <div class="ingr-tag">Pump</div>
+        </div>
+        <div class="ingr-card">
+          <div class="ingr-dose">3.2g</div>
+          <div class="ingr-name">Beta-Alanine</div>
+          <div class="ingr-benefit">Delay fatigue, push past limits</div>
+          <div class="ingr-tag">Endurance</div>
+        </div>
+        <div class="ingr-card">
+          <div class="ingr-dose">24g</div>
+          <div class="ingr-name">Whey Protein Blend</div>
+          <div class="ingr-benefit">Fast-absorbing muscle repair and growth</div>
+          <div class="ingr-tag">Protein</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="athlete-lifestyle">
     <div class="container">
       <div class="why-header">
@@ -1314,9 +1584,9 @@
         <h2 class="heading-lg">Train without compromise.</h2>
       </div>
       <div class="athlete-strip">
-        <img src="assets/images/athletes-banner.png" alt="IPN Athletes â€” Train Without Compromise" loading="lazy" />
-        <div class="athlete-strip-overlay"></div>
-        <div class="athlete-strip-tagline">Fueled by <span>IPN</span> â€” Built to Dominate</div>
+        <img src=”assets/images/athletes-banner.png” alt=”IPN Athletes — Train Without Compromise” loading=”lazy” />
+        <div class=”athlete-strip-overlay”></div>
+        <div class=”athlete-strip-tagline”>Fueled by <span>IPN</span> — Built to Dominate</div>
       </div>
     </div>
     <div class="athlete-marquee" aria-hidden="true">
@@ -1412,7 +1682,6 @@
         <div class="footer-brand">
           <a href="index.html" class="nav-logo" aria-label="Iron Pump Nutrition home">
             <img src="assets/logo/ipn-logo-new.png" alt="Iron Pump Nutrition" />
-            <span>Iron Pump</span>
           </a>
           <p>Premium sports nutrition engineered for athletes who refuse to settle for average. Lab-tested, FSSAI-certified, made in India.</p>
           <div class="footer-socials">
@@ -1450,13 +1719,22 @@
         <div class="footer-col">
           <h4>Support</h4>
           <ul>
-            <li><a href="#">Contact Us</a></li>
+            <li><a href="mailto:support@ironpumpnutrition.com">support@ironpumpnutrition.com</a></li>
+            <li><a href="https://wa.me/918317564213">WhatsApp: +91 83175 64213</a></li>
             <li><a href="#">FAQs</a></li>
             <li><a href="#">Shipping Policy</a></li>
             <li><a href="#">Return Policy</a></li>
           </ul>
         </div>
       </div>
+
+      <div class="footer-distribution">
+        <span>For product distribution enquiries:</span>
+        <a href="mailto:support@ironpumpnutrition.com">support@ironpumpnutrition.com</a>
+        <span class="footer-dist-sep"></span>
+        <a href="https://wa.me/918317564213">+91 83175 64213</a>
+      </div>
+
       <div class="footer-bottom">
         <span>&copy; 2026 Iron Pump Nutrition. All rights reserved.</span>
         <ul class="footer-legal">
@@ -1489,6 +1767,8 @@
       PRODUCTS.filter(function(p) { return p.category === category; }).forEach(function(p) {
         var card = document.createElement('div');
         card.className = 'product-card';
+        var waMsg = encodeURIComponent('Hi Iron Pump Nutrition! I want to order ' + p.name + ' - ' + p.flavour + '. Please confirm availability.');
+        var waUrl = 'https://wa.me/918317564213?text=' + waMsg;
         card.innerHTML =
           '<a href="product.html?id=' + p.id + '" class="card-img"><img src="' + p.image + '" alt="' + p.name + ' ' + p.flavour + '" loading="lazy" /></a>' +
           '<span class="card-type">' + p.type + '</span>' +
@@ -1498,7 +1778,7 @@
             '<span class="card-price">' + fmtPrice(p.price) + '</span>' +
             '<div class="card-offer"><span class="card-original">' + fmtPrice(p.mrp) + '</span><span class="card-discount">' + p.discount + '% OFF</span></div>' +
           '</div>' +
-          '<a href="product.html?id=' + p.id + '" class="card-btn">Shop Now</a>';
+          '<a href="' + waUrl + '" class="card-btn" target="_blank" rel="noopener noreferrer">Order on WhatsApp</a>';
         grid.appendChild(card);
       });
     }
@@ -1677,10 +1957,31 @@
     });
 
     var navbar = document.getElementById('navbar');
+    var stickyBar = document.getElementById('sticky-bar');
+    var heroEl = document.getElementById('hero');
+
     window.addEventListener('scroll', function() {
-      navbar.classList.toggle('scrolled', window.scrollY > 40);
+      var scrollY = window.scrollY;
+      navbar.classList.toggle('scrolled', scrollY > 40);
+      if (heroEl && stickyBar) {
+        var heroBottom = heroEl.getBoundingClientRect().bottom;
+        stickyBar.classList.toggle('visible', heroBottom < 0);
+        stickyBar.setAttribute('aria-hidden', heroBottom < 0 ? 'false' : 'true');
+      }
     }, { passive: true });
+
+    gsap.from('.ingr-card', {
+      opacity: 0, y: 24, duration: 0.5, ease: 'power3.out', stagger: 0.08,
+      scrollTrigger: { trigger: '#ingredients', start: 'top 90%', once: true }
+    });
   </script>
+
+  <a href="https://wa.me/918317564213?text=Hi%20Iron%20Pump%20Nutrition!%20I%27d%20like%20to%20place%20an%20order." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Order on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
 </body>
 </html>
 
