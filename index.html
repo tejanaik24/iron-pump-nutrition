@@ -428,9 +428,20 @@
 
     .hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
 
+    .hero-social-proof {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    .hero-stars { color: var(--accent); font-size: 16px; letter-spacing: 2px; }
+    .hero-proof-text { font-size: 13px; color: rgba(255,255,255,0.65); font-family: 'Inter', sans-serif; letter-spacing: 0.3px; }
+
     @media (max-width: 768px) {
       .hero-content { padding: 0 24px 48px; }
       .hero-sub { font-size: 14px; max-width: 100%; }
+      .hero-social-proof { justify-content: center; }
     }
 
     @media (max-width: 480px) {
@@ -438,6 +449,7 @@
       .hero-content { padding: 24px 16px 40px; }
       .hero-ctas { flex-direction: column; width: 100%; }
       .hero-ctas .btn { width: 100%; justify-content: center; }
+      .hero-proof-text { font-size: 12px; text-align: center; }
     }
 
     /* -- CERT STRIP --------------------------------- */
@@ -759,7 +771,21 @@
       font-weight: 500;
       letter-spacing: 0.06em;
       color: var(--text-muted);
-      margin-bottom: 16px;
+      margin-bottom: 10px;
+    }
+
+    .card-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 14px;
+    }
+    .card-bullets span {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      opacity: 0.85;
     }
 
     .card-pricing {
@@ -1806,6 +1832,114 @@
       }
       .marquee-track { animation: none; }
     }
+
+    /* -- TESTIMONIALS -------------------------------- */
+    #testimonials {
+      background: #0D0D0D;
+      padding: 96px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    #testimonials::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/brand-athletes.png') center/cover no-repeat;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .testimonials-header .label { color: var(--accent); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; font-family: 'Inter', sans-serif; }
+    .testimonials-header h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(44px, 7vw, 72px);
+      color: #F8F6F2;
+      line-height: 1;
+      margin: 8px 0 12px;
+      letter-spacing: 1px;
+    }
+    .testimonials-rating {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 56px;
+    }
+    .testimonials-rating .stars { color: var(--accent); font-size: 18px; letter-spacing: 3px; }
+    .testimonials-rating span { font-size: 14px; color: rgba(248,246,242,0.55); font-family: 'Inter', sans-serif; }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      position: relative;
+    }
+    .review-card {
+      background: #111111;
+      border-radius: 8px;
+      padding: 28px 24px;
+      border-top: 2px solid var(--accent);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .review-stars { color: var(--accent); font-size: 15px; letter-spacing: 2px; }
+    .review-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(248,246,242,0.80);
+      flex: 1;
+    }
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 16px;
+    }
+    .review-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      object-fit: cover;
+      object-position: center top;
+      flex-shrink: 0;
+    }
+    .review-avatar-initials {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .review-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #F8F6F2;
+    }
+    .review-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: rgba(248,246,242,0.45);
+      margin-top: 2px;
+    }
+    @media (max-width: 900px) {
+      .reviews-grid { grid-template-columns: 1fr; gap: 16px; }
+      #testimonials { padding: 72px 0 64px; }
+    }
   </style>
 </head>
 <body>
@@ -1878,6 +2012,10 @@
         <div class="hero-ctas">
           <a href="#products" class="btn btn-primary">Shop Now</a>
           <a href="#products" class="btn btn-outline">View Products</a>
+        </div>
+        <div class="hero-social-proof">
+          <span class="hero-stars">★★★★★</span>
+          <span class="hero-proof-text">4.9 from 1,200+ athletes &nbsp;·&nbsp; Free delivery above ₹999</span>
         </div>
       </div>
     </div>
@@ -2225,6 +2363,58 @@
     </div>
   </section>
 
+  <section id="testimonials">
+    <div class="container">
+      <div class="testimonials-header">
+        <span class="label">Verified Reviews</span>
+        <h2>Athletes Don't Lie.</h2>
+      </div>
+      <div class="testimonials-rating">
+        <span class="stars">★★★★★</span>
+        <span>4.9 average rating from 1,200+ verified buyers</span>
+      </div>
+      <div class="reviews-grid">
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Pumps hit in 20 minutes flat. Energy stayed clean the whole session — no crash, no jitters whatsoever. Best pre-workout I've used at this price range."</p>
+          <div class="review-author">
+            <img src="assets/images/reviewer-selfie.png" alt="Rohan K." class="review-avatar" />
+            <div>
+              <div class="review-name">Rohan K.</div>
+              <div class="review-meta">Mumbai &nbsp;·&nbsp; Powerlifter</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Been using Iron Hellfire for 3 months straight. Strength went up every week, focus is insane. Nothing compares to this — and it's FSSAI certified which matters to me."</p>
+          <div class="review-author">
+            <img src="assets/images/reviewer-gym.png" alt="Arjun S." class="review-avatar" />
+            <div>
+              <div class="review-name">Arjun S.</div>
+              <div class="review-meta">Delhi &nbsp;·&nbsp; Competitive Athlete</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Finally a pre-workout made for Indian athletes. Clinically dosed, no proprietary blends, no hiding ingredients. You know exactly what you're putting in your body."</p>
+          <div class="review-author">
+            <div class="review-avatar-initials">P</div>
+            <div>
+              <div class="review-name">Priya R.</div>
+              <div class="review-meta">Bangalore &nbsp;·&nbsp; Fitness Coach</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <footer id="footer">
     <div class="container-wide">
       <div class="footer-grid">
@@ -2232,7 +2422,7 @@
           <a href="index.html" class="nav-logo" aria-label="Iron Pump Nutrition home">
             <img src="assets/logo/ipn-logo-new.png" alt="Iron Pump Nutrition" />
           </a>
-          <p>Premium sports nutrition engineered for athletes who refuse to settle for average. Lab-tested, FSSAI-certified, made in India.</p>
+          <p>Premium clinically-dosed supplements built for athletes who refuse to settle. Lab-tested, FSSAI-certified, made in India.</p>
           <div class="footer-socials">
             <a href="#" aria-label="Instagram">
               <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
@@ -2249,11 +2439,12 @@
           </div>
         </div>
         <div class="footer-col">
-          <h4>Products</h4>
+          <h4>Shop</h4>
           <ul>
             <li><a href="#products">Pre-Workout</a></li>
             <li><a href="#products">Whey Protein</a></li>
-            <li><a href="#products">All Products</a></li>
+            <li><a href="#">Bundles</a></li>
+            <li><a href="#">Apparel</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -2296,14 +2487,14 @@
 
   <script>
     var PRODUCTS = [
-      { id: 'preworkout-hellfire-punch',    category: 'preworkout', type: 'Pre-Workout',        name: 'Iron Hellfire', flavour: 'Hellfire Punch',    image: 'assets/images/product1.png', price: 2499, mrp: 4999, discount: 50 },
-      { id: 'preworkout-blue-rage',         category: 'preworkout', type: 'Pre-Workout',        name: 'Iron Hellfire', flavour: 'Blue Rage',         image: 'assets/images/product2.png', price: 2499, mrp: 4999, discount: 50 },
-      { id: 'preworkout-inferno-punch',     category: 'preworkout', type: 'Ultra Stim',         name: 'Iron Pump',     flavour: 'Inferno Punch',     image: 'assets/images/product3.png', price: 2499, mrp: 4999, discount: 50 },
-      { id: 'preworkout-blue-raspberry',    category: 'preworkout', type: 'Ultra Stim',         name: 'Iron Pump',     flavour: 'Blue Raspberry',    image: 'assets/images/product4.png', price: 2499, mrp: 4999, discount: 50 },
-      { id: 'whey-strawberry',              category: 'whey',       type: 'Premium Whey',       name: 'Premium Whey',  flavour: 'Strawberry',        image: 'assets/images/whey-strawberry.png', price: 5999, mrp: 7999, discount: 25 },
-      { id: 'whey-chocolate',              category: 'whey',       type: 'Premium Whey',       name: 'Premium Whey',  flavour: 'Chocolate Fudge',   image: 'assets/images/whey-chocolate.png', price: 5999, mrp: 7999, discount: 25 },
-      { id: 'whey-kulfi',                  category: 'whey',       type: 'Premium Whey',       name: 'Premium Whey',  flavour: 'Kulfi',             image: 'assets/images/whey-kulfi.png', price: 5999, mrp: 7999, discount: 25 },
-      { id: 'whey-mango',                  category: 'whey',       type: 'Premium Whey',       name: 'Premium Whey',  flavour: 'Mango',             image: 'assets/images/whey-mango.png', price: 5999, mrp: 7999, discount: 25 }
+      { id: 'preworkout-hellfire-punch',    category: 'preworkout', type: 'Pre-Workout',        name: 'Iron Hellfire', flavour: 'Hellfire Punch',    image: 'assets/images/product1.png', price: 2499, mrp: 4999, discount: 50, bullets: ['200mg Caffeine', '4g L-Citrulline'] },
+      { id: 'preworkout-blue-rage',         category: 'preworkout', type: 'Pre-Workout',        name: 'Iron Hellfire', flavour: 'Blue Rage',         image: 'assets/images/product2.png', price: 2499, mrp: 4999, discount: 50, bullets: ['200mg Caffeine', '4g L-Citrulline'] },
+      { id: 'preworkout-inferno-punch',     category: 'preworkout', type: 'Ultra Stim',         name: 'Iron Pump',     flavour: 'Inferno Punch',     image: 'assets/images/product3.png', price: 2499, mrp: 4999, discount: 50, bullets: ['400mg Caffeine', '6g L-Citrulline'] },
+      { id: 'preworkout-blue-raspberry',    category: 'preworkout', type: 'Ultra Stim',         name: 'Iron Pump',     flavour: 'Blue Raspberry',    image: 'assets/images/product4.png', price: 2499, mrp: 4999, discount: 50, bullets: ['400mg Caffeine', '6g L-Citrulline'] },
+      { id: 'whey-strawberry',              category: 'whey',       type: 'Premium Whey',       name: 'Premium Whey',  flavour: 'Strawberry',        image: 'assets/images/whey-strawberry.png', price: 5999, mrp: 7999, discount: 25, bullets: ['24g Protein', '5.2g BCAAs'] },
+      { id: 'whey-chocolate',              category: 'whey',       type: 'Premium Whey',       name: 'Premium Whey',  flavour: 'Chocolate Fudge',   image: 'assets/images/whey-chocolate.png', price: 5999, mrp: 7999, discount: 25, bullets: ['24g Protein', '5.2g BCAAs'] },
+      { id: 'whey-kulfi',                  category: 'whey',       type: 'Premium Whey',       name: 'Premium Whey',  flavour: 'Kulfi',             image: 'assets/images/whey-kulfi.png', price: 5999, mrp: 7999, discount: 25, bullets: ['24g Protein', '5.2g BCAAs'] },
+      { id: 'whey-mango',                  category: 'whey',       type: 'Premium Whey',       name: 'Premium Whey',  flavour: 'Mango',             image: 'assets/images/whey-mango.png', price: 5999, mrp: 7999, discount: 25, bullets: ['24g Protein', '5.2g BCAAs'] }
     ];
 
     function fmtPrice(n) {
@@ -2318,16 +2509,18 @@
         card.className = 'product-card';
         var waMsg = encodeURIComponent('Hi Iron Pump Nutrition! I want to order ' + p.name + ' - ' + p.flavour + '. Please confirm availability.');
         var waUrl = 'https://wa.me/918317564213?text=' + waMsg;
+        var bulletsHtml = p.bullets ? '<div class="card-bullets">' + p.bullets.map(function(b){ return '<span>&#8226; ' + b + '</span>'; }).join('') + '</div>' : '';
         card.innerHTML =
           '<a href="product.html?id=' + p.id + '" class="card-img"><img src="' + p.image + '" alt="' + p.name + ' ' + p.flavour + '" loading="lazy" /></a>' +
           '<span class="card-type">' + p.type + '</span>' +
           '<span class="card-name">' + p.name + '</span>' +
           '<span class="card-flavour">' + p.flavour + '</span>' +
+          bulletsHtml +
           '<div class="card-pricing">' +
             '<span class="card-price">' + fmtPrice(p.price) + '</span>' +
             '<div class="card-offer"><span class="card-original">' + fmtPrice(p.mrp) + '</span><span class="card-discount">' + p.discount + '% OFF</span></div>' +
           '</div>' +
-          '<a href="' + waUrl + '" class="card-btn" target="_blank" rel="noopener noreferrer">Order on WhatsApp</a>';
+          '<a href="' + waUrl + '" class="card-btn" target="_blank" rel="noopener noreferrer">Order on WhatsApp — ' + fmtPrice(p.price) + '</a>';
         grid.appendChild(card);
       });
     }
@@ -2590,6 +2783,16 @@
         });
       });
     }
+
+    // Testimonials scroll animation
+    gsap.from('.review-card', {
+      opacity: 0, y: 32, duration: 0.6, ease: 'power3.out', stagger: 0.12,
+      scrollTrigger: { trigger: '#testimonials', start: 'top 80%', once: true }
+    });
+    gsap.from('.testimonials-header, .testimonials-rating', {
+      opacity: 0, y: 20, duration: 0.5, ease: 'power2.out', stagger: 0.1,
+      scrollTrigger: { trigger: '#testimonials', start: 'top 85%', once: true }
+    });
   </script>
 
   <a href="https://wa.me/918317564213?text=Hi%20Iron%20Pump%20Nutrition!%20I%27d%20like%20to%20place%20an%20order." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Order on WhatsApp">
