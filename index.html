@@ -871,14 +871,24 @@
     }
 
     /* Images fill the tile using absolute positioning — same pattern as hero video */
-    .mosaic-main img,
-    .mosaic-secondary img {
+    .mosaic-main img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center top;
+      display: block;
+      transition: transform 600ms ease;
+    }
+
+    .mosaic-secondary img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 20% center;
       display: block;
       transition: transform 600ms ease;
     }
