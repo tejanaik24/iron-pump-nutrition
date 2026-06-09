@@ -161,6 +161,60 @@
       .btn { padding: 12px 24px; font-size: 12px; min-height: 44px; }
     }
 
+    /* -- OFFER BANNER ------------------------------- */
+    #offer-banner {
+      background: var(--accent);
+      padding: 10px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .offer-banner-text {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #111111;
+      text-align: center;
+    }
+
+    .offer-banner-text a {
+      color: #111111;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 700;
+    }
+
+    .offer-banner-close {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      color: #111111;
+      opacity: 0.7;
+      transition: opacity 200ms ease;
+    }
+
+    .offer-banner-close:hover { opacity: 1; }
+    .offer-banner-close svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2.5; fill: none; }
+
+    #offer-banner.hidden { display: none; }
+
+    @media (max-width: 768px) {
+      #offer-banner { padding: 8px 40px 8px 16px; }
+      .offer-banner-text { font-size: 11px; letter-spacing: 0.06em; }
+    }
+
     /* -- NAV ---------------------------------------- */
     #navbar {
       position: fixed;
@@ -380,6 +434,58 @@
       .hero-content { padding: 24px 16px 40px; }
       .hero-ctas { flex-direction: column; width: 100%; }
       .hero-ctas .btn { width: 100%; justify-content: center; }
+    }
+
+    /* -- CERT STRIP --------------------------------- */
+    #cert-strip {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cert-strip-inner {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cert-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 20px 28px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      border-right: 1px solid var(--border);
+      flex: 1;
+      justify-content: center;
+      min-width: 140px;
+    }
+
+    .cert-badge:last-child { border-right: none; }
+
+    .cert-badge svg {
+      width: 18px; height: 18px;
+      stroke: var(--accent);
+      stroke-width: 1.5;
+      fill: none;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .cert-badge { flex: 0 0 50%; padding: 16px 16px; font-size: 10px; }
+      .cert-badge:nth-child(2n) { border-right: none; }
+      .cert-badge:nth-child(n+3) { border-top: 1px solid var(--border); }
+      .cert-badge:last-child { flex: 0 0 100%; border-right: none; border-top: 1px solid var(--border); }
+    }
+
+    @media (max-width: 400px) {
+      .cert-badge { flex: 0 0 100%; border-right: none; border-top: 1px solid var(--border); }
+      .cert-badge:first-child { border-top: none; }
     }
 
     /* -- MARQUEE ------------------------------------ */
@@ -722,7 +828,7 @@
 
     /* -- ATHLETE LIFESTYLE ---------------------------- */
     #athlete-lifestyle {
-      background: var(--bg);
+      background: #111111;
       padding: 96px 0 0;
       position: relative;
     }
@@ -731,56 +837,120 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 1px;
-      background: var(--border);
+      height: 4px;
+      background: var(--accent);
     }
 
-    .athlete-strip {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
+    #athlete-lifestyle .why-header .heading-lg { color: #FFFFFF; }
+    #athlete-lifestyle .why-header .label { color: var(--accent); }
+
+    /* Mosaic grid */
+    .athlete-mosaic {
       margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 3px;
+      overflow: hidden;
     }
 
-    .athlete-strip img {
+    .mosaic-main {
+      grid-row: 1 / 3;
+      position: relative;
+      overflow: hidden;
+      min-height: 560px;
+    }
+
+    .mosaic-secondary {
+      position: relative;
+      overflow: hidden;
+      min-height: 276px;
+    }
+
+    .mosaic-main img,
+    .mosaic-secondary img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
       display: block;
+      transition: transform 600ms ease;
     }
 
-    .athlete-strip-overlay {
+    .mosaic-main:hover img,
+    .mosaic-secondary:hover img {
+      transform: scale(1.04);
+    }
+
+    /* overlay on main tile */
+    .mosaic-main-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.6) 100%);
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 55%);
       pointer-events: none;
     }
 
-    .athlete-strip-tagline {
+    .mosaic-main-tagline {
       position: absolute;
-      bottom: 48px;
-      left: 0; right: 0;
-      text-align: center;
+      bottom: 32px;
+      left: 32px;
+      right: 32px;
       font-family: var(--font-display);
-      font-size: clamp(28px, 4vw, 56px);
+      font-size: clamp(24px, 3.5vw, 48px);
       color: rgba(255,255,255,0.92);
-      letter-spacing: 0.18em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      pointer-events: none;
+      line-height: 1.05;
     }
 
-    .athlete-strip-tagline span { color: var(--accent); }
+    .mosaic-main-tagline span { color: var(--accent); }
+
+    /* badge on each tile */
+    .mosaic-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #111111;
+      background: var(--accent);
+      padding: 4px 10px;
+    }
 
     .athlete-marquee {
-      border-top: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
       overflow: hidden;
       height: 44px;
       display: flex;
       align-items: center;
+      background: #111111;
     }
 
+    .athlete-marquee .marquee-item { color: rgba(255,255,255,0.5); }
+    .athlete-marquee .marquee-sep { background: var(--accent); }
+
+    /* Mobile: stack vertically */
     @media (max-width: 768px) {
-      .athlete-strip-tagline { bottom: 24px; font-size: 20px; }
       #athlete-lifestyle { padding: 56px 0 0; }
+      .athlete-mosaic {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 3px;
+      }
+      .mosaic-main {
+        grid-row: auto;
+        min-height: 320px;
+      }
+      .mosaic-secondary { min-height: 220px; }
+      .mosaic-main-tagline { bottom: 20px; left: 20px; right: 20px; font-size: clamp(22px, 6vw, 32px); }
+    }
+
+    @media (max-width: 500px) {
+      .mosaic-main { min-height: 260px; }
+      .mosaic-secondary { min-height: 180px; }
     }
 
     /* -- WHY IPN / CAROUSEL --------------------------- */
@@ -1049,6 +1219,142 @@
     @media (max-width: 500px) {
       #iron-standard { padding: 56px 0; }
       .standard-card { padding: 24px 16px; }
+    }
+
+    /* -- FAQ ---------------------------------------- */
+    #faq {
+      background: #111111;
+      padding: 96px 0;
+      position: relative;
+    }
+
+    #faq::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--accent);
+    }
+
+    .faq-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .faq-header .heading-lg { color: #FFFFFF; }
+    .faq-header .label { color: var(--accent); }
+    .faq-header .body-lg { color: rgba(255,255,255,0.5); margin-top: 12px; }
+
+    .faq-list {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .faq-item {
+      background: #161616;
+    }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px 28px;
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      min-height: 64px;
+      transition: background 200ms ease;
+    }
+
+    .faq-question:hover { background: rgba(255,255,255,0.04); }
+
+    .faq-question-text {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 1.4;
+    }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      position: relative;
+    }
+
+    .faq-icon::before,
+    .faq-icon::after {
+      content: '';
+      position: absolute;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: transform 280ms ease, opacity 280ms ease;
+    }
+
+    .faq-icon::before {
+      width: 14px; height: 2px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .faq-icon::after {
+      width: 2px; height: 14px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .faq-item.open .faq-icon::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+      opacity: 0;
+    }
+
+    .faq-answer-wrap {
+      overflow: hidden;
+      height: 0;
+    }
+
+    .faq-answer {
+      padding: 0 28px 24px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .faq-answer a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .faq-cta-row {
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    .faq-cta-row p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 768px) {
+      #faq { padding: 64px 0; }
+      .faq-question { padding: 20px 20px; }
+      .faq-answer { padding: 0 20px 20px; }
+      .faq-question-text { font-size: 14px; }
+    }
+
+    @media (max-width: 500px) {
+      #faq { padding: 56px 0; }
+      .faq-header { margin-bottom: 40px; }
     }
 
     /* -- FOOTER ------------------------------------- */
@@ -1353,6 +1659,100 @@
       .footer-dist-sep { display: none; }
     }
 
+    /* -- MOBILE BOTTOM BUY BAR ---------------------- */
+    .mobile-buy-bar {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-buy-bar {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0; right: 0;
+        z-index: 200;
+        background: #111111;
+        border-top: 1px solid rgba(184,162,122,0.25);
+        padding: 10px 16px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        transform: translateY(110%);
+        transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
+      }
+
+      .mobile-buy-bar.visible {
+        transform: translateY(0);
+      }
+
+      .mobile-buy-bar-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+      }
+
+      .mobile-buy-bar-name {
+        font-family: var(--font-display);
+        font-size: 16px;
+        color: #FFFFFF;
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .mobile-buy-bar-price {
+        font-family: var(--font-body);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .mobile-buy-bar-off {
+        font-size: 9px;
+        font-weight: 700;
+        background: var(--accent);
+        color: #111111;
+        padding: 2px 5px;
+        letter-spacing: 0.06em;
+      }
+
+      .mobile-buy-bar-btn {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #25D366;
+        color: #FFFFFF;
+        font-family: var(--font-body);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 12px 18px;
+        border-radius: var(--radius);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .mobile-buy-bar-btn svg {
+        width: 16px;
+        height: 16px;
+        fill: #FFFFFF;
+        flex-shrink: 0;
+      }
+
+      /* Push page content up so bottom bar doesn't overlap */
+      body.mobile-bar-visible {
+        padding-bottom: 76px;
+      }
+    }
+
     /* -- FLOATING WHATSAPP BUTTON ------------------- */
     .whatsapp-float {
       position: fixed;
@@ -1379,8 +1779,7 @@
     .whatsapp-float svg { width: 30px; height: 30px; fill: #FFFFFF; }
 
     @media (max-width: 768px) {
-      .whatsapp-float { bottom: 20px; right: 16px; width: 52px; height: 52px; }
-      .whatsapp-float svg { width: 26px; height: 26px; }
+      .whatsapp-float { display: none; }
     }
 
     @media (max-width: 768px) {
@@ -1399,6 +1798,24 @@
   </style>
 </head>
 <body>
+
+  <div id="offer-banner" role="banner" aria-label="Promotional offer">
+    <span class="offer-banner-text">⚡ LIMITED TIME — 50% OFF on Pre-Workout &nbsp;|&nbsp; <a href="https://wa.me/918317564213?text=Hi%21%20I%20want%20to%20order%20Iron%20Hellfire%20Pre-Workout%20at%2050%25%20off." target="_blank" rel="noopener noreferrer">Order on WhatsApp →</a></span>
+    <button class="offer-banner-close" id="offer-banner-close" aria-label="Dismiss offer">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <div id="mobile-buy-bar" class="mobile-buy-bar" aria-hidden="true">
+    <div class="mobile-buy-bar-info">
+      <span class="mobile-buy-bar-name">Iron Hellfire</span>
+      <span class="mobile-buy-bar-price">&#x20B9;2,499 <span class="mobile-buy-bar-off">50% OFF</span></span>
+    </div>
+    <a href="https://wa.me/918317564213?text=Hi%20Iron%20Pump%20Nutrition!%20I%20want%20to%20order%20Iron%20Hellfire%20Pre-Workout.%20Please%20share%20details." class="mobile-buy-bar-btn" target="_blank" rel="noopener noreferrer" aria-label="Order on WhatsApp">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Order Now
+    </a>
+  </div>
 
   <div id="sticky-bar" class="sticky-bar" aria-hidden="true">
     <div class="sticky-bar-inner">
@@ -1503,6 +1920,31 @@
     </div>
   </section>
 
+  <section id="cert-strip" aria-label="Certifications and quality standards">
+    <div class="cert-strip-inner">
+      <div class="cert-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        FSSAI Certified
+      </div>
+      <div class="cert-badge">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12l2 2 4-4"/></svg>
+        GMP Compliant
+      </div>
+      <div class="cert-badge">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+        ISO 9001:2015
+      </div>
+      <div class="cert-badge">
+        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 21H5a2 2 0 0 1-2-2v-4m6 6h10a2 2 0 0 0 2-2v-4"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
+        3rd Party Lab Tested
+      </div>
+      <div class="cert-badge">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Made in India
+      </div>
+    </div>
+  </section>
+
   <section id="manifesto">
     <div class="container">
       <div class="manifesto-inner">
@@ -1578,36 +2020,54 @@
     </div>
   </section>
 
-  <section id="athlete-lifestyle">
-    <div class="container">
-      <div class="why-header">
-        <span class="label">The IPN Athlete</span>
-        <h2 class="heading-lg">Train without compromise.</h2>
-      </div>
-      <div class=”athlete-strip”>
-        <img src=”assets/images/athletes-banner.png” alt=”IPN Athletes — Train Without Compromise” />
-        <div class=”athlete-strip-overlay”></div>
-        <div class=”athlete-strip-tagline”>Fueled by <span>IPN</span> — Built to Dominate</div>
+  <section id=”athlete-lifestyle”>
+    <div class=”container”>
+      <div class=”why-header”>
+        <span class=”label”>The IPN Athlete</span>
+        <h2 class=”heading-lg”>Train without compromise.</h2>
       </div>
     </div>
-    <div class="athlete-marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span class="marquee-item">Strength<span class="marquee-sep"></span></span>
-        <span class="marquee-item">Power<span class="marquee-sep"></span></span>
-        <span class="marquee-item">Endurance<span class="marquee-sep"></span></span>
-        <span class="marquee-item">Discipline<span class="marquee-sep"></span></span>
-        <span class="marquee-item">Results<span class="marquee-sep"></span></span>
-        <span class="marquee-item">No Excuses<span class="marquee-sep"></span></span>
-        <span class="marquee-item">Zero Fillers<span class="marquee-sep"></span></span>
-        <span class="marquee-item">Made in India<span class="marquee-sep"></span></span>
-        <span class="marquee-item">Strength<span class="marquee-sep"></span></span>
-        <span class="marquee-item">Power<span class="marquee-sep"></span></span>
-        <span class="marquee-item">Endurance<span class="marquee-sep"></span></span>
-        <span class="marquee-item">Discipline<span class="marquee-sep"></span></span>
-        <span class="marquee-item">Results<span class="marquee-sep"></span></span>
-        <span class="marquee-item">No Excuses<span class="marquee-sep"></span></span>
-        <span class="marquee-item">Zero Fillers<span class="marquee-sep"></span></span>
-        <span class="marquee-item">Made in India<span class="marquee-sep"></span></span>
+
+    <div class=”athlete-mosaic”>
+      <!-- Main large tile -->
+      <div class=”mosaic-main”>
+        <img src=”assets/images/male-model.png” alt=”IPN Athlete — Train Without Compromise” loading=”lazy” />
+        <div class=”mosaic-main-overlay”></div>
+        <div class=”mosaic-main-tagline”>Fueled by <span>IPN</span><br />Built to Dominate</div>
+        <span class=”mosaic-badge”>The IPN Athlete</span>
+      </div>
+
+      <!-- Top right tile -->
+      <div class=”mosaic-secondary”>
+        <img src=”assets/images/athletes-banner.png” alt=”IPN Athletes training” loading=”lazy” />
+        <span class=”mosaic-badge”>Real Results</span>
+      </div>
+
+      <!-- Bottom right tile -->
+      <div class=”mosaic-secondary”>
+        <img src=”assets/images/brand-ultra-stim.jpg” alt=”Iron Pump Nutrition — Ultra Stim” loading=”lazy” />
+        <span class=”mosaic-badge”>No Shortcuts</span>
+      </div>
+    </div>
+
+    <div class=”athlete-marquee” aria-hidden=”true”>
+      <div class=”marquee-track”>
+        <span class=”marquee-item”>Strength<span class=”marquee-sep”></span></span>
+        <span class=”marquee-item”>Power<span class=”marquee-sep”></span></span>
+        <span class=”marquee-item”>Endurance<span class=”marquee-sep”></span></span>
+        <span class=”marquee-item”>Discipline<span class=”marquee-sep”></span></span>
+        <span class=”marquee-item”>Results<span class=”marquee-sep”></span></span>
+        <span class=”marquee-item”>No Excuses<span class=”marquee-sep”></span></span>
+        <span class=”marquee-item”>Zero Fillers<span class=”marquee-sep”></span></span>
+        <span class=”marquee-item”>Made in India<span class=”marquee-sep”></span></span>
+        <span class=”marquee-item”>Strength<span class=”marquee-sep”></span></span>
+        <span class=”marquee-item”>Power<span class=”marquee-sep”></span></span>
+        <span class=”marquee-item”>Endurance<span class=”marquee-sep”></span></span>
+        <span class=”marquee-item”>Discipline<span class=”marquee-sep”></span></span>
+        <span class=”marquee-item”>Results<span class=”marquee-sep”></span></span>
+        <span class=”marquee-item”>No Excuses<span class=”marquee-sep”></span></span>
+        <span class=”marquee-item”>Zero Fillers<span class=”marquee-sep”></span></span>
+        <span class=”marquee-item”>Made in India<span class=”marquee-sep”></span></span>
       </div>
     </div>
   </section>
@@ -1673,6 +2133,83 @@
           <h3>Clean Ingredients</h3>
           <p>No artificial dyes, no unnecessary fillers, no hydrogenated oils. Just what works.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="container">
+      <div class="faq-header">
+        <span class="label">Got Questions?</span>
+        <h2 class="heading-lg">We've got answers.</h2>
+        <p class="body-lg">Everything you need to know before you order.</p>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">How do I place an order?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer-wrap">
+            <div class="faq-answer">Just tap the "Order on WhatsApp" button on any product and send us a message. Our team responds within minutes and confirms your order. No account needed — order in under 60 seconds.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">Do you deliver all over India?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer-wrap">
+            <div class="faq-answer">Yes — we deliver pan-India including metros, tier-2, and tier-3 cities. Standard delivery is 5–7 business days. WhatsApp us at <a href="https://wa.me/918317564213">+91 83175 64213</a> to confirm availability in your area.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">When should I take the pre-workout?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer-wrap">
+            <div class="faq-answer">Take 1 scoop mixed in 300ml cold water, 20–30 minutes before your training session. Start with half a scoop to assess your tolerance if you're new to pre-workouts. Do not take within 6 hours of bedtime.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">Is Iron Pump Nutrition FSSAI certified?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer-wrap">
+            <div class="faq-answer">Yes. Every Iron Pump Nutrition product is FSSAI-certified and manufactured in a GMP-compliant facility. Each production batch is independently tested at a third-party lab. Test certificates are available on request — WhatsApp us.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">What is your return policy?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer-wrap">
+            <div class="faq-answer">We accept returns on unopened, sealed products within 7 days of delivery. If you received a damaged or incorrect product, we'll replace it immediately at no charge. Initiate returns by messaging us on <a href="https://wa.me/918317564213">WhatsApp</a>.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">Can I stack pre-workout with whey protein?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer-wrap">
+            <div class="faq-answer">Absolutely — Iron Hellfire Pre-Workout + IPN Premium Whey is our most popular combo ("The Beast Stack"). Pre-workout before training for energy and pumps, whey within 30 minutes after training for recovery. <a href="https://wa.me/918317564213?text=Hi!%20I%20want%20to%20order%20the%20Beast%20Stack%20combo.%20What%27s%20the%20best%20deal%3F">Message us on WhatsApp</a> for a bundle discount.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-cta-row">
+        <p>Still have questions? We reply fast.</p>
+        <a href="https://wa.me/918317564213?text=Hi%20Iron%20Pump%20Nutrition!%20I%20have%20a%20question." class="btn btn-outline" target="_blank" rel="noopener noreferrer" style="color:#B8A27A;border-color:#B8A27A;">Ask on WhatsApp</a>
       </div>
     </div>
   </section>
@@ -1837,9 +2374,13 @@
       scrollTrigger: { trigger: '#manifesto', start: 'top 95%', once: true }
     });
 
-    gsap.from('.athlete-strip', {
-      opacity: 0, y: 30, duration: 0.8, ease: 'power3.out',
-      scrollTrigger: { trigger: '#athlete-lifestyle', start: 'top 95%', once: true }
+    gsap.from('.mosaic-main', {
+      opacity: 0, x: -30, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: '#athlete-lifestyle', start: 'top 90%', once: true }
+    });
+    gsap.from('.mosaic-secondary', {
+      opacity: 0, x: 30, duration: 0.7, ease: 'power3.out', stagger: 0.12,
+      scrollTrigger: { trigger: '#athlete-lifestyle', start: 'top 90%', once: true }
     });
 
     // -- FEATURE CAROUSEL -----------------------------
@@ -1959,6 +2500,7 @@
 
     var navbar = document.getElementById('navbar');
     var stickyBar = document.getElementById('sticky-bar');
+    var mobileBuyBar = document.getElementById('mobile-buy-bar');
     var heroEl = document.getElementById('hero');
 
     window.addEventListener('scroll', function() {
@@ -1970,12 +2512,65 @@
         stickyBar.classList.toggle('visible', stickyVisible);
         stickyBar.setAttribute('aria-hidden', stickyVisible ? 'false' : 'true');
       }
+      if (mobileBuyBar) {
+        mobileBuyBar.classList.toggle('visible', stickyVisible);
+        mobileBuyBar.setAttribute('aria-hidden', stickyVisible ? 'false' : 'true');
+        document.body.classList.toggle('mobile-bar-visible', stickyVisible);
+      }
     }, { passive: true });
 
     gsap.from('.ingr-card', {
       opacity: 0, y: 24, duration: 0.5, ease: 'power3.out', stagger: 0.08,
       scrollTrigger: { trigger: '#ingredients', start: 'top 90%', once: true }
     });
+
+    // -- FAQ ACCORDION --------------------------------
+    document.querySelectorAll('.faq-item').forEach(function(item) {
+      var btn = item.querySelector('.faq-question');
+      var wrap = item.querySelector('.faq-answer-wrap');
+      var answer = item.querySelector('.faq-answer');
+
+      btn.addEventListener('click', function() {
+        var isOpen = item.classList.contains('open');
+
+        // Close all others
+        document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
+          if (openItem !== item) {
+            openItem.classList.remove('open');
+            openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+            gsap.to(openItem.querySelector('.faq-answer-wrap'), { height: 0, duration: 0.3, ease: 'power2.inOut' });
+          }
+        });
+
+        if (isOpen) {
+          item.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+          gsap.to(wrap, { height: 0, duration: 0.3, ease: 'power2.inOut' });
+        } else {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          gsap.set(wrap, { height: 'auto' });
+          var fullH = wrap.offsetHeight;
+          gsap.fromTo(wrap, { height: 0 }, { height: fullH, duration: 0.35, ease: 'power2.out' });
+        }
+      });
+    });
+
+    gsap.from('.faq-item', {
+      opacity: 0, y: 20, duration: 0.5, ease: 'power3.out', stagger: 0.07,
+      scrollTrigger: { trigger: '#faq', start: 'top 90%', once: true }
+    });
+
+    // -- OFFER BANNER DISMISS -------------------------
+    var offerBannerClose = document.getElementById('offer-banner-close');
+    if (offerBannerClose) {
+      offerBannerClose.addEventListener('click', function() {
+        var banner = document.getElementById('offer-banner');
+        gsap.to(banner, { height: 0, opacity: 0, duration: 0.25, ease: 'power2.in', onComplete: function() {
+          banner.classList.add('hidden');
+        }});
+      });
+    }
   </script>
 
   <a href="https://wa.me/918317564213?text=Hi%20Iron%20Pump%20Nutrition!%20I%27d%20like%20to%20place%20an%20order." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Order on WhatsApp">
