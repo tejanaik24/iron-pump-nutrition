@@ -740,15 +740,13 @@
       width: 100%;
       overflow: hidden;
       margin-top: 48px;
-      min-height: 200px;
-      background: #111111;
+      background: #111111 center center / cover no-repeat;
+      aspect-ratio: 1797 / 875;
+      min-height: 280px;
     }
 
-    .athlete-strip img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
+    @media (max-width: 768px) {
+      .athlete-strip { aspect-ratio: auto; min-height: 220px; }
     }
 
     .athlete-strip-overlay {
@@ -1162,9 +1160,9 @@
     /* -- STICKY BUY BAR ----------------------------- */
     .sticky-bar {
       position: fixed;
-      top: var(--nav-h);
+      top: 0;
       left: 0; right: 0;
-      z-index: 90;
+      z-index: 101;
       background: #111111;
       border-bottom: 1px solid rgba(184,162,122,0.3);
       transform: translateY(-110%);
@@ -1587,8 +1585,7 @@
         <span class="label">The IPN Athlete</span>
         <h2 class="heading-lg">Train without compromise.</h2>
       </div>
-      <div class="athlete-strip">
-        <img src=”assets/images/athletes-banner.png” alt=”IPN Athletes — Train Without Compromise” loading=”eager” />
+      <div class=”athlete-strip” style=”background-image:url('assets/images/athletes-banner.png')” role=”img” aria-label=”IPN Athletes — Train Without Compromise”>
         <div class=”athlete-strip-overlay”></div>
         <div class=”athlete-strip-tagline”>Fueled by <span>IPN</span> — Built to Dominate</div>
       </div>
