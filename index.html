@@ -33,6 +33,7 @@
 
   <style>
     :root {
+      --banner-h: 40px;
       --bg: #F4F1EA;
       --surface: #FFFFFF;
       --text-primary: #111111;
@@ -55,7 +56,7 @@
     img { max-width: 100%; height: auto; display: block; }
 
     @media (max-width: 768px) {
-      :root { --nav-h: 56px; }
+      :root { --nav-h: 56px; --banner-h: 64px; }
       .section { padding: 48px 0; }
       .section-sm { padding: 32px 0; }
       #hero { min-height: 85vh; min-height: 85dvh; align-items: flex-end; }
@@ -168,7 +169,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
+      position: fixed;
+      top: 0;
+      left: 0; right: 0;
+      z-index: 201;
       gap: 16px;
       flex-wrap: wrap;
     }
@@ -218,11 +222,11 @@
     /* -- NAV ---------------------------------------- */
     #navbar {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: var(--banner-h, 40px); left: 0; right: 0;
       height: var(--nav-h);
       z-index: 100;
       background: transparent;
-      transition: background 300ms ease, border-color 300ms ease;
+      transition: background 300ms ease, border-color 300ms ease, top 250ms ease;
     }
 
     #navbar.scrolled {
@@ -312,7 +316,7 @@
     .mobile-menu {
       display: none;
       position: fixed;
-      top: var(--nav-h);
+      top: calc(var(--banner-h, 40px) + var(--nav-h));
       left: 0; right: 0;
       background: var(--bg);
       padding: 16px 24px 24px;
@@ -849,26 +853,28 @@
       margin-top: 48px;
       display: grid;
       grid-template-columns: 1.6fr 1fr;
-      grid-template-rows: auto auto;
+      grid-template-rows: 295px 295px;
       gap: 3px;
-      overflow: hidden;
     }
 
     .mosaic-main {
       grid-row: 1 / 3;
       position: relative;
       overflow: hidden;
-      min-height: 560px;
+      background: #1a1a1a;
     }
 
     .mosaic-secondary {
       position: relative;
       overflow: hidden;
-      min-height: 276px;
+      background: #1a1a1a;
     }
 
+    /* Images fill the tile using absolute positioning — same pattern as hero video */
     .mosaic-main img,
     .mosaic-secondary img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -882,12 +888,12 @@
       transform: scale(1.04);
     }
 
-    /* overlay on main tile */
     .mosaic-main-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 55%);
       pointer-events: none;
+      z-index: 1;
     }
 
     .mosaic-main-tagline {
@@ -901,11 +907,11 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       line-height: 1.05;
+      z-index: 2;
     }
 
     .mosaic-main-tagline span { color: var(--accent); }
 
-    /* badge on each tile */
     .mosaic-badge {
       position: absolute;
       top: 16px;
@@ -918,6 +924,7 @@
       color: #111111;
       background: var(--accent);
       padding: 4px 10px;
+      z-index: 2;
     }
 
     .athlete-marquee {
@@ -932,25 +939,19 @@
     .athlete-marquee .marquee-item { color: rgba(255,255,255,0.5); }
     .athlete-marquee .marquee-sep { background: var(--accent); }
 
-    /* Mobile: stack vertically */
     @media (max-width: 768px) {
       #athlete-lifestyle { padding: 56px 0 0; }
       .athlete-mosaic {
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
+        grid-template-rows: 300px 220px 220px;
         gap: 3px;
       }
-      .mosaic-main {
-        grid-row: auto;
-        min-height: 320px;
-      }
-      .mosaic-secondary { min-height: 220px; }
-      .mosaic-main-tagline { bottom: 20px; left: 20px; right: 20px; font-size: clamp(22px, 6vw, 32px); }
+      .mosaic-main { grid-row: auto; }
+      .mosaic-main-tagline { bottom: 20px; left: 20px; right: 20px; font-size: clamp(20px, 6vw, 30px); }
     }
 
     @media (max-width: 500px) {
-      .mosaic-main { min-height: 260px; }
-      .mosaic-secondary { min-height: 180px; }
+      .athlete-mosaic { grid-template-rows: 240px 180px 180px; }
     }
 
     /* -- WHY IPN / CAROUSEL --------------------------- */
@@ -2566,9 +2567,17 @@
     if (offerBannerClose) {
       offerBannerClose.addEventListener('click', function() {
         var banner = document.getElementById('offer-banner');
-        gsap.to(banner, { height: 0, opacity: 0, duration: 0.25, ease: 'power2.in', onComplete: function() {
-          banner.classList.add('hidden');
-        }});
+        var nav = document.getElementById('navbar');
+        var mobileMenu = document.getElementById('mobile-menu');
+        gsap.to(banner, {
+          height: 0, opacity: 0, duration: 0.25, ease: 'power2.in',
+          onComplete: function() {
+            banner.classList.add('hidden');
+            document.documentElement.style.setProperty('--banner-h', '0px');
+            if (nav) nav.style.top = '0px';
+            if (mobileMenu) mobileMenu.style.top = 'var(--nav-h)';
+          }
+        });
       });
     }
   </script>
