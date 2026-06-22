@@ -878,16 +878,19 @@
     .athlete-mosaic {
       margin-top: 48px;
       display: grid;
-      grid-template-columns: 1.6fr 1fr;
-      grid-template-rows: 295px 295px;
-      gap: 3px;
+      grid-template-columns: 1fr;
+      grid-template-rows: 590px;
+      gap: 0;
     }
 
     .mosaic-main {
-      grid-row: 1 / 3;
       position: relative;
       overflow: hidden;
       background: #1a1a1a;
+    }
+
+    .mosaic-full {
+      grid-column: 1 / -1;
     }
 
     .mosaic-secondary {
@@ -979,8 +982,8 @@
       #athlete-lifestyle { padding: 56px 0 0; }
       .athlete-mosaic {
         grid-template-columns: 1fr;
-        grid-template-rows: 300px 220px 220px;
-        gap: 3px;
+        grid-template-rows: 360px;
+        gap: 0;
       }
       .mosaic-main { grid-row: auto; }
       .mosaic-main-tagline { bottom: 20px; left: 20px; right: 20px; font-size: clamp(20px, 6vw, 30px); }
@@ -2178,24 +2181,12 @@
     </div>
 
     <div class="athlete-mosaic">
-      <!-- Main large tile -->
-      <div class="mosaic-main">
+      <!-- Single full-width athlete tile -->
+      <div class="mosaic-main mosaic-full">
         <img src="assets/images/male-model.png" alt="IPN Athlete — Train Without Compromise" loading="eager" />
         <div class="mosaic-main-overlay"></div>
         <div class="mosaic-main-tagline">Fueled by <span>IPN</span><br />Built to Dominate</div>
         <span class="mosaic-badge">The IPN Athlete</span>
-      </div>
-
-      <!-- Top right tile -->
-      <div class="mosaic-secondary">
-        <img src="assets/images/athletes-banner.png" alt="IPN Athletes training" loading="eager" />
-        <span class="mosaic-badge">Real Results</span>
-      </div>
-
-      <!-- Bottom right tile -->
-      <div class="mosaic-secondary">
-        <img src="assets/images/brand-ultra-stim.jpg" alt="Iron Pump Nutrition — Ultra Stim" loading="eager" />
-        <span class="mosaic-badge">No Shortcuts</span>
       </div>
     </div>
 
