@@ -1142,8 +1142,8 @@
         will-change: transform;
         /* No box-shadow — Nike flat elevation */
         transition: background 250ms ease;
-        opacity: 0;
-        transform: translateY(32px);
+        opacity: 1;
+        transform: translateY(0);
       }
 
       /* No ::after gold bar — removed per design rules */
@@ -1161,6 +1161,7 @@
         justify-content: center;
         margin-bottom: 20px;
         overflow: hidden;
+        position: relative;
       }
 
       .card-img img {
@@ -1290,6 +1291,687 @@
         border-color: #ffc933;
         color: #111111;
         transform: translateY(-1px);
+      }
+
+      /* ── PRODUCT CARD GALLERY & BADGE ─────────────── */
+      .card-img-badge {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: rgba(17, 17, 17, 0.88);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        color: #ffb800;
+        font-family: "Helvetica Now", Helvetica, Arial, sans-serif;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 4px 8px;
+        border-radius: 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        opacity: 0;
+        transform: translateY(-4px);
+        transition:
+          opacity 200ms ease,
+          transform 200ms ease;
+        pointer-events: none;
+        z-index: 6;
+        border: 1px solid rgba(255, 184, 0, 0.25);
+      }
+
+      .product-card:hover .card-img-badge {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (hover: none) {
+        .card-img-badge {
+          opacity: 0.95;
+          transform: translateY(0);
+        }
+      }
+
+      .gallery-dots {
+        position: absolute;
+        bottom: 8px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        z-index: 6;
+        padding: 4px 0;
+      }
+
+      .gallery-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #d4d4d6;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        transition: all 200ms ease;
+      }
+
+      .gallery-dot:hover {
+        background: #ffb800;
+        transform: scale(1.25);
+      }
+
+      .gallery-dot.active {
+        width: 22px;
+        border-radius: 10px;
+        background: #111111;
+      }
+
+      /* ── PRODUCT LIGHTBOX MODAL ────────────────────── */
+      #product-modal {
+        position: fixed;
+        inset: 64px 0 0 0;
+        z-index: 99;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition:
+          opacity 240ms ease,
+          visibility 240ms ease;
+      }
+
+      #product-modal.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .modal-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .modal-dialog {
+        position: relative;
+        z-index: 2;
+        background: #141414;
+        border: 1px solid rgba(255, 184, 0, 0.25);
+        border-radius: 0;
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow:
+          0 30px 80px rgba(0, 0, 0, 0.95),
+          0 0 50px rgba(255, 184, 0, 0.08);
+        transform: scale(0.96) translateY(12px);
+        transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      #product-modal.active .modal-dialog {
+        transform: scale(1) translateY(0);
+      }
+
+      .modal-brand-logo {
+        height: 22px;
+        width: auto;
+        flex-shrink: 0;
+      }
+
+      .modal-product-type {
+        font-family: "Helvetica Now", Helvetica, Arial, sans-serif;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: #ffb800;
+      }
+
+      .modal-product-name {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 26px;
+        letter-spacing: 0.05em;
+        color: #ffffff;
+        margin: 0;
+        line-height: 1.1;
+      }
+
+      .modal-product-flavor {
+        font-family: "Helvetica Now", Helvetica, Arial, sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        color: #9e9ea0;
+        text-transform: uppercase;
+      }
+
+      .modal-price-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 2px;
+      }
+
+      .modal-price {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 22px;
+        color: #ffb800;
+        letter-spacing: 0.04em;
+        line-height: 1;
+      }
+
+      .modal-original {
+        font-family: "Helvetica Now", Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        color: #666666;
+        text-decoration: line-through;
+      }
+
+      .modal-discount {
+        font-family: "Helvetica Now", Helvetica, Arial, sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: #111111;
+        background: #25d366;
+        padding: 2px 7px;
+        border-radius: 4px;
+        text-transform: uppercase;
+      }
+
+      .modal-close-btn {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        z-index: 10;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 200ms ease;
+        flex-shrink: 0;
+      }
+
+      .modal-close-btn:hover {
+        background: #ffb800;
+        color: #111111;
+        border-color: #ffb800;
+      }
+
+      .modal-body {
+        position: relative;
+        flex: 1;
+        min-height: 320px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 48px;
+        background: #0a0a0a;
+        overflow-y: auto;
+        padding: 56px 48px 40px;
+      }
+
+      .modal-media-col {
+        width: 460px;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .modal-media-row {
+        display: flex;
+        gap: 16px;
+      }
+
+      .modal-img-wrap {
+        flex: 1 1 auto;
+      }
+
+      .modal-benefits-box {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 18px 20px;
+      }
+
+      .modal-benefits-label {
+        font-family: "Helvetica Now", Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #ffb800;
+        margin-bottom: 14px;
+      }
+
+      .modal-info-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .modal-info-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        font-family: "Helvetica Now", Helvetica, Arial, sans-serif;
+      }
+
+      .modal-info-row:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .modal-info-label {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.55);
+      }
+
+      .modal-info-value {
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #ffffff;
+        text-align: right;
+      }
+
+      .modal-info-col {
+        width: 340px;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .modal-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .modal-details-title {
+        font-family: "Helvetica Now", Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #ffb800;
+      }
+
+      .modal-ingredients {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .modal-ingredient-row {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-family: "Helvetica Now", Helvetica, Arial, sans-serif;
+      }
+
+      .modal-ingredient-dose {
+        font-size: 20px;
+        font-weight: 700;
+        color: #ffffff;
+        white-space: nowrap;
+      }
+
+      .modal-ingredient-name {
+        font-size: 10.5px;
+        color: rgba(255, 255, 255, 0.55);
+        line-height: 1.3;
+      }
+
+      .modal-details-tagline {
+        font-family: "Helvetica Now", Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: rgba(255, 184, 0, 0.9);
+        margin-top: -4px;
+      }
+
+      .modal-details-certs {
+        font-family: "Helvetica Now", Helvetica, Arial, sans-serif;
+        font-size: 10.5px;
+        letter-spacing: 0.04em;
+        color: rgba(255, 255, 255, 0.45);
+        margin-top: 8px;
+      }
+
+      .modal-cta-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 6px;
+      }
+
+      .modal-img-wrap {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .modal-main-img {
+        max-height: 74vh;
+        max-width: 100%;
+        width: auto;
+        object-fit: contain;
+        border-radius: 6px;
+        transition:
+          opacity 180ms ease,
+          transform 180ms ease;
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+
+      .modal-img-caption {
+        margin-top: 12px;
+        font-family: "Helvetica Now", Helvetica, Arial, sans-serif;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #ffb800;
+        font-weight: 600;
+      }
+
+      .modal-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(20, 20, 20, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        color: #ffffff;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 200ms ease;
+        z-index: 5;
+      }
+
+      .modal-nav-btn:hover {
+        background: #ffb800;
+        color: #111111;
+        border-color: #ffb800;
+      }
+
+      .modal-prev-btn {
+        left: 14px;
+      }
+
+      .modal-next-btn {
+        right: 14px;
+      }
+
+      .modal-thumbs {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 64px;
+        flex-shrink: 0;
+      }
+
+      .modal-thumb {
+        width: 64px;
+        height: 64px;
+        background: #ffffff;
+        border: 1.5px solid rgba(255, 255, 255, 0.14);
+        border-radius: 8px;
+        cursor: pointer;
+        overflow: hidden;
+        padding: 0;
+        transition: all 200ms ease;
+      }
+
+      .modal-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .modal-thumb:hover {
+        border-color: rgba(255, 184, 0, 0.5);
+      }
+
+      .modal-thumb.active {
+        border-color: #ffb800;
+      }
+
+      .modal-badge-stamp {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 62px;
+        height: 62px;
+        border-radius: 50%;
+        border: 1.5px dashed rgba(255, 184, 0, 0.7);
+        background: rgba(17, 17, 17, 0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-family: "Helvetica Now", Helvetica, Arial, sans-serif;
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #ffb800;
+        line-height: 1.3;
+        transform: rotate(-8deg);
+        z-index: 3;
+        pointer-events: none;
+      }
+
+      .modal-zoom-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 255, 255, 0.95);
+        color: #111111;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: zoom-in;
+        transition:
+          transform 150ms ease,
+          background 150ms ease;
+        z-index: 3;
+      }
+
+      .modal-zoom-btn:hover {
+        background: #ffffff;
+        transform: scale(1.08);
+      }
+
+      .modal-img-wrap.zoomed .modal-main-img {
+        transform: scale(1.8);
+        cursor: zoom-in;
+      }
+
+      .modal-order-btn {
+        flex: 1;
+        font-family: "Helvetica Now", Helvetica, Arial, sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #111111 !important;
+        background: #ffb800;
+        padding: 12px 16px;
+        border-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-decoration: none;
+        transition:
+          background 200ms ease,
+          transform 150ms ease;
+      }
+
+      .modal-order-btn:hover {
+        background: #ffc933;
+        transform: translateY(-1px);
+      }
+
+      .modal-call-btn {
+        flex: 1;
+        font-family: "Helvetica Now", Helvetica, Arial, sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #ffffff;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 12px 16px;
+        border-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-decoration: none;
+        transition:
+          border-color 200ms ease,
+          color 200ms ease;
+      }
+
+      .modal-call-btn:hover {
+        border-color: #ffb800;
+        color: #ffb800;
+      }
+
+      .modal-flavor-block {
+        margin-bottom: 4px;
+      }
+
+      .modal-flavor-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .modal-flavor-pill {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-family: "Helvetica Now", Helvetica, Arial, sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.7);
+        transition: all 200ms ease;
+      }
+
+      .modal-flavor-pill:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+      }
+
+      .modal-flavor-pill.active {
+        background: rgba(255, 184, 0, 0.14);
+        border-color: #ffb800;
+        color: #ffb800;
+        font-weight: 700;
+      }
+
+      @media (max-width: 900px) {
+        .modal-body {
+          flex-direction: column;
+          align-items: center;
+          padding: 48px 16px 24px;
+        }
+        .modal-media-col,
+        .modal-info-col {
+          width: 100%;
+          max-width: 440px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .modal-body {
+          justify-content: flex-start;
+          padding: 48px 10px 20px;
+          min-height: 240px;
+          overflow-y: auto;
+        }
+        .modal-main-img {
+          max-height: 46vh;
+        }
+        .modal-nav-btn {
+          width: 36px;
+          height: 36px;
+        }
+        .modal-prev-btn {
+          left: 6px;
+        }
+        .modal-next-btn {
+          right: 6px;
+        }
+        .modal-thumbs {
+          flex-direction: row;
+          width: auto;
+          order: 2;
+          flex-wrap: wrap;
+        }
+        .modal-media-row {
+          flex-direction: column-reverse;
+        }
+        .modal-thumb {
+          width: 44px;
+          height: 44px;
+        }
+        .modal-img-wrap {
+          order: 1;
+          width: 100%;
+          height: auto;
+          flex: none;
+        }
+        .modal-badge-stamp {
+          width: 50px;
+          height: 50px;
+          font-size: 7px;
+        }
+        .modal-ingredients {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
 
       /* ── FLOATING WHATSAPP BUTTON ─────────────────── */
@@ -2532,12 +3214,58 @@
         class="products-grid tab-panel tab-panel-active"
         id="preworkout-grid"
       >
-        <div class="product-card">
-          <div class="card-img">
+        <div
+          class="product-card"
+          data-product-id="hellfire-punch"
+          data-upc="8937500341314"
+        >
+          <div
+            class="card-img"
+            data-gallery='[{"src":"assets/images/hellfire-punch-1.jpeg?v=3","title":"Front Bottle","label":"Bottle"},{"src":"assets/images/hellfire-punch-2.jpeg","title":"Directions & Benefits","label":"Directions"},{"src":"assets/images/hellfire-punch-3.jpeg","title":"Supplement Facts & Ingredients","label":"Nutrition"}]'
+          >
             <img
-              src="assets/images/product1.png"
+              src="assets/images/hellfire-punch-1.jpeg?v=3"
               alt="Iron Hellfire Hellfire Punch"
+              class="gallery-main-img"
             />
+            <div class="card-img-badge">
+              <svg
+                viewBox="0 0 24 24"
+                width="11"
+                height="11"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span>View Label</span>
+            </div>
+            <div class="gallery-dots" role="tablist" aria-label="Product views">
+              <button
+                class="gallery-dot active"
+                data-index="0"
+                title="Front Bottle"
+                aria-label="Front Bottle"
+              ></button>
+              <button
+                class="gallery-dot"
+                data-index="1"
+                title="Directions & Benefits"
+                aria-label="Directions & Benefits"
+              ></button>
+              <button
+                class="gallery-dot"
+                data-index="2"
+                title="Supplement Facts"
+                aria-label="Supplement Facts"
+              ></button>
+            </div>
           </div>
           <div class="card-type">Pre-Workout</div>
           <div class="card-name">Iron Hellfire</div>
@@ -2563,12 +3291,58 @@
             </a>
           </div>
         </div>
-        <div class="product-card">
-          <div class="card-img">
+        <div
+          class="product-card"
+          data-product-id="blue-rage"
+          data-upc="8937506464024"
+        >
+          <div
+            class="card-img"
+            data-gallery='[{"src":"assets/images/blue-rage-1.jpeg?v=3","title":"Front Bottle","label":"Bottle"},{"src":"assets/images/blue-rage-2.jpeg","title":"Directions & Benefits","label":"Directions"},{"src":"assets/images/blue-rage-3.jpeg","title":"Supplement Facts & Ingredients","label":"Nutrition"}]'
+          >
             <img
-              src="assets/images/product2.png"
+              src="assets/images/blue-rage-1.jpeg?v=3"
               alt="Iron Hellfire Blue Rage"
+              class="gallery-main-img"
             />
+            <div class="card-img-badge">
+              <svg
+                viewBox="0 0 24 24"
+                width="11"
+                height="11"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span>View Label</span>
+            </div>
+            <div class="gallery-dots" role="tablist" aria-label="Product views">
+              <button
+                class="gallery-dot active"
+                data-index="0"
+                title="Front Bottle"
+                aria-label="Front Bottle"
+              ></button>
+              <button
+                class="gallery-dot"
+                data-index="1"
+                title="Directions & Benefits"
+                aria-label="Directions & Benefits"
+              ></button>
+              <button
+                class="gallery-dot"
+                data-index="2"
+                title="Supplement Facts"
+                aria-label="Supplement Facts"
+              ></button>
+            </div>
           </div>
           <div class="card-type">Pre-Workout</div>
           <div class="card-name">Iron Hellfire</div>
@@ -2594,12 +3368,58 @@
             </a>
           </div>
         </div>
-        <div class="product-card">
-          <div class="card-img">
+        <div
+          class="product-card"
+          data-product-id="inferno-punch"
+          data-upc="8937509736036"
+        >
+          <div
+            class="card-img"
+            data-gallery='[{"src":"assets/images/inferno-punch-1.jpeg?v=3","title":"Front Bottle","label":"Bottle"},{"src":"assets/images/inferno-punch-2.jpeg","title":"Directions & Benefits","label":"Directions"},{"src":"assets/images/inferno-punch-3.jpeg","title":"Supplement Facts & Ingredients","label":"Nutrition"}]'
+          >
             <img
-              src="assets/images/product3.png"
+              src="assets/images/inferno-punch-1.jpeg?v=3"
               alt="Iron Pump Ultra Stim Inferno Punch"
+              class="gallery-main-img"
             />
+            <div class="card-img-badge">
+              <svg
+                viewBox="0 0 24 24"
+                width="11"
+                height="11"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span>View Label</span>
+            </div>
+            <div class="gallery-dots" role="tablist" aria-label="Product views">
+              <button
+                class="gallery-dot active"
+                data-index="0"
+                title="Front Bottle"
+                aria-label="Front Bottle"
+              ></button>
+              <button
+                class="gallery-dot"
+                data-index="1"
+                title="Directions & Benefits"
+                aria-label="Directions & Benefits"
+              ></button>
+              <button
+                class="gallery-dot"
+                data-index="2"
+                title="Supplement Facts"
+                aria-label="Supplement Facts"
+              ></button>
+            </div>
           </div>
           <div class="card-type">Ultra Stim Pre-Workout</div>
           <div class="card-name">Iron Pump</div>
@@ -2625,12 +3445,58 @@
             </a>
           </div>
         </div>
-        <div class="product-card">
-          <div class="card-img">
+        <div
+          class="product-card"
+          data-product-id="blue-raspberry"
+          data-upc="8937503597046"
+        >
+          <div
+            class="card-img"
+            data-gallery='[{"src":"assets/images/blue-raspberry-1.jpeg?v=3","title":"Front Bottle","label":"Bottle"},{"src":"assets/images/blue-raspberry-2.jpeg","title":"Directions & Benefits","label":"Directions"},{"src":"assets/images/blue-raspberry-3.jpeg","title":"Supplement Facts & Ingredients","label":"Nutrition"}]'
+          >
             <img
-              src="assets/images/product4.png"
+              src="assets/images/blue-raspberry-1.jpeg?v=3"
               alt="Iron Pump Ultra Stim Blue Raspberry Blast"
+              class="gallery-main-img"
             />
+            <div class="card-img-badge">
+              <svg
+                viewBox="0 0 24 24"
+                width="11"
+                height="11"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span>View Label</span>
+            </div>
+            <div class="gallery-dots" role="tablist" aria-label="Product views">
+              <button
+                class="gallery-dot active"
+                data-index="0"
+                title="Front Bottle"
+                aria-label="Front Bottle"
+              ></button>
+              <button
+                class="gallery-dot"
+                data-index="1"
+                title="Directions & Benefits"
+                aria-label="Directions & Benefits"
+              ></button>
+              <button
+                class="gallery-dot"
+                data-index="2"
+                title="Supplement Facts"
+                aria-label="Supplement Facts"
+              ></button>
+            </div>
           </div>
           <div class="card-type">Ultra Stim Pre-Workout</div>
           <div class="card-name">Iron Pump</div>
@@ -2660,12 +3526,33 @@
 
       <!-- Whey grid: 2x2 on mobile, 4-col on desktop -->
       <div class="products-grid tab-panel" id="whey-grid">
-        <div class="product-card">
-          <div class="card-img">
+        <div class="product-card" data-product-id="whey-strawberry">
+          <div
+            class="card-img"
+            data-gallery='[{"src":"assets/images/whey-strawberry.png","title":"Premium Whey Protein - Strawberry","label":"Bottle"}]'
+          >
             <img
               src="assets/images/whey-strawberry.png"
               alt="Premium Whey Strawberry"
             />
+            <div class="card-img-badge">
+              <svg
+                viewBox="0 0 24 24"
+                width="11"
+                height="11"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span>View Details</span>
+            </div>
           </div>
           <div class="card-type">Premium Whey Protein</div>
           <div class="card-name">Premium Whey</div>
@@ -2691,12 +3578,33 @@
             </a>
           </div>
         </div>
-        <div class="product-card">
-          <div class="card-img">
+        <div class="product-card" data-product-id="whey-chocolate">
+          <div
+            class="card-img"
+            data-gallery='[{"src":"assets/images/whey-chocolate.png","title":"Premium Whey Protein - Chocolate Fudge","label":"Bottle"}]'
+          >
             <img
               src="assets/images/whey-chocolate.png"
               alt="Premium Whey Chocolate Fudge"
             />
+            <div class="card-img-badge">
+              <svg
+                viewBox="0 0 24 24"
+                width="11"
+                height="11"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span>View Details</span>
+            </div>
           </div>
           <div class="card-type">Premium Whey Protein</div>
           <div class="card-name">Premium Whey</div>
@@ -2722,9 +3630,30 @@
             </a>
           </div>
         </div>
-        <div class="product-card">
-          <div class="card-img">
+        <div class="product-card" data-product-id="whey-kulfi">
+          <div
+            class="card-img"
+            data-gallery='[{"src":"assets/images/whey-kulfi.png","title":"Premium Whey Protein - Kulfi","label":"Bottle"}]'
+          >
             <img src="assets/images/whey-kulfi.png" alt="Premium Whey Kulfi" />
+            <div class="card-img-badge">
+              <svg
+                viewBox="0 0 24 24"
+                width="11"
+                height="11"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span>View Details</span>
+            </div>
           </div>
           <div class="card-type">Premium Whey Protein</div>
           <div class="card-name">Premium Whey</div>
@@ -2750,9 +3679,30 @@
             </a>
           </div>
         </div>
-        <div class="product-card">
-          <div class="card-img">
+        <div class="product-card" data-product-id="whey-mango">
+          <div
+            class="card-img"
+            data-gallery='[{"src":"assets/images/whey-mango.png","title":"Premium Whey Protein - Mango","label":"Bottle"}]'
+          >
             <img src="assets/images/whey-mango.png" alt="Premium Whey Mango" />
+            <div class="card-img-badge">
+              <svg
+                viewBox="0 0 24 24"
+                width="11"
+                height="11"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span>View Details</span>
+            </div>
           </div>
           <div class="card-type">Premium Whey Protein</div>
           <div class="card-name">Premium Whey</div>
@@ -3200,6 +4150,668 @@
         </div>
       </div>
     </footer>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- PRODUCT LIGHTBOX MODAL                                  -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div id="product-modal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal-backdrop"></div>
+      <div class="modal-dialog">
+        <button
+          class="modal-close-btn"
+          id="modal-close-btn"
+          aria-label="Close dialog"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <div class="modal-body">
+          <!-- LEFT: media column (thumbs + image + benefits box) -->
+          <div class="modal-media-col">
+            <div class="modal-media-row">
+              <div class="modal-thumbs" id="modal-thumbs"></div>
+
+              <div class="modal-img-wrap">
+                <div class="modal-badge-stamp">100%<br />Authentic</div>
+                <button
+                  class="modal-zoom-btn"
+                  id="modal-zoom-btn"
+                  type="button"
+                  aria-label="Zoom image"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                </button>
+                <button
+                  class="modal-nav-btn modal-prev-btn"
+                  id="modal-prev-btn"
+                  aria-label="Previous image"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <img
+                  id="modal-main-img"
+                  class="modal-main-img"
+                  src=""
+                  alt="Product Label Detail"
+                />
+                <button
+                  class="modal-nav-btn modal-next-btn"
+                  id="modal-next-btn"
+                  aria-label="Next image"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+                <div class="modal-img-caption" id="modal-img-caption">
+                  Front Bottle
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-benefits-box">
+              <div class="modal-benefits-label">Product Benefits</div>
+              <div class="modal-ingredients" id="modal-ingredients"></div>
+            </div>
+
+            <div class="modal-benefits-box">
+              <div class="modal-benefits-label">Product Information</div>
+              <div class="modal-info-list" id="modal-info-list"></div>
+            </div>
+          </div>
+
+          <!-- RIGHT: info column (breadcrumb, title, price, CTAs, flavour) -->
+          <div class="modal-info-col" id="modal-details">
+            <div class="modal-breadcrumb">
+              <img
+                src="assets/logo/ipn-logo-new.png"
+                alt="IPN — Iron Pump Nutrition"
+                class="modal-brand-logo"
+              />
+              <span class="modal-product-type" id="modal-product-type"
+                >Pre-Workout</span
+              >
+            </div>
+
+            <h3 class="modal-product-name" id="modal-product-name">
+              Iron Hellfire
+            </h3>
+            <span class="modal-product-flavor" id="modal-product-flavor"
+              >Hellfire Punch</span
+            >
+
+            <div class="modal-price-row" id="modal-price-row">
+              <span class="modal-price" id="modal-product-price">₹2,499</span>
+              <span class="modal-original" id="modal-product-original"
+                >₹4,999</span
+              >
+              <span class="modal-discount" id="modal-product-discount"
+                >50% OFF</span
+              >
+            </div>
+            <div class="modal-details-tagline" id="modal-details-tagline"></div>
+
+            <div class="modal-cta-row">
+              <a
+                href="#"
+                id="modal-order-btn"
+                class="modal-order-btn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                  />
+                </svg>
+                <span>Order on WhatsApp</span>
+              </a>
+              <a href="tel:+918317564213" class="modal-call-btn">
+                <svg
+                  viewBox="0 0 24 24"
+                  width="15"
+                  height="15"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+                  ></path>
+                </svg>
+                <span>Call to Order</span>
+              </a>
+            </div>
+
+            <div class="modal-flavor-block">
+              <h4 class="modal-details-title">Flavour</h4>
+              <div class="modal-flavor-pills" id="modal-flavor-pills"></div>
+            </div>
+
+            <div class="modal-details-certs">
+              FSSAI &middot; GMP &middot; ISO 9001:2015 &middot; HACCP Certified
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ── PRODUCT CARD GALLERY & LIGHTBOX MODAL (STANDALONE) ──
+      (function () {
+        // Sourced from each product's own printed nutrition-facts label
+        // (verified consistent across all 4 flavors per category).
+        var PRODUCT_FACTS = {
+          "Pre-Workout": {
+            tagline: "Strength • Energy • Pumps • Endurance",
+            ingredients: [
+              ["L-Citrulline Malate", "4000mg"],
+              ["Beta-Alanine", "3000mg"],
+              ["L-Arginine HCL", "1000mg"],
+              ["Nitrosigine®", "1000mg"],
+              ["Caffeine Anhydrous", "200mg"],
+              ["L-Theanine", "120mg"],
+              ["Taurine", "300mg"],
+            ],
+            info: [
+              ["Serving Size", "1 Scoop (12g)"],
+              ["Servings Per Container", "30"],
+              ["Lifestage", "Adult"],
+              ["Recommended For", "Men, Women"],
+            ],
+          },
+          "Whey Protein": {
+            tagline: "No Compromise. Just Results.",
+            ingredients: [
+              ["Protein per Serving", "24g"],
+              ["BCAAs", "5.6g"],
+              ["Calories per Serving", "130"],
+              ["Servings per Container", "66"],
+              ["Net Weight", "2kg (4.4 lbs)"],
+            ],
+            info: [
+              ["Servings Per Container", "66"],
+              ["Net Weight", "2kg (4.4 lbs)"],
+              ["Lifestage", "Adult"],
+              ["Recommended For", "Men, Women"],
+            ],
+          },
+        };
+
+        function initProductModal() {
+          const productModal = document.getElementById("product-modal");
+          if (!productModal) return;
+
+          const modalType = document.getElementById("modal-product-type");
+          const modalName = document.getElementById("modal-product-name");
+          const modalFlavor = document.getElementById("modal-product-flavor");
+          const modalPrice = document.getElementById("modal-product-price");
+          const modalOriginal = document.getElementById(
+            "modal-product-original",
+          );
+          const modalDiscount = document.getElementById(
+            "modal-product-discount",
+          );
+          const modalMainImg = document.getElementById("modal-main-img");
+          const modalCaption = document.getElementById("modal-img-caption");
+          const modalThumbs = document.getElementById("modal-thumbs");
+          const modalOrderBtn = document.getElementById("modal-order-btn");
+          const modalCloseBtn = document.getElementById("modal-close-btn");
+          const modalPrevBtn = document.getElementById("modal-prev-btn");
+          const modalNextBtn = document.getElementById("modal-next-btn");
+          const modalBackdrop = productModal.querySelector(".modal-backdrop");
+          const modalZoomBtn = document.getElementById("modal-zoom-btn");
+          const modalIngredients = document.getElementById(
+            "modal-ingredients",
+          );
+          const modalDetailsTagline = document.getElementById(
+            "modal-details-tagline",
+          );
+          const modalFlavorPills = document.getElementById(
+            "modal-flavor-pills",
+          );
+          const modalCallBtn = productModal.querySelector(".modal-call-btn");
+          const modalInfoList = document.getElementById("modal-info-list");
+          const modalImgWrap = productModal.querySelector(".modal-img-wrap");
+
+          let activeGallery = [];
+          let activeIndex = 0;
+
+          // Card dots click listener (switches preview without opening modal)
+          document.addEventListener("click", function (e) {
+            const dot = e.target.closest(".gallery-dot");
+            if (!dot) return;
+            e.stopPropagation();
+
+            const cardImg = dot.closest(".card-img");
+            const card = dot.closest(".product-card");
+            if (!cardImg || !card) return;
+
+            const index = parseInt(dot.getAttribute("data-index"), 10);
+            const mainImg = cardImg.querySelector(".gallery-main-img");
+            const dots = cardImg.querySelectorAll(".gallery-dot");
+            let galleryData = [];
+            try {
+              galleryData = JSON.parse(
+                cardImg.getAttribute("data-gallery") || "[]",
+              );
+            } catch (err) {}
+
+            if (!galleryData[index]) return;
+
+            dots.forEach((d, i) => d.classList.toggle("active", i === index));
+            card.dataset.currentIndex = index;
+
+            if (mainImg) {
+              mainImg.style.opacity = "0.3";
+              mainImg.src = galleryData[index].src;
+              mainImg.onload = function () {
+                mainImg.style.opacity = "1";
+              };
+            }
+          });
+
+          function openModalFromCard(card) {
+            const cardImg = card.querySelector(".card-img");
+            let galleryData = [];
+            if (cardImg && cardImg.getAttribute("data-gallery")) {
+              try {
+                galleryData = JSON.parse(
+                  cardImg.getAttribute("data-gallery") || "[]",
+                );
+              } catch (err) {}
+            }
+
+            // Fallback for single-image cards
+            if (!galleryData || !galleryData.length) {
+              const imgEl = card.querySelector(".card-img img");
+              if (imgEl && imgEl.src) {
+                galleryData = [
+                  {
+                    src: imgEl.src,
+                    title:
+                      card.querySelector(".card-name")?.textContent.trim() ||
+                      "Product View",
+                    label: "Bottle",
+                  },
+                ];
+              }
+            }
+
+            if (!galleryData.length) return;
+
+            const name =
+              card.querySelector(".card-name")?.textContent.trim() ||
+              "Iron Pump";
+            const flavor =
+              card.querySelector(".card-flavour")?.textContent.trim() || "";
+            const type =
+              card.querySelector(".card-type")?.textContent.trim() ||
+              "Supplement";
+            const price =
+              card.querySelector(".card-price")?.textContent.trim() || "";
+            const originalPrice =
+              card.querySelector(".card-original")?.textContent.trim() || "";
+            const discount =
+              card.querySelector(".card-discount")?.textContent.trim() || "";
+            const orderBtn = card.querySelector(".card-btn");
+            const orderHref = orderBtn
+              ? orderBtn.getAttribute("href")
+              : "https://wa.me/918317564213";
+            const startIndex = parseInt(card.dataset.currentIndex || "0", 10);
+
+            openModal({
+              name: name,
+              flavor: flavor,
+              type: type,
+              price: price,
+              originalPrice: originalPrice,
+              discount: discount,
+              orderHref: orderHref,
+              gallery: galleryData,
+              startIndex: isNaN(startIndex) ? 0 : startIndex,
+              sourceCard: card,
+            });
+          }
+
+          // Open modal when clicking anywhere on a product card
+          document.addEventListener("click", function (e) {
+            const card = e.target.closest(".product-card");
+            if (!card) return;
+
+            // Do not open modal if user clicked directly on the WhatsApp CTA button
+            if (e.target.closest(".card-btn")) return;
+            // Do not open modal if user clicked directly on a gallery preview dot
+            if (e.target.closest(".gallery-dot")) return;
+
+            openModalFromCard(card);
+          });
+
+          function renderModalSlide(index) {
+            if (!activeGallery.length) return;
+            activeIndex =
+              ((index % activeGallery.length) + activeGallery.length) %
+              activeGallery.length;
+            const currentItem = activeGallery[activeIndex];
+
+            modalMainImg.style.opacity = "0.2";
+            modalMainImg.alt = currentItem.title || "Product Label";
+
+            function revealSlide() {
+              modalMainImg.style.opacity = "1";
+            }
+            modalMainImg.onload = revealSlide;
+            modalMainImg.src = currentItem.src;
+            if (modalMainImg.complete) revealSlide();
+
+            if (modalCaption) {
+              if (activeGallery.length > 1) {
+                modalCaption.textContent =
+                  activeIndex +
+                  1 +
+                  " of " +
+                  activeGallery.length +
+                  ": " +
+                  currentItem.title;
+              } else {
+                modalCaption.textContent =
+                  currentItem.title || "Full Product View";
+              }
+            }
+
+            // Update active thumb
+            modalThumbs
+              .querySelectorAll(".modal-thumb")
+              .forEach(function (thumb, i) {
+                thumb.classList.toggle("active", i === activeIndex);
+              });
+          }
+
+          function openModal(data) {
+            activeGallery = data.gallery;
+            if (modalName) modalName.textContent = data.name;
+            if (modalFlavor) modalFlavor.textContent = data.flavor;
+            if (modalType) modalType.textContent = data.type;
+            if (modalPrice) modalPrice.textContent = data.price;
+            if (modalOriginal) modalOriginal.textContent = data.originalPrice;
+            if (modalDiscount) modalDiscount.textContent = data.discount;
+            if (modalOrderBtn) modalOrderBtn.href = data.orderHref;
+            if (modalCallBtn) modalCallBtn.href = "tel:+918317564213";
+
+            // Flavour pills — siblings in the same product grid
+            if (modalFlavorPills) {
+              modalFlavorPills.innerHTML = "";
+              const grid = data.sourceCard
+                ? data.sourceCard.closest(".products-grid")
+                : null;
+              if (grid) {
+                const siblings = grid.querySelectorAll(".product-card");
+                siblings.forEach(function (sibCard) {
+                  const flavorName =
+                    sibCard.querySelector(".card-flavour")?.textContent.trim() ||
+                    sibCard.querySelector(".card-name")?.textContent.trim() ||
+                    "Flavour";
+                  const pill = document.createElement("button");
+                  pill.type = "button";
+                  pill.className =
+                    "modal-flavor-pill" +
+                    (sibCard === data.sourceCard ? " active" : "");
+                  pill.textContent = flavorName;
+                  pill.addEventListener("click", function () {
+                    openModalFromCard(sibCard);
+                  });
+                  modalFlavorPills.appendChild(pill);
+                });
+              }
+            }
+
+            // Key ingredients / benefits panel
+            const typeStr = (data.type || "").toLowerCase();
+            const facts = typeStr.indexOf("whey") !== -1
+              ? PRODUCT_FACTS["Whey Protein"]
+              : typeStr.indexOf("pre-workout") !== -1
+                ? PRODUCT_FACTS["Pre-Workout"]
+                : null;
+            if (modalIngredients) {
+              modalIngredients.innerHTML = "";
+              if (facts) {
+                facts.ingredients.forEach(function (row) {
+                  const el = document.createElement("div");
+                  el.className = "modal-ingredient-row";
+                  el.innerHTML =
+                    '<span class="modal-ingredient-dose">' +
+                    row[1] +
+                    '</span><span class="modal-ingredient-name">' +
+                    row[0] +
+                    "</span>";
+                  modalIngredients.appendChild(el);
+                });
+              }
+            }
+            if (modalDetailsTagline) {
+              modalDetailsTagline.textContent = facts ? facts.tagline : "";
+            }
+
+            // Product information panel (serving info + real per-flavor UPC)
+            if (modalInfoList) {
+              modalInfoList.innerHTML = "";
+              const infoRows = facts && facts.info ? facts.info.slice() : [];
+              const upc = data.sourceCard
+                ? data.sourceCard.getAttribute("data-upc")
+                : null;
+              if (upc) infoRows.unshift(["Product Code (UPC)", upc]);
+              infoRows.forEach(function (row) {
+                const el = document.createElement("div");
+                el.className = "modal-info-row";
+                el.innerHTML =
+                  '<span class="modal-info-label">' +
+                  row[0] +
+                  '</span><span class="modal-info-value">' +
+                  row[1] +
+                  "</span>";
+                modalInfoList.appendChild(el);
+              });
+            }
+
+            // Build thumbs or hide if only 1 slide
+            modalThumbs.innerHTML = "";
+            if (activeGallery.length > 1) {
+              modalThumbs.style.display = "flex";
+              if (modalPrevBtn) modalPrevBtn.style.display = "flex";
+              if (modalNextBtn) modalNextBtn.style.display = "flex";
+
+              activeGallery.forEach(function (item, i) {
+                const btn = document.createElement("button");
+                btn.className =
+                  "modal-thumb" + (i === data.startIndex ? " active" : "");
+                btn.type = "button";
+                btn.title = item.title || "";
+                const thumbImg = document.createElement("img");
+                thumbImg.src = item.src;
+                thumbImg.alt = item.title || item.label || "View " + (i + 1);
+                btn.appendChild(thumbImg);
+                btn.addEventListener("click", function () {
+                  renderModalSlide(i);
+                });
+                modalThumbs.appendChild(btn);
+              });
+            } else {
+              modalThumbs.style.display = "none";
+              if (modalPrevBtn) modalPrevBtn.style.display = "none";
+              if (modalNextBtn) modalNextBtn.style.display = "none";
+            }
+
+            renderModalSlide(data.startIndex);
+
+            productModal.classList.add("active");
+            productModal.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+          }
+
+          function closeModal() {
+            productModal.classList.remove("active");
+            productModal.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
+          }
+
+          if (modalCloseBtn)
+            modalCloseBtn.addEventListener("click", closeModal);
+          if (modalBackdrop)
+            modalBackdrop.addEventListener("click", closeModal);
+          if (modalPrevBtn) {
+            modalPrevBtn.addEventListener("click", function () {
+              if (activeGallery.length > 1) renderModalSlide(activeIndex - 1);
+            });
+          }
+          if (modalNextBtn) {
+            modalNextBtn.addEventListener("click", function () {
+              if (activeGallery.length > 1) renderModalSlide(activeIndex + 1);
+            });
+          }
+
+          // Cursor-follow zoom on the main image (desktop only)
+          if (modalImgWrap && modalMainImg) {
+            modalImgWrap.addEventListener("mouseenter", function () {
+              if (window.innerWidth < 768) return;
+              modalImgWrap.classList.add("zoomed");
+            });
+            modalImgWrap.addEventListener("mousemove", function (e) {
+              if (window.innerWidth < 768) return;
+              const rect = modalMainImg.getBoundingClientRect();
+              const x = ((e.clientX - rect.left) / rect.width) * 100;
+              const y = ((e.clientY - rect.top) / rect.height) * 100;
+              modalMainImg.style.transformOrigin =
+                Math.min(100, Math.max(0, x)) +
+                "% " +
+                Math.min(100, Math.max(0, y)) +
+                "%";
+            });
+            modalImgWrap.addEventListener("mouseleave", function () {
+              modalImgWrap.classList.remove("zoomed");
+              modalMainImg.style.transformOrigin = "center center";
+            });
+          }
+          // modal-zoom-btn is a visual cue; hover on modalImgWrap drives the zoom
+
+          // Keyboard controls
+          window.addEventListener("keydown", function (e) {
+            if (!productModal.classList.contains("active")) return;
+            if (e.key === "Escape") {
+              closeModal();
+            } else if (e.key === "ArrowLeft") {
+              if (activeGallery.length > 1) renderModalSlide(activeIndex - 1);
+            } else if (e.key === "ArrowRight") {
+              if (activeGallery.length > 1) renderModalSlide(activeIndex + 1);
+            }
+          });
+
+          // Touch swipe support for mobile
+          let touchStartX = 0;
+          let touchEndX = 0;
+          const modalBody = productModal.querySelector(".modal-body");
+          if (modalBody) {
+            modalBody.addEventListener(
+              "touchstart",
+              function (e) {
+                touchStartX = e.changedTouches[0].screenX;
+              },
+              { passive: true },
+            );
+
+            modalBody.addEventListener(
+              "touchend",
+              function (e) {
+                if (activeGallery.length <= 1) return;
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchEndX - touchStartX;
+                if (Math.abs(diff) > 40) {
+                  if (diff < 0) {
+                    renderModalSlide(activeIndex + 1);
+                  } else {
+                    renderModalSlide(activeIndex - 1);
+                  }
+                }
+              },
+              { passive: true },
+            );
+          }
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", initProductModal);
+        } else {
+          initProductModal();
+        }
+      })();
+    </script>
+
+    <!-- Floating WhatsApp Action Button -->
+    <a
+      href="https://wa.me/918317564213?text=Hi%20Iron%20Pump%20Nutrition!%20I%27d%20like%20to%20place%20an%20order."
+      class="whatsapp-float"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Order on WhatsApp"
+    >
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+        />
+      </svg>
+    </a>
 
     <script>
       gsap.registerPlugin(ScrollTrigger);
@@ -3877,20 +5489,5 @@
         });
       }
     </script>
-
-    <!-- Floating WhatsApp Action Button -->
-    <a
-      href="https://wa.me/918317564213?text=Hi%20Iron%20Pump%20Nutrition!%20I%27d%20like%20to%20place%20an%20order."
-      class="whatsapp-float"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Order on WhatsApp"
-    >
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-        />
-      </svg>
-    </a>
   </body>
 </html>
