@@ -1,6 +1,13 @@
 Dockerfile
 .dockerignore
 .git
+.vercel
 CLAUDE.md
 DESIGN.md
 PRD-nike-redesign.md
+VPS-MOVE.md
+SELF-CHECK.md
+label-30srv/
+label-hellfire/
+label-mm-280x80/
+
